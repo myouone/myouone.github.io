@@ -501,8 +501,8 @@
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
             document.querySelector('#classify_search_outdoor').classList.add('classify-search1');
             document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
             document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
         }
         else if (classify === '公考') {
 
@@ -511,8 +511,8 @@
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
             document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
             document.querySelector('#classify_search_civil_service_exam').classList.add('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
             document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
         } else if (classify === '成长') {
 
             searchDivDom.style.display = 'none';
@@ -520,17 +520,17 @@
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
             document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
             document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
             document.querySelector('#classify_search_grow_up').classList.add('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
         } else if (classify === '开发') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
             document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
-            // document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.add('classify-search1');
+            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
             document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.add('classify-search1');
         }
 
         const titleDivFather = document.querySelectorAll('.title-div-father');
@@ -594,13 +594,13 @@
 
     function searchButtonClick() {
 
-        const title = encodeURIComponent(document.querySelector('#search_div_input').value);
+        const title = encodeURIComponent((document.querySelector('#search_div_input').value).toLowerCase());
 
         const titleDivFather = document.querySelectorAll('.title-div-father');
         let bool = false;
         for (let i = 0; i < titleDivFather.length; i ++) {
 
-            if (titleDivFather[i].dataset.title.toLowerCase().indexOf(title.toLowerCase()) !== -1) {
+            if (encodeURIComponent(titleDivFather[i].dataset.title.toLowerCase()).indexOf(title) !== -1) {
 
                 titleDivFather[i].style.display = '';
 
