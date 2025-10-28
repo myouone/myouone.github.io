@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>关于本站 - 户外探索见闻 | IT开发实录 | 多元成长笔记</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="这里记录了本站的基本信息。本站聚焦户外探索，IT开发，多元成长等方面，如果感兴趣可以通过邮箱联系笔者。">
+    <meta name="keywords" content="关于本站" />
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <link rel="stylesheet" href="https://www.hadihe.top/tinymce/tinymce/skins/ui/oxide/content.min.css" type="text/css">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.76;
+            margin: 0;
+            padding: 0;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            color: #333333;
+        }
+
+        /*.body-eink-device {*/
+        /*    font-size: 24px !important;*/
+        /*}*/
+
+        h2, h3 {
+            margin-block-end: 0;
+        }
+
+        hr {
+            margin-block-start: 0;
+        }
+
+        .content-page {
+            width: 90%;
+            position: relative;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            z-index: 998;
+            margin: auto;
+            padding: 1px;
+        }
+
+        .content-page > * {
+            border-radius: 5px;
+            border: 0;
+            background-color: #FFFFFF;
+        }
+
+        .content-page::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre[class*="language-"] {
+            padding: 10px 20px;
+            border-radius: 2px;
+            /*border: 1px solid #D0D0D0;*/
+            box-shadow: 0 0 2px #D0D0D0;
+            background-color: #FFFFFF; /* #F8F8F8 */
+            white-space: pre-wrap;
+            color: #333333;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: #F3EFE6;
+            border-radius: 1px;
+        }
+
+        img:not(/*#time_img, */#back_home_img) {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
+            border: 8px solid #FFFFFF;
+            box-shadow: 0 0 2px #D0D0D0;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        a {
+            word-wrap: break-word;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            outline: none !important;
+        }
+
+        /* 设置前边小黑点的样式 */
+        ul li::marker {
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        ul {
+            padding-left: 16px;
+        }
+
+        #back_home_img {
+            width: 30px;
+            margin-left: -5px;
+            cursor: pointer;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        @media screen and (max-width: 1157px) {
+            img:not(/*#time_img, */#back_home_img) {
+                width: calc(100% - 16px) !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            table {
+                width: 100% !important;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100%">
+
+<div class="content-page">
+    <!-- 静态内容预览（Thymeleaf渲染） -->
+    <div><html>
+ <head></head>
+ <body>
+  <h1 style="text-align: left;" data-mce-style="text-align: left;">关于本站 - 户外探索见闻 | IT开发实录 | 多元成长笔记</h1>
+  <p style="text-align: left; margin-bottom: 50px;">编写于2023年12月03日 修订于2025年10月27日 | 来源：<a style="text-underline-offset: 5px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.hadihe.top">https://www.hadihe.top</a></p><div id="catalog_div"><p><a style="text-underline-offset: 5px;" href='#heading_0'>基本信息</a></p><p><a style="text-underline-offset: 5px;" href='#heading_1'>网站定位</a></p><p><a style="text-underline-offset: 5px;" href='#heading_2'>核心内容板块</a></p><p><a style="text-underline-offset: 5px;" href='#heading_3'>未来规划</a></p><p><a style="text-underline-offset: 5px;" href='#heading_4'>个人作品集</a></p><p><a style="text-underline-offset: 5px;" href='#heading_5'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>【chrome浏览器插件】Single<span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>Tab<span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>Per<span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>Site</a></p><p><a style="text-underline-offset: 5px;" href='#heading_6'>系统更新日志</a></p></div>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_0"><strong>基本信息</strong></h3>
+  <hr>
+  <p class="ds-markdown-paragraph"><strong>名称</strong>：叨叨老飞</p>
+  <p class="ds-markdown-paragraph"><strong>邮箱</strong>：<a href="https://mailto:daodaolaofei@hadihe.top/" target="_blank" rel="noopener noreferrer" data-mce-href="https://mailto:daodaolaofei@hadihe.top/">daodaolaofei@hadihe.top</a><br></p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_1"><strong>网站定位</strong></h3>
+  <hr>
+  <p class="auto-hide-last-sibling-br paragraph-qzbcQC paragraph-element br-paragraph-space">本站建站理念是以极简设计承载深度内容，用精工品质打造长效价值，秉持「技术筑基，内容共生」原则，通过「系统持续进化，内容深度迭代」，构建专业化数字体验，与读者在知识探索中共同成长。</p>
+  <p class="auto-hide-last-sibling-br paragraph-qzbcQC paragraph-element br-paragraph-space">本站兼顾墨水屏阅读器用户的深阅读需求，在墨水屏端安装设备支持的浏览器即可访问本站，阅读体验友好。</p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_2"><strong>核心内容板块</strong></h3>
+  <hr>
+  <p><strong>户外探索</strong>：记录自己在户外活动过程中的见闻及感受。目前体验过自驾游旅行、滑过雪、挑战过百公里骑行，其他还对长途摩旅，露营，徒步，滑翔等更多户外活动感兴趣，希望都能尝试一下。</p>
+  <p><strong>IT开发</strong>：记录分享IT技术。</p>
+  <p><strong>多元成长</strong>：记录自己在生活、健康、发展、技能等领域的成长与感悟。</p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_3"><strong>未来规划</strong></h3>
+  <hr>
+  <p><strong>长期愿景</strong>：本站的长期使命，是构建一个以专业性与思想深度为基石的内容体系。我笃信，真正的价值源于对事物本质的洞察。因此，我拒绝肤浅的泛泛而谈，每一篇文章都力求立足可靠的知识框架，提供严谨的分析与超越表象的思考。我愿以此为志业，为所有渴望穿透迷雾、触及核心的同行者，提供值得花费时间的阅读。</p>
+  <p><strong>产品规划</strong>：</p>
+  <ul>
+   <li>
+    <p>添加视频在线播放功能。</p></li>
+   <li>添加播客功能。</li>
+   <li>
+    <p>添加功能，更科学条理的记录网站内容更新情况。</p></li>
+   <li>添加邮箱订阅功能。</li>
+  </ul>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_4">个人作品集</h3>
+  <hr>
+  <h4 id="heading_5">【chrome浏览器插件】Single Tab Per Site</h4>
+  <p><strong>功能简介</strong>：支持在插件中添加网站域名，所有在插件中添加的网站在浏览器中最多只能打开一个tab页，其他已经打开的属于当前网站的tab页会自动关闭。</p>
+  <p><strong>应用场景</strong>：该插件可以应用在第三方跳转等场景中，避免浏览器中同时打开多个相同网页。</p>
+  <p><strong>下载安装</strong>：后续发布到应用商店以后提供下载安装链接。</p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_6">系统更新日志</h3>
+  <hr>
+  <ul>
+   <li>
+    <p>【2023-12-25】网站完成备案，发布上线。</p></li>
+   <li>
+    <p>【2025-05-23】文章详情页重构为「静态生成（SSG）」方案。</p></li>
+   <li>
+    <p>【2025-05-25】网站首页重构为「服务端渲染（SSR）」方案。</p></li>
+   <li>
+    <p>【2025-06-04】添加回到顶部功能。</p></li>
+   <li>
+    <p>【2025-06-06】修改文章的url组成结构。</p></li>
+   <li>
+    <p>【2025-06-07】配置http重定向到https。</p></li>
+   <li>
+    <p>【2025-06-30】配置https压缩访问html静态文件。</p></li>
+   <li>
+    <p>【2025-07-04】优化墨水屏阅读体验。【墨水屏阅读器安装EinkBro浏览器即可访问本站，推荐使用触摸翻页功能浏览】。</p></li>
+  </ul>
+ </body>
+</html></div>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    const backHomeImgDom = document.querySelector('#back_home_img');
+    if (backHomeImgDom) {
+
+        backHomeImgDom.onclick = function () {
+
+            window.location.replace('/');
+        }
+    }
+
+    document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+                frameCount++;
+                const elapsed = timestamp - startTime;
+                if (elapsed >= 1000) {
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice()) {
+
+            // document.body.classList.add('body-eink-device');
+            // document.querySelector('#return_top').style.display = 'none';
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+
+            document.querySelectorAll('img').forEach(img => {
+
+                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
+
+                    img.style.width = 'calc(100% - 16px)';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>

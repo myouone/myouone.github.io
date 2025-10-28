@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JS进阶学习 | 原生JS基础到进阶</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="本文是《原生JS基础到进阶》系列的第三篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是JS进阶内容的学习笔记。">
+    <meta name="keywords" content="JS学习笔记" />
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <link rel="stylesheet" href="https://www.hadihe.top/tinymce/tinymce/skins/ui/oxide/content.min.css" type="text/css">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.76;
+            margin: 0;
+            padding: 0;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            color: #333333;
+        }
+
+        /*.body-eink-device {*/
+        /*    font-size: 24px !important;*/
+        /*}*/
+
+        h2, h3 {
+            margin-block-end: 0;
+        }
+
+        hr {
+            margin-block-start: 0;
+        }
+
+        .content-page {
+            width: 90%;
+            position: relative;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            z-index: 998;
+            margin: auto;
+            padding: 1px;
+        }
+
+        .content-page > * {
+            border-radius: 5px;
+            border: 0;
+            background-color: #FFFFFF;
+        }
+
+        .content-page::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre[class*="language-"] {
+            padding: 10px 20px;
+            border-radius: 2px;
+            /*border: 1px solid #D0D0D0;*/
+            box-shadow: 0 0 2px #D0D0D0;
+            background-color: #FFFFFF; /* #F8F8F8 */
+            white-space: pre-wrap;
+            color: #333333;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: #F3EFE6;
+            border-radius: 1px;
+        }
+
+        img:not(/*#time_img, */#back_home_img) {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
+            border: 8px solid #FFFFFF;
+            box-shadow: 0 0 2px #D0D0D0;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        a {
+            word-wrap: break-word;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            outline: none !important;
+        }
+
+        /* 设置前边小黑点的样式 */
+        ul li::marker {
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        ul {
+            padding-left: 16px;
+        }
+
+        #back_home_img {
+            width: 30px;
+            margin-left: -5px;
+            cursor: pointer;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        @media screen and (max-width: 1157px) {
+            img:not(/*#time_img, */#back_home_img) {
+                width: calc(100% - 16px) !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            table {
+                width: 100% !important;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100%">
+
+<div class="content-page">
+    <!-- 静态内容预览（Thymeleaf渲染） -->
+    <div><html>
+ <head></head>
+ <body>
+  <h1 style="text-align: left;" data-mce-style="text-align: left;">JS进阶学习 | 原生JS基础到进阶</h1>
+  <p style="text-align: left; margin-bottom: 50px;">编写于2025年06月03日 修订于2025年10月27日 | 来源：<a style="text-underline-offset: 5px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.hadihe.top">https://www.hadihe.top</a></p><div id="catalog_div"><p><a style="text-underline-offset: 5px;" href='#heading_0'>正文</a></p><p><a style="text-underline-offset: 5px;" href='#heading_1'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>作用域</a></p><p><a style="text-underline-offset: 5px;" href='#heading_2'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>垃圾回收机制（GC）</a></p><p><a style="text-underline-offset: 5px;" href='#heading_3'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>闭包</a></p><p><a style="text-underline-offset: 5px;" href='#heading_4'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>变量提升</a></p><p><a style="text-underline-offset: 5px;" href='#heading_5'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>函数提升</a></p><p><a style="text-underline-offset: 5px;" href='#heading_6'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>函数参数</a></p><p><a style="text-underline-offset: 5px;" href='#heading_7'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>展开运算符</a></p><p><a style="text-underline-offset: 5px;" href='#heading_8'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>箭头函数</a></p><p><a style="text-underline-offset: 5px;" href='#heading_9'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>解构赋值</a></p><p><a style="text-underline-offset: 5px;" href='#heading_10'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>遍历数组forEach方法</a></p><p><a style="text-underline-offset: 5px;" href='#heading_11'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>创建对象的三种方式</a></p><p><a style="text-underline-offset: 5px;" href='#heading_12'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>实例成员和静态成员</a></p><p><a style="text-underline-offset: 5px;" href='#heading_13'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>内置构造函数</a></p><p><a style="text-underline-offset: 5px;" href='#heading_14'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>防抖</a></p><p><a style="text-underline-offset: 5px;" href='#heading_15'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>节流</a></p><p><a style="text-underline-offset: 5px;" href='#heading_16'>参考</a></p><p><a style="text-underline-offset: 5px;" href='#heading_17'>相关文章</a></p></div>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_0">正文</h3>
+  <hr>
+  <h4 id="heading_1">作用域</h4>
+  <p>作用域是变量能够被访问的范围，分为局部作用域、全局作用域。</p>
+  <p>局部作用域分为函数作用域（函数内部声明，外部无法访问）、块作用域（“{}”包含的代码称为一个块，如for循环，外边有可能无法访问，var声明的外边可以访问，var没有块作用域）。</p>
+  <p>全局作用域变量定义在最外层，可以在其他作用域中访问，尽量不要用全局变量。</p>
+  <p>作用域链本质上是底层的变量查找机制，函数执行时，优先查找当前的作用域，然后依次逐级查找父级作用域，直到全局作用域。</p>
+  <h4 id="heading_2">垃圾回收机制（GC）</h4>
+  <p>JS中内存的分配和回收都是自动完成的，内存在不使用时会被垃圾回收器自动回收。</p>
+  <p>内存生命周期：</p>
+  <div>
+   1、内存分配：当声明变量、函数、对象时，系统会自动分配内存。
+  </div>
+  <div>
+   2、内存使用：使用变量、函数时读写内存。
+  </div>
+  <div>
+   3、内存回收：使用完毕，由垃圾回收器自动回收不再使用的内存。
+  </div>
+  <p>全局变量一般不会回收（关闭页面回收），局部变量的值在使用完成以后就会被回收。</p>
+  <h4 id="heading_3">闭包</h4>
+  <p>闭包 = 内层函数 + 外层函数的变量。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 闭包示例</span>
+<span class="token keyword">function</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">f2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> f2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> f3 <span class="token operator">=</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">f3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <p>闭包的作用：封闭数据，提供操作，外部函数可以使用函数内部的变量。</p>
+  <p>闭包的应用：实现数据私有，不能被篡改，保证安全。</p>
+  <p>闭包的局部变量不会被回收，因为f3是全局变量，不会回收，f3指向f2，f2不会被回收，f2中用到了a，所以局部变量a不会被回收。</p>
+  <p>闭包有内存泄漏的风险。</p>
+  <h4 id="heading_4">变量提升</h4>
+  <p>变量提升是js的一个现象，即运行变量在声明以前即被访问，仅限于var声明的变量，实际开发中不推荐使用。ES6引入了块级作用域let和const。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token comment">// 输出结果是undefined</span></pre>
+  <p>执行过程：当代码在执行之前，首先内部会把所有在当前作用域下var声明的变量提升到当前作用域的最前面，只提升声明，不提升赋值。</p>
+  <h4 id="heading_5">函数提升</h4>
+  <p>函数在声明之前被调用，提倡先声明函数，再调用函数。</p>
+  <h4 id="heading_6">函数参数</h4>
+  <p>动态参数：arguments是函数内部内置的伪数组变量，包含调用函数时传入的所有实参，括号里边是没有参数的。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> s <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arguments<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        s <span class="token operator">+=</span> arguments<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <p>剩余参数：将一个不定数量的参数表示为一个数组</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>arr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">let</span> s <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        s <span class="token operator">+=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">...</span>c</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">...</span><span class="token operator">...</span> <span class="token punctuation">}</span></pre>
+  <p>区别：剩余参数“...”是语法符号，置于最末函数形参之前，用于获取多余的实参，开发中提倡使用剩余参数。</p>
+  <h4 id="heading_7">展开运算符</h4>
+  <p>展开运算符(...)，将一个数组进行展开，不会修改原数组。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token operator">...</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <p>使用场景：求最大最小值、合并数组等。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ...arr === 1,2,3,4,5</span>
+
+<span class="token keyword">const</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> arr3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>arr<span class="token punctuation">,</span> <span class="token operator">...</span>arr2<span class="token punctuation">]</span><span class="token punctuation">;</span></pre>
+  <h4 id="heading_8">箭头函数</h4>
+  <p>箭头函数使函数表达式更简洁，用于原本就写匿名函数的地方。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 1、箭头函数写法</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">fn</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2、只有一个形参的时候可以省略小括号</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 3、只有一行代码的时候，可以省略大括号</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 4、只有一行return可以省略return</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> x<span class="token operator">+</span>x<span class="token punctuation">;</span>
+
+<span class="token comment">// 5、可以直接返回一个对象，但需要用小括号包起来</span>
+<span class="token keyword">const</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">uname</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span> name<span class="token punctuation">}</span><span class="token punctuation">)</span></pre>
+  <p>箭头函数中没有arguments动态参数，有剩余参数...args。</p>
+  <p>箭头函数不会创建自己的this，只会从作用域链的上一层沿用this，尽量不要用this。</p>
+  <h4 id="heading_9">解构赋值</h4>
+  <p>数组解构</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 数组解构：将数组的单元值快速批量的赋值给一些列变量的简洁语法</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>max<span class="token punctuation">,</span> min<span class="token punctuation">,</span> avg<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 典型应用——交互两个变量</span>
+<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>b<span class="token punctuation">,</span> a<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// js必须加分号的情况——1、立即执行函数；2、数组解构；</span>
+<span class="token comment">// 变量多，单元值少时，多出的变量是undefined</span>
+<span class="token comment">// 变量少，单元值多是，可以用剩余变量处理</span>
+<span class="token comment">// 也可以给默认值[a=0, b=0] = []</span>
+<span class="token comment">// 位置忽略[a, b, , c]，单元值也对应跳一位</span></pre>
+  <p>对象解构</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 对象解构将对象属性和方法快速批量赋值给一系列变量的简洁方法</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>uname<span class="token punctuation">,</span> age<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">uname</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">}</span>
+<span class="token comment">// 变量名和属性名要一致，解构的变量名和外部变量名不冲突。</span>
+<span class="token comment">// 如果必须改名的话，对象解构的变量名可以重新改名：旧变量名: 新变量名</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token literal-property property">uname</span><span class="token operator">:</span> username<span class="token punctuation">,</span> age<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">uname</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">}</span>
+
+<span class="token comment">// 数组对象解构</span>
+<span class="token keyword">const</span> objArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token literal-property property">uname</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">uname</span><span class="token operator">:</span> <span class="token string">'bbb'</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>uname<span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token operator">=</span> objArr<span class="token punctuation">;</span>
+
+<span class="token comment">// 多级对象解构</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>name<span class="token punctuation">,</span> <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token punctuation">{</span>father<span class="token punctuation">,</span> mather<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token literal-property property">father</span><span class="token operator">:</span> <span class="token string">'bbb'</span><span class="token punctuation">,</span> <span class="token literal-property property">mather</span><span class="token operator">:</span> <span class="token string">'ccc'</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span></pre>
+  <h4 id="heading_10">遍历数组forEach方法</h4>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true">arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">元素<span class="token punctuation">,</span> 元素索引号</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <h4 id="heading_11">创建对象的三种方式</h4>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 利用字面量创建对象</span>
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'佩奇'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 利用new Object创建对象</span>
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'佩奇'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'佩奇'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 也是构造函数</span>
+
+<span class="token comment">// 利用构造函数创建对象</span>
+<span class="token keyword">function</span> <span class="token function">Info</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> info1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Info</span><span class="token punctuation">(</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> info2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Info</span><span class="token punctuation">(</span><span class="token string">'bbb'</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 构造函数在技术上是常规函数，有两个约定：1、命名以大写字母开头；2、只能由new操作符来执行；</span>
+<span class="token comment">// this指向Object</span></pre>
+  <p>new关键词创建对象都叫实例化，构造函数无需写return，写了也没用，没有参数可以省略“()”。</p>
+  <p>new实例化执行过程：只要有new，立马创建一个新的空对象，构造函数中的this指向新对象，再执行构造函数中的代码，修改this，添加新的属性，最后返回新对象。</p>
+  <h4 id="heading_12">实例成员和静态成员</h4>
+  <p>通过构造函数创建的对象叫实例对象，对象中的属性和方法叫实例成员。构造函数创建的实例对象彼此独立，互不影响。</p>
+  <p>构造函数中的属性和成员称为静态成员（静态属性、静态方法），静态成员只能构造函数来访问，静态方法中的this指向构造函数。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">function</span> <span class="token function">Obj</span> <span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+Obj<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span></pre>
+  <h4 id="heading_13">内置构造函数</h4>
+  <p>基本数据类型：字符串、数值、布尔、undefined、null</p>
+  <p>引用数据类型：对象</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 基本数据类型包装成了引用数据类型</span>
+<span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">'aaa'</span><span class="token punctuation">;</span> <span class="token operator">&lt;=</span><span class="token operator">==</span><span class="token operator">&gt;</span> <span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">'aaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+  <p>内置构造函数：Object、Array、String、Number</p>
+  <p>推荐使用字面量创建对象。</p>
+  <p>Object的三个常用的静态方法（只有Object才可以调用的）：</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 获取对象中的所有属性，返回数组。</span>
+Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 获取对象中的所有值，返回数组。</span>
+<span class="token keyword">const</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj2<span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 拷贝</span></pre>
+  <p>Array的常用的实例方法</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// forEach 遍历数组</span>
+<span class="token comment">// filter 过滤数组，返回新数组</span>
+<span class="token comment">// map 迭代数组，返回处理之后的数组元素，返回新数组</span>
+<span class="token comment">// reduce 累计器，返回累计处理的结果，经常用于求和等</span>
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> total <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">prev<span class="token punctuation">,</span> current</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> prev <span class="token operator">+</span> current<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// join 数组元素拼接为字符串，返回字符串</span>
+<span class="token comment">// find 查找元素，返回符合测试条件的第一个数组元素值，没有返回undefined</span>
+<span class="token comment">// every 检测数组中所有元素都符合指定条件，是返回true，否返回false</span>
+<span class="token comment">// some 检测数组中的元素是否满足指定条件，有返回true，没有返回false</span>
+<span class="token comment">// concat 合并两个数组，返回生成新数组</span>
+<span class="token comment">// sort 对原数组单元值排序</span>
+<span class="token comment">// splice 删除或替换原数组单元</span>
+<span class="token comment">// reverse 反转数组</span>
+<span class="token comment">// findIndex 查找元素索引值</span></pre>
+  <p>String常用的实例方法</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// length 实例属性，获取字符串长度</span>
+<span class="token comment">// split 将字符串分割成数组</span>
+<span class="token comment">// substring 截取字符串</span>
+<span class="token comment">// startsWith 检测是否以某字符开头</span>
+<span class="token comment">// includes 判断一个字符串是否包含在另一个字符串中</span>
+<span class="token comment">// toUpperCase 将字母转成大写</span>
+<span class="token comment">// toLowerCase 将字母转成小写</span>
+<span class="token comment">// indexOf 检测是否包含某字符</span>
+<span class="token comment">// endsWith 检测是否以某字符结尾</span>
+<span class="token comment">// replace 替换字符串，支持正则匹配</span>
+<span class="token comment">// match 查找字符串，支持正则匹配</span></pre>
+  <h4 id="heading_14">防抖</h4>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token keyword">function</span> <span class="token function">mouseMove</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'aaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 用lodash提供的防抖来处理</span>
+<span class="token comment">// 鼠标停止500毫秒之后调用mouseMove函数</span>
+对象<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'mousemove'</span><span class="token punctuation">,</span> _<span class="token punctuation">.</span><span class="token function">debounce</span><span class="token punctuation">(</span>mouseMove<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <h4 id="heading_15">节流</h4>
+  <p>单位时间内频繁触发事件，只执行一次，如一个事件需要执行3秒，如果在这3秒内频繁触发其他事件，不会再有新的事件执行，直到当前事件执行完成。</p>
+  <pre class="language-javascript" contenteditable="false" data-mce-highlighted="true"><span class="token comment">// 500毫秒之内只执行一次</span>
+对象<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'mousemove'</span><span class="token punctuation">,</span> <span class="token function">_throttle</span><span class="token punctuation">(</span>mouseMove<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_16">参考</h3>
+  <hr>
+  <p>学习视频是b站《黑马程序员前端JavaScript入门到精通全套视频教程》。</p>
+  <p>更多信息可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" data-mce-href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">权威网站</a>。</p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_17">相关文章</h3>
+  <hr>
+  <p>前一篇：<a href="https://www.hadihe.top/js-xuexibiji-181.html" data-mce-href="https://www.hadihe.top/js-xuexibiji-181.html">web APIs学习 | 原生JS基础到进阶</a></p>
+ </body>
+</html></div>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    const backHomeImgDom = document.querySelector('#back_home_img');
+    if (backHomeImgDom) {
+
+        backHomeImgDom.onclick = function () {
+
+            window.location.replace('/');
+        }
+    }
+
+    document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+                frameCount++;
+                const elapsed = timestamp - startTime;
+                if (elapsed >= 1000) {
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice()) {
+
+            // document.body.classList.add('body-eink-device');
+            // document.querySelector('#return_top').style.display = 'none';
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+
+            document.querySelectorAll('img').forEach(img => {
+
+                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
+
+                    img.style.width = 'calc(100% - 16px)';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>

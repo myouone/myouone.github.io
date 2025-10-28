@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>叨叨老飞 - 户外探索，IT开发，多元成长等</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="这里是叨叨老飞的个人站点！本站系统沉淀个人多维实践：户外探索见闻、IT开发实录、多元成长笔记，力求构建可复用的经验坐标系。">
+    <meta name="keywords" content="叨叨老飞,HadiHe,户外探索,旅行笔记,IT开发,成长" />
+    <meta name="msvalidate.01" content="0370BF431D2268DDBD063B6344B5F2D2" />
+    <meta name="baidu-site-verification" content="codeva-1DV0mPSHZI" />
+
+    <!-- 预加载字体 -->
+    <link rel="preload" href="https://www.hadihe.top/SourceSerif4-Regular.otf.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('../SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+            font-display: swap; /* 关键属性 */
+        }
+
+        html {
+            overflow-y: scroll;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            height: 100%;
+            margin: 0;
+        }
+
+        .top-bar {
+            width: 100%;
+            height: 75px;
+            background-color: #FFFFFF;
+        }
+
+        .top-bar-p {
+            line-height: 38px;
+            font-size: 24px;
+            color: #1E293B;
+            transform: rotate(-20deg);
+            position: absolute;
+            top: 25px;
+            left: 20px;
+            font-weight: bold;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        .button-group {
+            width: 60%;
+            display: flex;
+            justify-content: space-between; /* 两端对齐，也可换 center/space-around */
+            align-items: center;
+            gap: 10px; /* 按钮间间距（可选，也可用 margin ） */
+            margin: 0 auto; /* 居中（可选） */
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .classify-search {
+            height: 40px;
+            border-radius: 3px;
+            background-color: #F8F8F8;
+            border: 1px solid #EFEFEF;
+            margin-top: 20px;
+            color: #ABB0B8;
+            cursor: pointer;
+            flex: 1;
+            line-height: 40px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .classify-search:hover {
+            background-color: #6b7280;
+            color: #FFFFFF;
+        }
+
+        .classify-search > p {
+            line-height: 40px;
+            text-align: center;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+
+        .classify-search1 {
+            background-color: #6b7280;
+            color: #FFFFFF;
+        }
+
+        .content-page {
+            width: 90%;
+            min-height: calc(100vh - 235px);
+            position: relative;
+            background-size: 100% 100%;
+            background-color: #FFFFFF;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            /*margin-left: 25%;*/
+            margin: auto;
+        }
+
+        /*.content-page-eink-device {*/
+        /*    margin-top: 20px !important;*/
+        /*}*/
+
+        .search-div {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* 重置默认样式 */
+        input, button {
+            box-sizing: border-box;        /* 统一盒模型 */
+            height: 38px;                 /* 设置相同高度 */
+            padding: 0;                   /* 清除内边距 */
+            border: 1px solid #ccc;       /* 统一边框 */
+            margin: 0;                    /* 清除外边距 */
+            font-family: inherit;         /* 继承字体 */
+            font-size: inherit;           /* 继承字号 */
+            line-height: normal;          /* 重置行高 */
+            vertical-align: middle;       /* 垂直居中对齐 */
+        }
+
+        .search-div-input {
+            line-height: 1.3;
+            height: 45px;
+            color: #334155;
+            border-radius: 3px;
+            padding-left: 15px;
+            width: calc(100% - 158px);
+            margin-bottom: 10px;
+            background-color: #F8F8F8;
+            border: 1px solid #EFEFEF;
+        }
+
+        input:focus-visible {
+            outline-offset: 0;
+            outline: -webkit-focus-ring-color auto 0;
+        }
+
+        .search-div-button {
+            margin-left: 10px;
+            width: 65px;
+            height: 45px;
+            background-color: #F8F8F8;
+            border: 1px solid #EFEFEF;
+            color: #ABB0B8;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 38px;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            margin-bottom: 10px;
+        }
+
+        .search-div-button:hover {
+            opacity: 1;
+            background-color: #6b7280;
+            color: #FFFFFF;
+        }
+
+        .content-page-blog-list {
+            background-color: #F8F8F8;
+            border: 1px solid #EFEFEF;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .title-div-father {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 -1px 1px -1px #334155;
+        }
+
+        .title-div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 10px 0 10px;
+        }
+
+        :root {
+            --title-a-font-size: 20px;
+        }
+
+        [class='title-a'] {
+            color: #1E293B;
+            font-size: var(--title-a-font-size);
+            line-height: 1.5;
+            white-space: normal;
+            text-decoration-skip-ink: auto;
+            vertical-align: baseline;
+            text-underline-offset: 5px;
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+            text-decoration: none;
+        }
+
+        .title-a:hover {
+            background-size: 100% 1px;
+        }
+
+        .title-p1 {
+            margin: 10px;
+            color: #334155;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .title-p2 {
+            margin: 0 10px 20px 10px;
+            color: #334155;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .bottom-bar {
+            width: 90%;
+            position: relative;
+            height: 120px;
+            background-color: #FFFFFF;
+            text-align: left;
+            /*margin-left: 25%;*/
+            margin: auto;
+        }
+
+        .bottom-bar::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1em;
+            background: radial-gradient(circle at 50% 1.3em, transparent 24%, #222222 28%, transparent 32%), radial-gradient(circle at 50% -0.3em, transparent 24%, #222222 28%, transparent 32%), transparent;
+            background-size: 1em 1em;
+            background-position: 0 -0.5em, 0.5em .5em;
+        }
+
+        #bottom_bar_h1 {
+            all: initial;
+            font-size: var(--title-a-font-size);
+            position: absolute;
+            /*left: calc(2 * var(--title-a-font-size) + 3px);*/
+            top: 30px;
+            line-height: 1.2;
+            color: #1E293B;
+            cursor: pointer;
+            text-decoration: none;
+            /*text-decoration: underline;*/
+            /*text-decoration-skip-ink: auto;*/
+            /*vertical-align: baseline;*/
+            /*text-underline-offset: 5px;*/
+        }
+
+        .webinfo {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+            position: absolute;
+            top: 53px;
+            left: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #1E293B;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        @media screen and (max-width: 1157px) {
+
+            .top-bar {
+                display: none;
+            }
+
+            .content-page, .bottom-bar {
+                width: 90%;
+                margin-left: 5%;
+            }
+
+            .content-page-blog-list {
+                background-color: #FFFFFF;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+
+            .top-bar-p {
+                left: 2%;
+            }
+
+            .bottom-bar {
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+
+    <!-- Clarity tracking code for https://www.hadihe.top/ -->
+    <script>
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "s4rtbbtp6n");
+    </script>
+</head>
+<body>
+
+<div id="top_bar" class="top-bar">
+    <p class="top-bar-p">@叨叨老飞</p>
+
+    <div class="button-group">
+        <div id="classify_search_all" class="classify-search classify-search1" onclick="classifySearchClick('')">
+            <p>全部</p>
+        </div>
+        <div id="classify_search_outdoor" class="classify-search" onclick="classifySearchClick('户外')">
+            <p>户外</p>
+        </div>
+        <div id="classify_search_civil_service_exam" class="classify-search" onclick="classifySearchClick('公考')">
+            <p>公考</p>
+        </div>
+        <div id="classify_search_grow_up" class="classify-search" onclick="classifySearchClick('成长')">
+            <p>成长</p>
+        </div>
+        <div id="classify_search_it_development" class="classify-search" onclick="classifySearchClick('开发')">
+            <p>开发</p>
+        </div>
+        <div id="classify_search_about" class="classify-search" onclick="aboutTitleClick()">
+            <p>关于</p>
+        </div>
+        <div id="classify_search_search" class="classify-search" onclick="searchClick()">
+            <p>搜索</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-page">
+
+    <div id="search_div" class="search-div" style="display: none;">
+        <label for="search_div_input"></label><input id="search_div_input" class="search-div-input" type="text" name="title" value="" placeholder=" 标题">
+        <button id="search_button" class="search-div-button" style="width: 64px;" onclick="searchButtonClick()">搜索</button>
+        <button class="search-div-button" style="width: 64px;" onclick="document.querySelector('#search_div_input').value = '';">清除</button>
+    </div>
+
+    <!-- 直接使用Thymeleaf语法，但在构建时渲染为静态HTML -->
+    <div id="content_page_blog_list" class="content-page-blog-list">
+        <div class="title-div-father" data-classify="开发" data-title="Win11使用Docker安装Gitlab" style="box-shadow: none; margin-top: 0;">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/win11-docker-gitlab-201.html">Vol.1 Win11使用Docker安装Gitlab</a>
+            </div>
+            <p class="title-p1">开发  |  2025-07-28</p>
+            <p class="title-p2">内容摘要：本文介绍了Win11使用Docker安装Gitlab的方法。可以用于有Gitlab需求但是没有Linux环境的场景中，将Gitlab安装部署到Window系统。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="centos共享文件夹配置方法">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/centos-gongxiangwenjianjia-198.html">Vol.2 centos共享文件夹配置方法</a>
+            </div>
+            <p class="title-p1">开发  |  2025-07-19</p>
+            <p class="title-p2">内容摘要：本文介绍了centos7服务器配置共享文件夹的方法，可以应用在局域网中在个人服务器上做文件备份等场景，便捷将win11中的文件传到服务器上。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="Jenkins + Gitlab配置Springboot多模块项目自动化编译部署">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/jenkins-gitlab-zidonghuabushu-192.html">Vol.3 Jenkins + Gitlab配置Springboot多模块项目自动化编译部署</a>
+            </div>
+            <p class="title-p1">开发  |  2025-06-23</p>
+            <p class="title-p2">内容摘要：本文详细介绍了新版Jenkins的安装方法，并介绍用Jenkins + Gitlab配置Springboot多模块项目自动化编译部署的方法，Jenkins的运行环境是Java21，Springboot项目的编译和运行环境是Java 8。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="HTML5学习笔记 | HTML5 + CSS3学习">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/html-xuexibiji-189.html">Vol.4 HTML5学习笔记 | HTML5 + CSS3学习</a>
+            </div>
+            <p class="title-p1">开发  |  2025-06-10</p>
+            <p class="title-p2">内容摘要：本文是《HTML5 + CSS3学习》系列的第一篇文章，该系列文章是笔者系统学习H5和C3时记录的学习笔记。本文的主要内容是HTML5的相关知识。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="电脑edge调试手机edge网页的方法">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/tiaoshi-shouji-edge-188.html">Vol.5 电脑edge调试手机edge网页的方法</a>
+            </div>
+            <p class="title-p1">开发  |  2025-06-08</p>
+            <p class="title-p2">内容摘要：本文主要介绍在桌面端Win10系统上的edge浏览器调试小米手机移动端edge网页的方法。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="centos安装nginx，配置将http重定向到https及相关其他配置">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/nginx-anzhuang-http-zhongdingxiang-https-186.html">Vol.6 centos安装nginx，配置将http重定向到https及相关其他配置</a>
+            </div>
+            <p class="title-p1">开发  |  2025-06-07</p>
+            <p class="title-p2">内容摘要：本文是一篇it技术教程，记录了centos服务器安装nginx的方法，并使用nginx将http重定向到https。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="JS进阶学习 | 原生JS基础到进阶">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/js-xuexibiji-185.html">Vol.7 JS进阶学习 | 原生JS基础到进阶</a>
+            </div>
+            <p class="title-p1">开发  |  2025-06-03</p>
+            <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第三篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是JS进阶内容的学习笔记。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="web APIs学习 | 原生JS基础到进阶">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/js-xuexibiji-181.html">Vol.8 web APIs学习 | 原生JS基础到进阶</a>
+            </div>
+            <p class="title-p1">开发  |  2025-05-13</p>
+            <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第二篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是 web APIs 的学习。</p>
+        </div>
+        <div class="title-div-father" data-classify="开发" data-title="基础语法扫盲 | 原生JS基础到进阶">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/js-xuexibiji-180.html">Vol.9 基础语法扫盲 | 原生JS基础到进阶</a>
+            </div>
+            <p class="title-p1">开发  |  2025-05-11</p>
+            <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第一篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是 JS 基础语法。</p>
+        </div>
+        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮城墙里的文明切片">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/lvxing-xinzhougucheng-172.html">Vol.10 寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮城墙里的文明切片</a>
+            </div>
+            <p class="title-p1">户外  |  2025-04-25</p>
+            <p class="title-p2">内容摘要：这篇文章记录了笔者在忻州古城游玩时拍摄的街景，分为城楼、城墙、街道三部分。</p>
+        </div>
+        <div class="title-div-father" data-classify="户外" data-title="厦门环东烂漫骑行记">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/shamenhuandonglanmanxian-qixing-71.html">Vol.11 厦门环东烂漫骑行记</a>
+            </div>
+            <p class="title-p1">户外  |  2024-11-24</p>
+            <p class="title-p2">内容摘要：这里记录了笔者在厦门环东浪漫线骑行时记录的景色。</p>
+        </div>
+        <div class="title-div-father" data-classify="户外" data-title="成都天府绿道骑行记">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/chengdoutianfulvdao-qixing-42.html">Vol.12 成都天府绿道骑行记</a>
+            </div>
+            <p class="title-p1">户外  |  2024-10-05</p>
+            <p class="title-p2">内容摘要：这里记录了笔者在成都天府绿道骑行时拍摄的一些照片。</p>
+        </div>
+        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/lvxing-zijiayouchuanxi-abaxiaohuanxian-32.html">Vol.13 寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路</a>
+            </div>
+            <p class="title-p1">户外  |  2024-08-25</p>
+            <p class="title-p2">内容摘要：这里记录了笔者从成都出发返回成都的川西阿坝小环线自驾游攻略和自驾游时拍摄的一些景色。</p>
+        </div>
+        <div class="title-div-father" data-classify="杂谈" data-title="关于本站 - 户外探索见闻 | IT开发实录 | 多元成长笔记">
+            <div class="title-div">
+                <a class="title-a" lang="en" href="/guanyubenzhan-1.html">Vol.14 关于本站 - 户外探索见闻 | IT开发实录 | 多元成长笔记</a>
+            </div>
+            <p class="title-p1">杂谈  |  2023-12-03</p>
+            <p class="title-p2">内容摘要：这里记录了本站的基本信息。本站聚焦户外探索，IT开发，多元成长等方面，如果感兴趣可以通过邮箱联系笔者。</p>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-bar">
+    <h1 id="bottom_bar_h1" onclick="aboutTitleClick()">关于</h1>
+    <p class="webinfo">©2023 - 2025 · 叨叨老飞 版权所有. All rights reserved. 晋ICP备2023026529号-1</p>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    function classifySearchClick(classify) {
+
+        const searchDivDom = document.querySelector('#search_div');
+
+        if (classify === '') {
+
+            document.querySelector('#classify_search_all').classList.add('classify-search1');
+            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
+            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+        } else if (classify === '户外') {
+
+            searchDivDom.style.display = 'none';
+            document.querySelector('#classify_search_search').classList.remove('classify-search1');
+            document.querySelector('#classify_search_all').classList.remove('classify-search1');
+            document.querySelector('#classify_search_outdoor').classList.add('classify-search1');
+            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+        }
+        else if (classify === '公考') {
+
+            searchDivDom.style.display = 'none';
+            document.querySelector('#classify_search_search').classList.remove('classify-search1');
+            document.querySelector('#classify_search_all').classList.remove('classify-search1');
+            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
+            document.querySelector('#classify_search_civil_service_exam').classList.add('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+        } else if (classify === '成长') {
+
+            searchDivDom.style.display = 'none';
+            document.querySelector('#classify_search_search').classList.remove('classify-search1');
+            document.querySelector('#classify_search_all').classList.remove('classify-search1');
+            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
+            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_grow_up').classList.add('classify-search1');
+        } else if (classify === '开发') {
+
+            searchDivDom.style.display = 'none';
+            document.querySelector('#classify_search_search').classList.remove('classify-search1');
+            document.querySelector('#classify_search_all').classList.remove('classify-search1');
+            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
+            // document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
+            document.querySelector('#classify_search_it_development').classList.add('classify-search1');
+            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+        }
+
+        const titleDivFather = document.querySelectorAll('.title-div-father');
+        let bool = false;
+        for (let i = 0; i < titleDivFather.length; i ++) {
+
+            if (classify === titleDivFather[i].dataset.classify) {
+
+                titleDivFather[i].style.display = '';
+
+                if (!bool) {
+
+                    titleDivFather[i].style.boxShadow = 'none';
+                    titleDivFather[i].style.marginTop = 0;
+                    bool = true;
+                } else {
+
+                    titleDivFather[i].style.boxShadow = '0 -1px 1px -1px #334155';
+                    titleDivFather[i].style.marginTop = '10px';
+                }
+            } else {
+
+                if (classify === '') {
+
+                    titleDivFather[i].style.display = '';
+                } else {
+
+                    titleDivFather[i].style.display = 'none';
+                }
+            }
+        }
+    }
+
+    function searchClick() {
+
+        const searchDivDom = document.querySelector('#search_div');
+
+        if (searchDivDom.style.display === 'none') {
+
+            document.querySelector('#classify_search_search').classList.add('classify-search1');
+            document.querySelector('#classify_search_all').click();
+
+            searchDivDom.style.opacity = 0;
+            searchDivDom.style.display = 'inline';
+            setTimeout(function () {
+
+                searchDivDom.style.opacity = 1;
+                searchDivDom.style.transition = 'opacity 1s ease';
+                document.querySelector('#search_div_input').value = '';
+            }, 50);
+        } else {
+
+            document.querySelector('#classify_search_search').classList.remove('classify-search1');
+
+            searchDivDom.style.opacity = 0;
+            setTimeout(function () {
+                searchDivDom.style.display = 'none';
+            }, 50);
+        }
+    }
+
+    function searchButtonClick() {
+
+        const title = encodeURIComponent(document.querySelector('#search_div_input').value);
+
+        const titleDivFather = document.querySelectorAll('.title-div-father');
+        let bool = false;
+        for (let i = 0; i < titleDivFather.length; i ++) {
+
+            if (titleDivFather[i].dataset.title.toLowerCase().indexOf(title.toLowerCase()) !== -1) {
+
+                titleDivFather[i].style.display = '';
+
+                if (!bool) {
+
+                    titleDivFather[i].style.boxShadow = 'none';
+                    titleDivFather[i].style.marginTop = 0;
+                    bool = true;
+                } else {
+
+                    titleDivFather[i].style.boxShadow = '0 -1px 1px -1px #334155';
+                    titleDivFather[i].style.marginTop = '10px';
+                }
+            } else {
+
+                if (title === '') {
+
+                    titleDivFather[i].style.display = '';
+                } else {
+
+                    titleDivFather[i].style.display = 'none';
+                }
+            }
+        }
+    }
+
+    function aboutTitleClick() {
+
+        // 打开新标签页
+        window.open('/guanyubenzhan-1.html', '_self');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const searchDivInputDom = document.querySelector('#search_div_input');
+
+        if (searchDivInputDom) {
+
+            searchDivInputDom.addEventListener('keydown', (e) => {
+
+                if (e.key === 'Enter') {
+
+                    document.querySelector('#search_button').click();
+                }
+            });
+        }
+
+        document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+    });
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 监听英文字体加载完成
+    document.fonts.ready.then(() => {
+
+        // 获取第一个样式表（即上面的 <style> 标签）
+        const styleSheet = document.styleSheets[0];
+
+        // 查找 .title-a 规则（可能需要遍历所有规则）
+        let titleARule;
+        for (let i = 0; i < styleSheet.cssRules.length; i++) {
+
+            if (styleSheet.cssRules[i].selectorText === '.title-a') {
+
+                titleARule = styleSheet.cssRules[i];
+                break;
+            }
+        }
+
+        // 添加样式（如果找到规则）
+        if (titleARule) {
+
+            titleARule.style.textDecoration = 'underline';
+        } else {
+
+            // 如果没找到，添加新规则
+            styleSheet.insertRule('.title-a { text-decoration: underline; }', 0);
+        }
+    });
+
+    // 确保 detectRefreshRate 返回 Promise
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+
+                frameCount++;
+                const elapsed = timestamp - startTime;
+
+                if (elapsed >= 1000) {
+
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    // 保存滚动位置到本地存储
+    function saveScrollPosition() {
+
+        localStorage.setItem('scrollPosition', window.pageYOffset);
+    }
+
+    // 从本地存储恢复滚动位置
+    function restoreScrollPosition() {
+
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+        }
+    }
+
+    // 页面即将卸载时保存滚动位置
+    window.addEventListener('beforeunload', saveScrollPosition);
+
+    // 页面加载完成后恢复滚动位置
+    window.addEventListener('DOMContentLoaded', restoreScrollPosition);
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice() && navigator.platform.indexOf('Win') === -1) {
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+        }
+    })();
+</script>
+</body>
+</html>

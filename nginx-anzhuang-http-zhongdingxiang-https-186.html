@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>centos安装nginx，配置将http重定向到https及相关其他配置</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="本文是一篇it技术教程，记录了centos服务器安装nginx的方法，并使用nginx将http重定向到https。">
+    <meta name="keywords" content="nginx安装,http重定向https" />
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <link rel="stylesheet" href="https://www.hadihe.top/tinymce/tinymce/skins/ui/oxide/content.min.css" type="text/css">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.76;
+            margin: 0;
+            padding: 0;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            color: #333333;
+        }
+
+        /*.body-eink-device {*/
+        /*    font-size: 24px !important;*/
+        /*}*/
+
+        h2, h3 {
+            margin-block-end: 0;
+        }
+
+        hr {
+            margin-block-start: 0;
+        }
+
+        .content-page {
+            width: 90%;
+            position: relative;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            z-index: 998;
+            margin: auto;
+            padding: 1px;
+        }
+
+        .content-page > * {
+            border-radius: 5px;
+            border: 0;
+            background-color: #FFFFFF;
+        }
+
+        .content-page::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre[class*="language-"] {
+            padding: 10px 20px;
+            border-radius: 2px;
+            /*border: 1px solid #D0D0D0;*/
+            box-shadow: 0 0 2px #D0D0D0;
+            background-color: #FFFFFF; /* #F8F8F8 */
+            white-space: pre-wrap;
+            color: #333333;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: #F3EFE6;
+            border-radius: 1px;
+        }
+
+        img:not(/*#time_img, */#back_home_img) {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
+            border: 8px solid #FFFFFF;
+            box-shadow: 0 0 2px #D0D0D0;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        a {
+            word-wrap: break-word;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            outline: none !important;
+        }
+
+        /* 设置前边小黑点的样式 */
+        ul li::marker {
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        ul {
+            padding-left: 16px;
+        }
+
+        #back_home_img {
+            width: 30px;
+            margin-left: -5px;
+            cursor: pointer;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        @media screen and (max-width: 1157px) {
+            img:not(/*#time_img, */#back_home_img) {
+                width: calc(100% - 16px) !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            table {
+                width: 100% !important;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100%">
+
+<div class="content-page">
+    <!-- 静态内容预览（Thymeleaf渲染） -->
+    <div><html>
+ <head></head>
+ <body>
+  <h1 style="text-align: left;" data-mce-style="text-align: left;">centos安装nginx，配置将http重定向到https及相关其他配置</h1>
+  <p style="text-align: left; margin-bottom: 50px;">编写于2025年06月07日 修订于2025年10月27日 | 来源：<a style="text-underline-offset: 5px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.hadihe.top">https://www.hadihe.top</a></p><div id="catalog_div"><p><a style="text-underline-offset: 5px;" href='#heading_0'>centos安装nginx</a></p><p><a style="text-underline-offset: 5px;" href='#heading_1'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>安装依赖</a></p><p><a style="text-underline-offset: 5px;" href='#heading_2'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>下载安装nginx</a></p><p><a style="text-underline-offset: 5px;" href='#heading_3'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>验证</a></p><p><a style="text-underline-offset: 5px;" href='#heading_4'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>后续</a></p><p><a style="text-underline-offset: 5px;" href='#heading_5'>nginx配置将http重定向到https</a></p><p><a style="text-underline-offset: 5px;" href='#heading_6'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>在springboot的application.yml中配置https压缩访问html的方法</a></p><p><a style="text-underline-offset: 5px;" href='#heading_7'>参考</a></p></div>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_0">centos安装nginx</h3>
+  <hr>
+  <h4 id="heading_1">安装依赖</h4>
+  <p>root用户任意目录执行</p>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"># 安装 nginx 需要先将官网下载的源码进行编译，编译依赖 gcc 环境
+yum install gcc-c++
+# pcre是一个perl库，包括perl兼容的正则表达式库，nginx的http模块使用pcre来解析正则表达式，所以需要安装pcre库
+yum install -y pcre pcre-devel
+# zlib库提供了很多种压缩和解压缩方式nginx使用zlib对http包的内容进行gzip，所以需要安装
+yum install -y zlib zlib-devel
+# nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库
+yum install -y openssl openssl-devel</pre>
+  <h4 id="heading_2">下载安装nginx</h4>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"># 任意目录可执行，如：/data目录
+cd /data
+# 下载nginx
+wget https://nginx.org/download/nginx-1.22.1.tar.gz
+# 解压
+tar -zxvf nginx-1.22.1.tar.gz
+# 进入解压后的目录
+cd nginx-1.22.1/
+# 配置（带有https模块）
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+# 编译
+make
+# 安装
+make install
+# 进入安装后的启动目录
+cd /usr/local/nginx/sbin
+# 启动nginx
+./nginx
+</pre>
+  <h4 id="heading_3">验证</h4>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">netstat -ntlp</pre>
+  <p><img id="tmp_img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/186/2581c384-c4d2-4d04-a6d5-ac7078a6aae3.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/186/2581c384-c4d2-4d04-a6d5-ac7078a6aae3.png"></p>
+  <p>浏览器访问http://ip</p>
+  <p><img id="tmp_img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/186/22e04a04-2a17-47cb-9ef0-4685fc028d35.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/186/22e04a04-2a17-47cb-9ef0-4685fc028d35.png"></p>
+  <h4 id="heading_4">后续</h4>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"># 关闭nginx服务
+./nginx -s stop
+
+# 配置nginx环境变量
+vim /etc/profile
+export PATH=$PATH:/usr/local/nginx/sbin
+# 让文件生效
+source /etc/profile</pre>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_5">nginx配置将http重定向到https</h3>
+  <hr>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"># 进入nginx配置文件所在目录
+cd /usr/local/nginx/conf
+# 打开nginx配置文件
+vim nginx.conf
+# 找到“server { listen 80;”
+# 修改配置
+server_name  你的域名;  
+return 301 https://$server_name$request_uri; 
+
+# 保存退出，重载配置，重启也可以
+cd /usr/local/nginx/sbin
+./nginx -s reload</pre>
+  <p><img id="tmp_img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/186/0430bf0c-305f-4fed-a5a6-bbe6ffe7acba.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/186/0430bf0c-305f-4fed-a5a6-bbe6ffe7acba.png"></p>
+  <p>https我已经在springboot中配置，所以在nginx里边不需要配置https的相关内容。</p>
+  <p>可在浏览器中验证http重定向到https的配置效果。</p>
+  <h4 id="heading_6">在springboot的application.yml中配置https压缩访问html的方法</h4>
+  <p>因为https流量直接通过Springboot服务，并不经过nginx，所有要想配置相关内容，需要直接配置到Springboot项目中。</p>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">server:
+  compression:
+    enabled: true  # 启用压缩
+    mime-types:    # 压缩的文件类型
+      - text/html
+      - text/css
+      - application/javascript
+      - application/json
+    min-response-size: 1024  # 最小压缩阈值（字节）
+    excluded-user-agents: false  # 不排除任何用户代理</pre>
+  <p>验证</p>
+  <p>浏览器访问相关页面，右键点击 → 检查 → 点击Network，在Name列表中选择一个静态资源，如这里是.html静态文件，然后在后边的Headers的Response Headers里边如果有Content-Encoding的相关内容，就表示压缩生效了。</p>
+  <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/186/aa8d7209-2fd5-4dcb-b6ee-9444e3fa0657.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/186/aa8d7209-2fd5-4dcb-b6ee-9444e3fa0657.png"></p>
+  <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/186/64b0f2f0-fc42-4d59-a6b1-38ef9d2bf762.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/186/64b0f2f0-fc42-4d59-a6b1-38ef9d2bf762.png"></p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_7">参考</h3>
+  <hr>
+  <p><a href="https://blog.csdn.net/weixin_47110096/article/details/135741324" data-mce-href="https://blog.csdn.net/weixin_47110096/article/details/135741324">https://blog.csdn.net/weixin_47110096/article/details/135741324</a></p>
+ </body>
+</html></div>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    const backHomeImgDom = document.querySelector('#back_home_img');
+    if (backHomeImgDom) {
+
+        backHomeImgDom.onclick = function () {
+
+            window.location.replace('/');
+        }
+    }
+
+    document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+                frameCount++;
+                const elapsed = timestamp - startTime;
+                if (elapsed >= 1000) {
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice()) {
+
+            // document.body.classList.add('body-eink-device');
+            // document.querySelector('#return_top').style.display = 'none';
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+
+            document.querySelectorAll('img').forEach(img => {
+
+                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
+
+                    img.style.width = 'calc(100% - 16px)';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>

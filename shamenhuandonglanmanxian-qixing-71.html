@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>厦门环东烂漫骑行记</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="这里记录了笔者在厦门环东浪漫线骑行时记录的景色。">
+    <meta name="keywords" content="厦门环东烂漫线,骑行" />
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <link rel="stylesheet" href="https://www.hadihe.top/tinymce/tinymce/skins/ui/oxide/content.min.css" type="text/css">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.76;
+            margin: 0;
+            padding: 0;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            color: #333333;
+        }
+
+        /*.body-eink-device {*/
+        /*    font-size: 24px !important;*/
+        /*}*/
+
+        h2, h3 {
+            margin-block-end: 0;
+        }
+
+        hr {
+            margin-block-start: 0;
+        }
+
+        .content-page {
+            width: 90%;
+            position: relative;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            z-index: 998;
+            margin: auto;
+            padding: 1px;
+        }
+
+        .content-page > * {
+            border-radius: 5px;
+            border: 0;
+            background-color: #FFFFFF;
+        }
+
+        .content-page::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre[class*="language-"] {
+            padding: 10px 20px;
+            border-radius: 2px;
+            /*border: 1px solid #D0D0D0;*/
+            box-shadow: 0 0 2px #D0D0D0;
+            background-color: #FFFFFF; /* #F8F8F8 */
+            white-space: pre-wrap;
+            color: #333333;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: #F3EFE6;
+            border-radius: 1px;
+        }
+
+        img:not(/*#time_img, */#back_home_img) {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
+            border: 8px solid #FFFFFF;
+            box-shadow: 0 0 2px #D0D0D0;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        a {
+            word-wrap: break-word;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            outline: none !important;
+        }
+
+        /* 设置前边小黑点的样式 */
+        ul li::marker {
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        ul {
+            padding-left: 16px;
+        }
+
+        #back_home_img {
+            width: 30px;
+            margin-left: -5px;
+            cursor: pointer;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        @media screen and (max-width: 1157px) {
+            img:not(/*#time_img, */#back_home_img) {
+                width: calc(100% - 16px) !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            table {
+                width: 100% !important;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100%">
+
+<div class="content-page">
+    <!-- 静态内容预览（Thymeleaf渲染） -->
+    <div><html>
+ <head></head>
+ <body>
+  <h1 style="text-align: left;" data-mce-style="text-align: left;">厦门环东烂漫骑行记</h1>
+  <p style="text-align: left; margin-bottom: 50px;">编写于2024年11月24日 修订于2025年10月27日 | 来源：<a style="text-underline-offset: 5px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.hadihe.top">https://www.hadihe.top</a></p><div id="catalog_div"></div>
+  
+  <p><img src="1/71/be556639-a571-4adf-9ae4-b8169614cc65.jpg" alt="图片" width="169" height="300" data-mce-src="1/71/be556639-a571-4adf-9ae4-b8169614cc65.jpg"> &nbsp;<img src="1/71/d649737c-2a8b-4f20-b5fe-590c9e5649de.jpg" alt="图片" width="556" height="300" data-mce-src="1/71/d649737c-2a8b-4f20-b5fe-590c9e5649de.jpg"> &nbsp;<img style="max-width: 950px; width: auto; height: 300px;" src="1/71/c8b135bf-4cbe-4444-b2a2-e71ba2fa6822.jpg" alt="图片" data-mce-style="max-width: 950px; width: auto; height: 300px;" data-mce-src="1/71/c8b135bf-4cbe-4444-b2a2-e71ba2fa6822.jpg"></p>
+  <p><img src="1/71/0c412e6e-7f4e-4219-8cc2-28dcc4557c76.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/0c412e6e-7f4e-4219-8cc2-28dcc4557c76.jpg"> &nbsp;<img src="1/71/518df228-9ff9-411b-b097-efcfe1fdf919.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/518df228-9ff9-411b-b097-efcfe1fdf919.jpg"> &nbsp;<img src="1/71/83b76b57-5b18-4a3a-a943-87ce7ec567d5.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/83b76b57-5b18-4a3a-a943-87ce7ec567d5.jpg"></p>
+  <p><img src="1/71/9fbc893b-e9d0-43a2-a125-5623877cd71d.jpg" alt="图片" width="889" height="500" data-mce-src="1/71/9fbc893b-e9d0-43a2-a125-5623877cd71d.jpg"></p>
+ </body>
+</html></div>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    const backHomeImgDom = document.querySelector('#back_home_img');
+    if (backHomeImgDom) {
+
+        backHomeImgDom.onclick = function () {
+
+            window.location.replace('/');
+        }
+    }
+
+    document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+                frameCount++;
+                const elapsed = timestamp - startTime;
+                if (elapsed >= 1000) {
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice()) {
+
+            // document.body.classList.add('body-eink-device');
+            // document.querySelector('#return_top').style.display = 'none';
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+
+            document.querySelectorAll('img').forEach(img => {
+
+                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
+
+                    img.style.width = 'calc(100% - 16px)';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>

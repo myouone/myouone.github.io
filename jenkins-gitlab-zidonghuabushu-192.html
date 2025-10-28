@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jenkins + Gitlab配置Springboot多模块项目自动化编译部署</title>
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="description" content="本文详细介绍了新版Jenkins的安装方法，并介绍用Jenkins + Gitlab配置Springboot多模块项目自动化编译部署的方法，Jenkins的运行环境是Java21，Springboot项目的编译和运行环境是Java 8。">
+    <meta name="keywords" content="jenkins,gitlab,自动化部署" />
+    <link rel="icon" href="https://www.hadihe.top/image/blog.svg">
+
+    <link rel="stylesheet" href="https://www.hadihe.top/tinymce/tinymce/skins/ui/oxide/content.min.css" type="text/css">
+
+    <style>
+        @font-face {
+            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
+            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
+            font-weight: 400; /* 对应常规字重，按需调整 */
+            font-style: normal; /* 常规样式，按需调整 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.76;
+            margin: 0;
+            padding: 0;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            color: #333333;
+        }
+
+        /*.body-eink-device {*/
+        /*    font-size: 24px !important;*/
+        /*}*/
+
+        h2, h3 {
+            margin-block-end: 0;
+        }
+
+        hr {
+            margin-block-start: 0;
+        }
+
+        .content-page {
+            width: 90%;
+            position: relative;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            z-index: 998;
+            margin: auto;
+            padding: 1px;
+        }
+
+        .content-page > * {
+            border-radius: 5px;
+            border: 0;
+            background-color: #FFFFFF;
+        }
+
+        .content-page::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre[class*="language-"] {
+            padding: 10px 20px;
+            border-radius: 2px;
+            /*border: 1px solid #D0D0D0;*/
+            box-shadow: 0 0 2px #D0D0D0;
+            background-color: #FFFFFF; /* #F8F8F8 */
+            white-space: pre-wrap;
+            color: #333333;
+            font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+            word-wrap: break-word;
+        }
+
+        code {
+            background-color: #F3EFE6;
+            border-radius: 1px;
+        }
+
+        img:not(/*#time_img, */#back_home_img) {
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
+            border: 8px solid #FFFFFF;
+            box-shadow: 0 0 2px #D0D0D0;
+        }
+
+        .return-top {
+            position: fixed;
+            top: calc(100vh - 60px);
+            left: calc(100vw - 60px);
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 2px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
+            background-size: 15px 15px;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1000;
+            background-color: #FFFFFF;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+
+        .return-top:hover {
+            box-shadow: 0 0 4px #D0D0D0;
+        }
+
+        a {
+            word-wrap: break-word;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            outline: none !important;
+        }
+
+        /* 设置前边小黑点的样式 */
+        ul li::marker {
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        ul {
+            padding-left: 16px;
+        }
+
+        #back_home_img {
+            width: 30px;
+            margin-left: -5px;
+            cursor: pointer;
+            /* 禁用圈选 */
+            user-select: none; /* 标准语法 */
+            -webkit-user-select: none; /* Safari 浏览器 */
+            -moz-user-select: none; /* Firefox 浏览器 */
+            -ms-user-select: none; /* IE/Edge 浏览器 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+
+        @media screen and (max-width: 1157px) {
+            img:not(/*#time_img, */#back_home_img) {
+                width: calc(100% - 16px) !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            table {
+                width: 100% !important;
+            }
+
+            .return-top {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100%">
+
+<div class="content-page">
+    <!-- 静态内容预览（Thymeleaf渲染） -->
+    <div><html>
+ <head></head>
+ <body>
+  <h1>Jenkins + Gitlab配置Springboot多模块项目自动化编译部署</h1>
+  <p style="text-align: left; margin-bottom: 50px;">编写于2025年06月23日 修订于2025年10月27日 | 来源：<a style="text-underline-offset: 5px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.hadihe.top">https://www.hadihe.top</a></p><div id="catalog_div"><p><a style="text-underline-offset: 5px;" href='#heading_0'>前置条件</a></p><p><a style="text-underline-offset: 5px;" href='#heading_1'>正文</a></p><p><a style="text-underline-offset: 5px;" href='#heading_2'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>安装Maven</a></p><p><a style="text-underline-offset: 5px;" href='#heading_3'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>安装Git</a></p><p><a style="text-underline-offset: 5px;" href='#heading_4'><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span><span style="display: inline-block; text-decoration: none !important;">&nbsp;</span>安装Jenkins</a></p></div>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_0">前置条件</h3>
+  <hr>
+  <p>1、服务器已安装Java 8、Java 21，并配置JAVA_HOME环境变量，指向Java 8。</p>
+  <p>2、服务器已安装配置Gitlab，并可以正常将项目提交到Gitlab仓库。</p>
+  <p>3、如下命令均为root用户执行，服务器为centos7，springboot项目为Java 8，Jenkins运行Java环境为Java 21。</p>
+  <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_1">正文</h3>
+  <hr>
+  <h4 id="heading_2">安装Maven</h4>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+
+# 解压以后重命名为maven并放在合适的目录下，笔者放在了/usr/local/softs
+# 配置setting文件
+cd /usr/local/softs/maven/conf
+vim settings.xml
+
+# 配置本地仓库地址，并在目录中创建repository文件夹
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>localRepository</span><span class="token punctuation">&gt;</span></span>/usr/local/softs/maven/repository<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>localRepository</span><span class="token punctuation">&gt;</span></span>
+# 配置镜像
+    <span class="token comment">&lt;!-- 阿里云仓库 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>alimaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>aliyun maven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>http://maven.aliyun.com/nexus/content/repositories/central/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 中央仓库1 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>repo1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>Human Readable Name for this Mirror.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>http://repo1.maven.org/maven2/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 中央仓库2 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>repo2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>Human Readable Name for this Mirror.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>http://repo2.maven.org/maven2/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+
+# 配置Maven环境变量
+vim /etc/profile
+
+export MAVEN_HOME=/usr/local/softs/maven-3.9.4
+export PATH=$PATH:$MAVEN_HOME/bin
+
+# 配置生效
+source /etc/profile
+
+# 验证
+mvn -v</pre>
+  <h4 id="heading_3">安装Git</h4>
+  <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">yum install -y git</pre>
+  <h4 id="heading_4">安装Jenkins</h4>
+  <div class="lake-content">
+   <p id="u565ae27f" class="ne-p"><span class="ne-text"><a href="https://www.jenkins.io/zh/download/" data-mce-href="https://www.jenkins.io/zh/download/">https://www.jenkins.io/zh/download/</a></span></p>
+   <p class="ne-p"><span class="ne-text">Jenkins 安装2.504.2版本，可以在以前的发行版中找其他版本。笔者安装时遇到一个问题是想下载支持Java 8的版本，但是比较老的版本已经没法在线安装插件，所以选择了较高的2.504.2版本，用Java21运行。</span></p>
+   <p class="ne-p"><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1920 / 922; object-fit: cover;" src="1/192/879cb2cc-b4ac-4cf3-b13c-f71517e75314.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1920 / 922; object-fit: cover;" data-mce-src="1/192/879cb2cc-b4ac-4cf3-b13c-f71517e75314.png"></span></p>
+   <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">cd /data/jenkins
+wget https://mirrors.jenkins.io/war-stable/2.504.2/jenkins.war
+
+# 配置JENKINS_HOME，路径指向一个较大容量的磁盘，后期比较费空间
+vim /etc/profile
+
+export JENKINS_HOME=/home/hadi/data/jenkins/jenkins
+
+# 使文件生效
+source /etc/profile
+
+# 指定端口启动
+nohup java -jar jenkins.war --httpPort=18081 &gt; log.log 2&gt;&amp;1 &amp;</pre>
+   <p>访问管理页面：http://ip:18081/jenkins</p>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1238 / 724; object-fit: cover;" src="1/192/eeb9c56a-21ef-4440-b088-c8ed097cad43.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1238 / 724; object-fit: cover;" data-mce-src="1/192/eeb9c56a-21ef-4440-b088-c8ed097cad43.png"></p>
+   <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"># 获取管理员密码：
+cat /home/hadi/data/jenkins/jenkins/secrets/initialAdminPassword</pre>
+   <div class="lake-content">
+    <p><span class="ne-text">输入管理员密码以后，先选择推荐的安装。</span></p>
+   </div>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1238 / 724; object-fit: cover;" src="1/192/bdbaf473-4b86-4935-ad79-c7d57db31749.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1238 / 724; object-fit: cover;" data-mce-src="1/192/bdbaf473-4b86-4935-ad79-c7d57db31749.png"></p>
+   <p>然后按照页面操作步骤操作即可，全部操作完成以后，进入以下页面。</p>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1919 / 849; object-fit: cover;" src="1/192/337d6496-b9d7-4fb3-8b5f-ad044d35312d.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1919 / 849; object-fit: cover;" data-mce-src="1/192/337d6496-b9d7-4fb3-8b5f-ad044d35312d.png"></p>
+   <p><span class="ne-text">jenkins安装完成后，首先进行插件的下载（Jenkins页面 → Manage Jenkins → Plugins）需要安装的插件有：Maven Integration；GitLab（全部）；Git（全部）；ssh（全部）；如下页面操作：</span></p>
+   <p class="ne-p"><img id="tmp_img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/9ca5db30-ad0d-4307-adcc-ac4aa3511084.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/9ca5db30-ad0d-4307-adcc-ac4aa3511084.png"></p>
+   <p class="ne-p">可以从Installed plugins中查看有哪些告警或弃用的插件可以从Installed plugins中卸载掉，重启即可生效。</p>
+   <p><span class="ne-text">插件安装完成后，我们进行全局的配置（Jenkins页面 → Manage Jenkins → Tools），其中包括Maven、jdk、git的配置。</span></p>
+   <p>&nbsp;<img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1597 / 701; object-fit: cover;" src="1/192/323f2b51-562e-46d3-88c6-7253c2397ad6.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1597 / 701; object-fit: cover;" data-mce-src="1/192/323f2b51-562e-46d3-88c6-7253c2397ad6.png"></p>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1592 / 686; object-fit: cover;" src="1/192/16644283-a488-4fd1-bb81-ebf58051886a.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1592 / 686; object-fit: cover;" data-mce-src="1/192/16644283-a488-4fd1-bb81-ebf58051886a.png"></p>
+   <p><img style="max-width: 99%; width: 1000px; height: auto; aspect-ratio: 1589 / 539; object-fit: cover;" src="1/192/fcd5fa3d-ccab-462e-977c-6c48fa1c1553.png" alt="图片" data-mce-style="max-width: 99%; width: 1000px; height: auto; aspect-ratio: 1589 / 539; object-fit: cover;" data-mce-src="1/192/fcd5fa3d-ccab-462e-977c-6c48fa1c1553.png"></p>
+   <p>注意：Install automatically都不勾选。</p>
+   <p><span class="ne-text">全局配置完成之后，进行系统配置（Jenkins页面 → Manage Jenkins → System），主要是配置ssh服务。</span></p>
+   <p><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 830 / 785; object-fit: cover;" src="1/192/067fdf73-9425-471d-98a6-894cb155a8c5.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 830 / 785; object-fit: cover;" data-mce-src="1/192/067fdf73-9425-471d-98a6-894cb155a8c5.png"></span></p>
+   <p><img style="max-width: 99%; width: 1000px; height: auto; aspect-ratio: 1579 / 160; object-fit: cover;" src="1/192/87fff01f-fb7f-4932-b5c5-c211e9008025.png" alt="图片" data-mce-style="max-width: 99%; width: 1000px; height: auto; aspect-ratio: 1579 / 160; object-fit: cover;" data-mce-src="1/192/87fff01f-fb7f-4932-b5c5-c211e9008025.png"></p>
+   <p><span class="ne-text">回到主页，点击新建Item，填好项目名称以后，选择构建一个Maven项目，进入配置页面，安装如下步骤依次操作：</span></p>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1150 / 657; object-fit: cover;" src="1/192/89b67621-58b0-43e5-9ca5-cd22dfa8fadc.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1150 / 657; object-fit: cover;" data-mce-src="1/192/89b67621-58b0-43e5-9ca5-cd22dfa8fadc.png"></p>
+   <p><span class="ne-text">1、源码管理配置Git</span></p>
+   <p><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1324 / 720; object-fit: cover;" src="1/192/7f2dad29-5534-4c42-ac15-4dbdca9e70f2.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1324 / 720; object-fit: cover;" data-mce-src="1/192/7f2dad29-5534-4c42-ac15-4dbdca9e70f2.png"></p>
+   <p><span class="ne-text">2、点击如上添加按钮，配置Credentials（也可以从如下路径配置：Dashboard → Manage Jenkins → Credentials），如下：</span></p>
+   <p><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1274 / 761; object-fit: cover;" src="1/192/dda9a5f4-ff35-4b9f-8026-f06772b5e484.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1274 / 761; object-fit: cover;" data-mce-src="1/192/dda9a5f4-ff35-4b9f-8026-f06772b5e484.png"></span></p>
+   <p><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1304 / 619; object-fit: cover;" src="1/192/4569ab14-c8d6-4c47-816e-6e0ad870c092.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1304 / 619; object-fit: cover;" data-mce-src="1/192/4569ab14-c8d6-4c47-816e-6e0ad870c092.png"></span></p>
+   <p><span class="ne-text">填写Gitlab的用户名密码。</span></p>
+   <p><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1287 / 672; object-fit: cover;" src="1/192/18603070-248b-4517-9538-dd3385c1425e.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1287 / 672; object-fit: cover;" data-mce-src="1/192/18603070-248b-4517-9538-dd3385c1425e.png"></span></p>
+   <p><span class="ne-text">3、Triggers勾选如下选项</span></p>
+   <p><span class="ne-text"><img style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1254 / 579; object-fit: cover;" src="1/192/173654d7-a4c2-4d6e-bbca-352bf6c7fefd.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: 500px; aspect-ratio: 1254 / 579; object-fit: cover;" data-mce-src="1/192/173654d7-a4c2-4d6e-bbca-352bf6c7fefd.png"></span></p>
+   <p><span class="ne-text"><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/3a052e32-229f-4df0-8317-800fce9713ef.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/3a052e32-229f-4df0-8317-800fce9713ef.png"></span></p>
+   <p><span class="ne-text">3、配置Build</span></p>
+   <p><span class="ne-text"><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/219d1ba1-e371-4ab1-8c05-75a50c20489c.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/219d1ba1-e371-4ab1-8c05-75a50c20489c.png"></span></p>
+   <p><span class="ne-text">Goals and options为Maven编译打包命令，这里是多模块项目，只打包todo模块，并且由-am命令将依赖模块自动打包。</span></p>
+   <p>这里会有问题是新版Jenkins限制的最低Java编译版本，Java 8不符合要求，所以要做如下配置：</p>
+   <p>在项目pom.xml中添加如下配置：</p>
+   <pre class="language-markup" contenteditable="false" data-mce-highlighted="true"><span class="token comment">&lt;!-- 配置 toolchains 插件 --&gt;</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.apache.maven.plugins<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>maven-toolchains-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.1.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>executions</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>execution</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>goals</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>goal</span><span class="token punctuation">&gt;</span></span>toolchain<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>goal</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>goals</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>execution</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>executions</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>toolchains</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jdk</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jdk</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>toolchains</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">&gt;</span></span></pre>
+   <p>在服务器用户目录的m2文件夹（笔者是/root/.m2）中添加如下文件：</p>
+   <pre class="language-markup" contenteditable="false" data-mce-highlighted="true">cd /root/.m2
+vim toolchains.xml
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>toolchains</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>toolchain</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>jdk<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>provides</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span> <span class="token comment">&lt;!-- 要使用的 JDK 版本标识，与后续 POM 关联 --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>vendor</span><span class="token punctuation">&gt;</span></span>Oracle<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>vendor</span><span class="token punctuation">&gt;</span></span> <span class="token comment">&lt;!-- 供应商，可自定义 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>provides</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jdkHome</span><span class="token punctuation">&gt;</span></span>/usr/local/softs/jdk1.8.0_221<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jdkHome</span><span class="token punctuation">&gt;</span></span> <span class="token comment">&lt;!-- JDK 实际路径 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>toolchain</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>toolchains</span><span class="token punctuation">&gt;</span></span>
+
+保存退出</pre>
+   <p>4、Post Steps</p>
+   <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/276130c4-96c8-418a-9bad-a4dc111a920a.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/276130c4-96c8-418a-9bad-a4dc111a920a.png"></p>
+   <p>5、构建后操作</p>
+   <p>构建后操作是在编译打包完成项目以后，将项目发布上线。</p>
+   <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/6e9d59e0-7f5c-4788-adbd-fb7e29c264eb.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/6e9d59e0-7f5c-4788-adbd-fb7e29c264eb.png"></p>
+   <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/06aa0f14-7dc7-4f64-8776-6af60f412d07.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/06aa0f14-7dc7-4f64-8776-6af60f412d07.png"></p>
+   <p>6、其他模块快速配置方法</p>
+   <p>回到主页，点击新建Item，输入项目名称以后，在页面的最下边填写要复制的项目名，即可快速复制一个项目出来。</p>
+   <p><img class="tmp-img" style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" src="1/192/bd31dba0-264b-4815-9e6a-e7e65a716137.png" alt="图片" data-mce-style="max-width: 99%; width: auto; height: auto; aspect-ratio: auto; object-fit: cover;" data-mce-src="1/192/bd31dba0-264b-4815-9e6a-e7e65a716137.png"></p>
+  </div>
+ </body>
+</html></div>
+</div>
+
+<div id="return_top" class="return-top"></div>
+
+<script>
+    const backHomeImgDom = document.querySelector('#back_home_img');
+    if (backHomeImgDom) {
+
+        backHomeImgDom.onclick = function () {
+
+            window.location.replace('/');
+        }
+    }
+
+    document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
+
+    function detectRefreshRate() {
+
+        return new Promise(resolve => {
+
+            let frameCount = 0;
+            let startTime = performance.now();
+
+            function checkFrame(timestamp) {
+                frameCount++;
+                const elapsed = timestamp - startTime;
+                if (elapsed >= 1000) {
+                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
+                    resolve(refreshRate); // 计算完成后 resolve
+                    return;
+                }
+                requestAnimationFrame(checkFrame);
+            }
+
+            requestAnimationFrame(checkFrame);
+        });
+    }
+
+    function scrollTopSmooth() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0
+        });
+    }
+
+    // 标记为 async 函数，支持 await
+    async function isEInkDevice() {
+
+        const refreshRate = await detectRefreshRate(); // 等待异步结果
+        return refreshRate <= 30;
+    }
+
+    (async function () {
+
+        if (await isEInkDevice()) {
+
+            // document.body.classList.add('body-eink-device');
+            // document.querySelector('#return_top').style.display = 'none';
+
+            // 移除默认事件
+            document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
+            document.querySelector('#return_top').addEventListener('click', scrollTop);
+
+            document.querySelectorAll('img').forEach(img => {
+
+                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
+
+                    img.style.width = 'calc(100% - 16px)';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>
