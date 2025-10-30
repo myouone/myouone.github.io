@@ -301,6 +301,10 @@
                 display: none;
             }
 
+            .title-div-father {
+                padding: 10px;
+            }
+
             .content-page-blog-list {
                 grid-template-columns: repeat(auto-fit, minmax(90%, 1fr));
             }
@@ -322,6 +326,19 @@
             .bottom-bar {
                 padding-bottom: 20px;
             }
+
+            .loading-text {
+                font-size: 16px !important;
+            }
+
+            .loading-subtext {
+                font-size: 14px !important;
+            }
+
+            .loader {
+                width: 50px !important;
+                height: 50px !important;
+            }
         }
 
         /* 加载层样式 */
@@ -338,10 +355,6 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 0.5s ease;
-        }
-
-        .title-div-father {
-            padding: 10px;
         }
 
         .loader {
