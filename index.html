@@ -110,13 +110,8 @@
             background-color: #FFFFFF;
             padding-top: 10px;
             padding-bottom: 20px;
-            /*margin-left: 25%;*/
             margin: auto;
         }
-
-        /*.content-page-eink-device {*/
-        /*    margin-top: 20px !important;*/
-        /*}*/
 
         .search-div {
             margin-top: 0;
@@ -181,16 +176,17 @@
         }
 
         .content-page-blog-list {
-            background-color: #F8F8F8;
-            border: 1px solid #EFEFEF;
-            margin-top: 10px;
-            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
         }
 
         .title-div-father {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 -1px 1px -1px #334155;
+            background: #F8F8F8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
         }
 
         .title-div {
@@ -214,6 +210,8 @@
             text-underline-offset: 5px;
             -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
             text-decoration: none;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
         .title-a:hover {
@@ -240,7 +238,6 @@
             height: 120px;
             background-color: #FFFFFF;
             text-align: left;
-            /*margin-left: 25%;*/
             margin: auto;
         }
 
@@ -259,22 +256,16 @@
             all: initial;
             font-size: var(--title-a-font-size);
             position: absolute;
-            /*left: calc(2 * var(--title-a-font-size) + 3px);*/
             top: 30px;
             line-height: 1.2;
             color: #1E293B;
             cursor: pointer;
             text-decoration: none;
-            /*text-decoration: underline;*/
-            /*text-decoration-skip-ink: auto;*/
-            /*vertical-align: baseline;*/
-            /*text-underline-offset: 5px;*/
         }
 
         .webinfo {
             overflow: hidden;
             text-overflow: ellipsis;
-            /*white-space: nowrap;*/
             position: absolute;
             top: 53px;
             left: 0;
@@ -328,9 +319,59 @@
                 padding-bottom: 20px;
             }
         }
+
+        /* 加载层样式 */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #3a3a3a, #5a5a5a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid white;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .loading-subtext {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 10px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
+
+<!-- 加载层 -->
+<div id="loading-overlay">
+    <div class="loader"></div>
+    <div class="loading-text">正在加载字体</div>
+    <div class="loading-subtext">请稍候...</div>
+</div>
 
 <div id="top_bar" class="top-bar">
     <p class="top-bar-p">@卖油老翁</p>
@@ -370,98 +411,98 @@
 
     <!-- 直接使用Thymeleaf语法，但在构建时渲染为静态HTML -->
     <div id="content_page_blog_list" class="content-page-blog-list">
-        <div class="title-div-father" data-classify="开发" data-title="Win11使用Docker安装Gitlab" style="box-shadow: none; margin-top: 0;">
+        <div class="title-div-father" data-classify="开发" data-title="Win11使用Docker安装Gitlab"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/win11-docker-gitlab-201.html">Vol.1 Win11使用Docker安装Gitlab</a>
             </div>
             <p class="title-p1">开发  |  2025-07-28</p>
             <p class="title-p2">内容摘要：本文介绍了Win11使用Docker安装Gitlab的方法。可以用于有Gitlab需求但是没有Linux环境的场景中，将Gitlab安装部署到Window系统。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="centos共享文件夹配置方法">
+        <div class="title-div-father" data-classify="开发" data-title="centos共享文件夹配置方法"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/centos-gongxiangwenjianjia-198.html">Vol.2 centos共享文件夹配置方法</a>
             </div>
             <p class="title-p1">开发  |  2025-07-19</p>
             <p class="title-p2">内容摘要：本文介绍了centos7服务器配置共享文件夹的方法，可以应用在局域网中在个人服务器上做文件备份等场景，便捷将win11中的文件传到服务器上。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="Jenkins + Gitlab配置Springboot多模块项目自动化编译部署">
+        <div class="title-div-father" data-classify="开发" data-title="Jenkins + Gitlab配置Springboot多模块项目自动化编译部署"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/jenkins-gitlab-zidonghuabushu-192.html">Vol.3 Jenkins + Gitlab配置Springboot多模块项目自动化编译部署</a>
             </div>
             <p class="title-p1">开发  |  2025-06-23</p>
             <p class="title-p2">内容摘要：本文详细介绍了新版Jenkins的安装方法，并介绍用Jenkins + Gitlab配置Springboot多模块项目自动化编译部署的方法，Jenkins的运行环境是Java21，Springboot项目的编译和运行环境是Java 8。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="HTML5学习笔记 | HTML5 + CSS3学习">
+        <div class="title-div-father" data-classify="开发" data-title="HTML5学习笔记 | HTML5 + CSS3学习"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/html-xuexibiji-189.html">Vol.4 HTML5学习笔记 | HTML5 + CSS3学习</a>
             </div>
             <p class="title-p1">开发  |  2025-06-10</p>
             <p class="title-p2">内容摘要：本文是《HTML5 + CSS3学习》系列的第一篇文章，该系列文章是笔者系统学习H5和C3时记录的学习笔记。本文的主要内容是HTML5的相关知识。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="电脑edge调试手机edge网页的方法">
+        <div class="title-div-father" data-classify="开发" data-title="电脑edge调试手机edge网页的方法"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/tiaoshi-shouji-edge-188.html">Vol.5 电脑edge调试手机edge网页的方法</a>
             </div>
             <p class="title-p1">开发  |  2025-06-08</p>
             <p class="title-p2">内容摘要：本文主要介绍在桌面端Win10系统上的edge浏览器调试小米手机移动端edge网页的方法。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="centos安装nginx，配置将http重定向到https及相关其他配置">
+        <div class="title-div-father" data-classify="开发" data-title="centos安装nginx，配置将http重定向到https及相关其他配置"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/nginx-anzhuang-http-zhongdingxiang-https-186.html">Vol.6 centos安装nginx，配置将http重定向到https及相关其他配置</a>
             </div>
             <p class="title-p1">开发  |  2025-06-07</p>
             <p class="title-p2">内容摘要：本文是一篇it技术教程，记录了centos服务器安装nginx的方法，并使用nginx将http重定向到https。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="JS进阶学习 | 原生JS基础到进阶">
+        <div class="title-div-father" data-classify="开发" data-title="JS进阶学习 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/js-xuexibiji-185.html">Vol.7 JS进阶学习 | 原生JS基础到进阶</a>
             </div>
             <p class="title-p1">开发  |  2025-06-03</p>
             <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第三篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是JS进阶内容的学习笔记。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="web APIs学习 | 原生JS基础到进阶">
+        <div class="title-div-father" data-classify="开发" data-title="web APIs学习 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/js-xuexibiji-181.html">Vol.8 web APIs学习 | 原生JS基础到进阶</a>
             </div>
             <p class="title-p1">开发  |  2025-05-13</p>
             <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第二篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是 web APIs 的学习。</p>
         </div>
-        <div class="title-div-father" data-classify="开发" data-title="基础语法扫盲 | 原生JS基础到进阶">
+        <div class="title-div-father" data-classify="开发" data-title="基础语法扫盲 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/js-xuexibiji-180.html">Vol.9 基础语法扫盲 | 原生JS基础到进阶</a>
             </div>
             <p class="title-p1">开发  |  2025-05-11</p>
             <p class="title-p2">内容摘要：本文是《原生JS基础到进阶》系列的第一篇文章，该系列是笔者系统学习原生JS过程中记录的学习笔记。本文的主要内容是 JS 基础语法。</p>
         </div>
-        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮城墙里的文明切片">
+        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮城墙里的文明切片"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/lvxing-xinzhougucheng-172.html">Vol.10 寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮城墙里的文明切片</a>
             </div>
             <p class="title-p1">户外  |  2025-04-25</p>
             <p class="title-p2">内容摘要：这篇文章记录了笔者在忻州古城游玩时拍摄的街景，分为城楼、城墙、街道三部分。</p>
         </div>
-        <div class="title-div-father" data-classify="户外" data-title="厦门环东烂漫骑行记">
+        <div class="title-div-father" data-classify="户外" data-title="厦门环东烂漫骑行记"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/shamenhuandonglanmanxian-qixing-71.html">Vol.11 厦门环东烂漫骑行记</a>
             </div>
             <p class="title-p1">户外  |  2024-11-24</p>
             <p class="title-p2">内容摘要：这里记录了笔者在厦门环东浪漫线骑行时记录的景色。</p>
         </div>
-        <div class="title-div-father" data-classify="户外" data-title="成都天府绿道骑行记">
+        <div class="title-div-father" data-classify="户外" data-title="成都天府绿道骑行记"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/chengdoutianfulvdao-qixing-42.html">Vol.12 成都天府绿道骑行记</a>
             </div>
             <p class="title-p1">户外  |  2024-10-05</p>
             <p class="title-p2">内容摘要：这里记录了笔者在成都天府绿道骑行时拍摄的一些照片。</p>
         </div>
-        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路">
+        <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/lvxing-zijiayouchuanxi-abaxiaohuanxian-32.html">Vol.13 寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路</a>
             </div>
             <p class="title-p1">户外  |  2024-08-25</p>
             <p class="title-p2">内容摘要：这里记录了笔者从成都出发返回成都的川西阿坝小环线自驾游攻略和自驾游时拍摄的一些景色。</p>
         </div>
-        <div class="title-div-father" data-classify="杂谈" data-title="关于本站 - 户外探索见闻 | 公考应试经验 | 多元成长笔记 | IT开发实录">
+        <div class="title-div-father" data-classify="杂谈" data-title="关于本站 - 户外探索见闻 | 公考应试经验 | 多元成长笔记 | IT开发实录"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
                 <a class="title-a" lang="en" href="/guanyubenzhan-1.html">Vol.14 关于本站 - 户外探索见闻 | 公考应试经验 | 多元成长笔记 | IT开发实录</a>
             </div>
@@ -479,6 +520,50 @@
 <div id="return_top" class="return-top"></div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        // 模拟字体加载（实际项目中应替换为真实字体加载逻辑）
+        const font = new FontFace('CustomFont', 'url(https://www.myouone.xyz/SourceSerif4-Regular.otf.woff2)');
+        document.fonts.add(font);
+
+        font.load().then(() => {
+
+            setTimeout(() => {
+
+                // 隐藏加载层
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    document.body.style.opacity = '1';
+                }, 500);
+            }, 500);
+        }).catch((error) => {
+
+            // 仍然隐藏加载层
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    document.body.style.opacity = '1';
+                }, 500);
+            }, 1000);
+        });
+
+        // 设置超时机制（5秒后无论如何都显示页面）
+        setTimeout(() => {
+            if (loadingOverlay.style.display !== 'none') {
+
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    document.body.style.opacity = '1';
+                }, 500);
+            }
+        }, 5000);
+    });
+
     function classifySearchClick(classify) {
 
         const searchDivDom = document.querySelector('#search_div');
@@ -530,23 +615,11 @@
         }
 
         const titleDivFather = document.querySelectorAll('.title-div-father');
-        let bool = false;
         for (let i = 0; i < titleDivFather.length; i ++) {
 
             if (classify === titleDivFather[i].dataset.classify) {
 
                 titleDivFather[i].style.display = '';
-
-                if (!bool) {
-
-                    titleDivFather[i].style.boxShadow = 'none';
-                    titleDivFather[i].style.marginTop = 0;
-                    bool = true;
-                } else {
-
-                    titleDivFather[i].style.boxShadow = '0 -1px 1px -1px #334155';
-                    titleDivFather[i].style.marginTop = '10px';
-                }
             } else {
 
                 if (classify === '') {
@@ -593,23 +666,11 @@
         const title = encodeURIComponent((document.querySelector('#search_div_input').value).toLowerCase());
 
         const titleDivFather = document.querySelectorAll('.title-div-father');
-        let bool = false;
         for (let i = 0; i < titleDivFather.length; i ++) {
 
             if (encodeURIComponent(titleDivFather[i].dataset.title.toLowerCase()).indexOf(title) !== -1) {
 
                 titleDivFather[i].style.display = '';
-
-                if (!bool) {
-
-                    titleDivFather[i].style.boxShadow = 'none';
-                    titleDivFather[i].style.marginTop = 0;
-                    bool = true;
-                } else {
-
-                    titleDivFather[i].style.boxShadow = '0 -1px 1px -1px #334155';
-                    titleDivFather[i].style.marginTop = '10px';
-                }
             } else {
 
                 if (title === '') {
