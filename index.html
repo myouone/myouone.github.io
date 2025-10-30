@@ -351,17 +351,17 @@
             perspective: 1000; /* 提升3D渲染性能 */
         }
 
-        .loader {
-            width: 70px;
-            height: 70px;
-            border: 8px solid #6b7280;
-            border-top: 8px solid #F8F8F8;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            animation: spin 1.2s linear infinite; /* 调整动画速度 */
-            transform: translateZ(0); /* 开启GPU加速 */
-            will-change: transform; /* 提示浏览器优化动画 */
-        }
+        /*.loader {*/
+        /*    width: 70px;*/
+        /*    height: 70px;*/
+        /*    border: 8px solid #6b7280;*/
+        /*    border-top: 8px solid #F8F8F8;*/
+        /*    border-radius: 50%;*/
+        /*    margin-bottom: 20px;*/
+        /*    animation: spin 1.2s linear infinite; !* 调整动画速度 *!*/
+        /*    transform: translateZ(0); !* 开启GPU加速 *!*/
+        /*    will-change: transform; !* 提示浏览器优化动画 *!*/
+        /*}*/
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -373,7 +373,7 @@
 
 <!-- 加载层 -->
 <div id="loading-overlay">
-    <div class="loader"></div>
+<!--    <div class="loader"></div>-->
 </div>
 
 <div id="top_bar" class="top-bar">
