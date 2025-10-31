@@ -260,6 +260,13 @@
             color: #1E293B;
             cursor: pointer;
             text-decoration: none;
+            -webkit-tap-highlight-color: transparent;  /* 移除Webkit浏览器的高亮颜色 */
+            -webkit-touch-callout: none;               /* 禁用长按菜单 */
+            -webkit-user-select: none;                 /* 禁用文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            outline: none;                            /* 移除焦点轮廓 */
         }
 
         .webinfo {
@@ -341,7 +348,7 @@
         }
 
         /* 加载层样式 */
-        #loading-overlay {
+        #loading_overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -380,7 +387,7 @@
 <body>
 
 <!-- 加载层 -->
-<div id="loading-overlay">
+<div id="loading_overlay">
     <div id="loader" class="loader" style="display: none;"></div>
 </div>
 
@@ -535,6 +542,8 @@
 
         const isEInkDevice = localStorage.getItem('isEInkDevice');
 
+        const loadingOverlayDom = document.getElementById('loading_overlay');
+
         if (isEInkDevice === 'false') {
 
             document.querySelector('#loader').style.display = '';
@@ -549,9 +558,9 @@
             const returnTopDom = document.querySelector('#return_top');
             returnTopDom.style.border = '2px solid #f0f0f0';
             returnTopDom.style.boxShadow = 'none';
-        }
 
-        const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlayDom.style.background = '#FFFFFF';
+        }
 
         const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
         document.fonts.add(font);
@@ -564,9 +573,9 @@
                 setTimeout(() => {
 
                     // 隐藏加载层
-                    loadingOverlay.style.opacity = '0';
+                    loadingOverlayDom.style.opacity = '0';
                     setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
+                        loadingOverlayDom.style.display = 'none';
                         document.body.style.opacity = '1';
                     }, 500);
                 }, 500);
@@ -577,9 +586,9 @@
             requestAnimationFrame(() => {
                 // 仍然隐藏加载层
                 setTimeout(() => {
-                    loadingOverlay.style.opacity = '0';
+                    loadingOverlayDom.style.opacity = '0';
                     setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
+                        loadingOverlayDom.style.display = 'none';
                         document.body.style.opacity = '1';
                     }, 500);
                 }, 1000);
@@ -590,11 +599,11 @@
         requestAnimationFrame(() => {
             // 设置超时机制（5秒后无论如何都显示页面）
             setTimeout(() => {
-                if (loadingOverlay.style.display !== 'none') {
+                if (loadingOverlayDom.style.display !== 'none') {
 
-                    loadingOverlay.style.opacity = '0';
+                    loadingOverlayDom.style.opacity = '0';
                     setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
+                        loadingOverlayDom.style.display = 'none';
                         document.body.style.opacity = '1';
                     }, 500);
                 }
