@@ -550,7 +550,7 @@
         const loadingOverlay = document.getElementById('loading-overlay');
 
         // 模拟字体加载（实际项目中应替换为真实字体加载逻辑）
-        const font = new FontFace('CustomFont', 'url(https://www.myouone.xyz/SourceSerif4-Regular.otf.woff2)');
+        const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
         document.fonts.add(font);
 
         font.load().then(() => {
