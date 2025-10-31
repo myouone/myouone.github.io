@@ -404,28 +404,6 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <script>
     document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
 
-    function detectRefreshRate() {
-
-        return new Promise(resolve => {
-
-            let frameCount = 0;
-            let startTime = performance.now();
-
-            function checkFrame(timestamp) {
-                frameCount++;
-                const elapsed = timestamp - startTime;
-                if (elapsed >= 1000) {
-                    const refreshRate = Math.round((frameCount * 1000) / elapsed);
-                    resolve(refreshRate); // 计算完成后 resolve
-                    return;
-                }
-                requestAnimationFrame(checkFrame);
-            }
-
-            requestAnimationFrame(checkFrame);
-        });
-    }
-
     function scrollTopSmooth() {
 
         window.scrollTo({
