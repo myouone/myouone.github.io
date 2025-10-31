@@ -37,38 +37,39 @@
 
         .top-bar {
             width: 100%;
-            height: 75px;
+            height: 100px;
             background-color: #FFFFFF;
         }
 
-        .top-bar-p {
-            line-height: 38px;
-            font-size: 24px;
-            color: #1E293B;
-            transform: rotate(-20deg);
-            position: absolute;
-            top: 25px;
-            left: 5%;
-            font-weight: bold;
-            margin-block-start: 0;
-            margin-block-end: 0;
-            /* 禁用圈选 */
-            user-select: none; /* 标准语法 */
-            -webkit-user-select: none; /* Safari 浏览器 */
-            -moz-user-select: none; /* Firefox 浏览器 */
-            -ms-user-select: none; /* IE/Edge 浏览器 */
-            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
-        }
+        /*.top-bar-p {*/
+        /*    display: none;*/
+        /*    line-height: 38px;*/
+        /*    font-size: 24px;*/
+        /*    color: #1E293B;*/
+        /*    transform: rotate(-20deg);*/
+        /*    position: absolute;*/
+        /*    top: 25px;*/
+        /*    left: 5%;*/
+        /*    font-weight: bold;*/
+        /*    margin-block-start: 0;*/
+        /*    margin-block-end: 0;*/
+        /*    !* 禁用圈选 *!*/
+        /*    user-select: none; !* 标准语法 *!*/
+        /*    -webkit-user-select: none; !* Safari 浏览器 *!*/
+        /*    -moz-user-select: none; !* Firefox 浏览器 *!*/
+        /*    -ms-user-select: none; !* IE/Edge 浏览器 *!*/
+        /*    -webkit-tap-highlight-color: transparent; !* 移除点击高亮 *!*/
+        /*}*/
 
         .button-group {
-            width: 65%;
+            width: 68%;
             display: flex;
             justify-content: space-between; /* 两端对齐，也可换 center/space-around */
             align-items: center;
             gap: 10px; /* 按钮间间距（可选，也可用 margin ） */
             margin: 0 auto; /* 居中（可选） */
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
+            /*padding-top: 0 !important;*/
+            /*padding-bottom: 0 !important;*/
         }
 
         .classify-search {
@@ -76,7 +77,7 @@
             border-radius: 3px;
             background-color: #F8F8F8;
             border: 1px solid #EFEFEF;
-            margin-top: 20px;
+            margin-top: 30px;
             color: #ABB0B8;
             cursor: pointer;
             flex: 1;
@@ -108,7 +109,6 @@
             position: relative;
             background-size: 100% 100%;
             background-color: #FFFFFF;
-            padding-top: 10px;
             padding-bottom: 20px;
             margin: auto;
         }
@@ -384,7 +384,7 @@
 </div>
 
 <div id="top_bar" class="top-bar">
-    <p class="top-bar-p">@卖油老翁</p>
+<!--    <p class="top-bar-p">@卖油老翁</p>-->
 
     <div class="button-group">
         <div id="classify_search_all" class="classify-search classify-search1" onclick="classifySearchClick('')">
@@ -523,7 +523,7 @@
 </div>
 
 <div class="bottom-bar">
-    <h1 id="bottom_bar_h1" onclick="aboutTitleClick()">关于</h1>
+    <h1 id="bottom_bar_h1" onclick="aboutTitleClick()">关于本站@老翁卖油</h1>
     <p class="webinfo">©2023 - 2025 · 卖油老翁 版权所有. All rights reserved.</p>
 </div>
 
