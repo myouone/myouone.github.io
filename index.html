@@ -288,6 +288,13 @@
             z-index: 1000;
             background-color: #FFFFFF;
             cursor: pointer; /* 鼠标悬停时显示手型 */
+            -webkit-tap-highlight-color: transparent;  /* 移除Webkit浏览器的高亮颜色 */
+            -webkit-touch-callout: none;               /* 禁用长按菜单 */
+            -webkit-user-select: none;                 /* 禁用文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            outline: none;                            /* 移除焦点轮廓 */
         }
 
         .return-top:hover {
@@ -532,11 +539,15 @@
             document.querySelector('#loader').style.display = '';
         } else if (isEInkDevice === 'true') {
 
-            const titleDivFatherAll = document.querySelectorAll('.title-div-father');
-            titleDivFatherAll.forEach(item => {
+            const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
+            titleDivFatherDomAll.forEach(item => {
 
                 item.style.background = '#FFFFFF';
             });
+
+            const returnTopDom = document.querySelector('#return_top');
+            returnTopDom.style.border = '2px solid #f0f0f0';
+            returnTopDom.style.boxShadow = 'none';
         }
 
         const loadingOverlay = document.getElementById('loading-overlay');

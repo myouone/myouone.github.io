@@ -32,10 +32,6 @@
             color: #333333;
         }
 
-        /*.body-eink-device {*/
-        /*    font-size: 24px !important;*/
-        /*}*/
-
         h1 {
             line-height: 1.5;
         }
@@ -88,7 +84,7 @@
             border-radius: 1px;
         }
 
-        img:not(/*#time_img, */#back_home_img) {
+        img {
             background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
             border: 8px solid #FFFFFF;
             box-shadow: 0 0 2px #D0D0D0;
@@ -109,6 +105,13 @@
             z-index: 1000;
             background-color: #FFFFFF;
             cursor: pointer; /* 鼠标悬停时显示手型 */
+            -webkit-tap-highlight-color: transparent;  /* 移除Webkit浏览器的高亮颜色 */
+            -webkit-touch-callout: none;               /* 禁用长按菜单 */
+            -webkit-user-select: none;                 /* 禁用文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            outline: none;                            /* 移除焦点轮廓 */
         }
 
         .return-top:hover {
@@ -137,20 +140,8 @@
             padding-left: 16px;
         }
 
-        #back_home_img {
-            width: 30px;
-            margin-left: -5px;
-            cursor: pointer;
-            /* 禁用圈选 */
-            user-select: none; /* 标准语法 */
-            -webkit-user-select: none; /* Safari 浏览器 */
-            -moz-user-select: none; /* Firefox 浏览器 */
-            -ms-user-select: none; /* IE/Edge 浏览器 */
-            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
-        }
-
         @media screen and (max-width: 1157px) {
-            img:not(/*#time_img, */#back_home_img) {
+            img {
                 width: calc(100% - 16px) !important;
                 height: 100% !important;
                 object-fit: cover;
@@ -201,15 +192,6 @@
 <div id="return_top" class="return-top"></div>
 
 <script>
-    const backHomeImgDom = document.querySelector('#back_home_img');
-    if (backHomeImgDom) {
-
-        backHomeImgDom.onclick = function () {
-
-            window.location.replace('/');
-        }
-    }
-
     document.querySelector('#return_top').addEventListener('click', scrollTopSmooth);
 
     function detectRefreshRate() {
@@ -249,19 +231,10 @@
         });
     }
 
-    // 标记为 async 函数，支持 await
-    async function isEInkDevice() {
+    document.addEventListener('DOMContentLoaded', function() {
 
-        const refreshRate = await detectRefreshRate(); // 等待异步结果
-        return refreshRate <= 30;
-    }
-
-    (async function () {
-
-        if (await isEInkDevice()) {
-
-            // document.body.classList.add('body-eink-device');
-            // document.querySelector('#return_top').style.display = 'none';
+        const isEInkDevice = localStorage.getItem('isEInkDevice');
+        if (isEInkDevice === 'true') {
 
             // 移除默认事件
             document.querySelector('#return_top').removeEventListener('click', scrollTopSmooth);
@@ -269,15 +242,16 @@
 
             document.querySelectorAll('img').forEach(img => {
 
-                if (/*img.id !== 'time_img' && */img.id !== 'back_home_img') {
-
-                    img.style.width = 'calc(100% - 16px)';
-                    img.style.height = '100%';
-                    img.style.objectFit = 'cover';
-                }
+                img.style.width = 'calc(100% - 16px)';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
             });
+
+            const returnTopDom = document.querySelector('#return_top');
+            returnTopDom.style.border = '2px solid #f0f0f0';
+            returnTopDom.style.boxShadow = 'none';
         }
-    })();
+    });
 </script>
 </body>
 </html>
