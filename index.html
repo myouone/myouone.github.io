@@ -524,6 +524,10 @@
 <div id="return_top" class="return-top"></div>
 
 <script>
+
+    // 在解析 HTML 前立即执行
+    document.documentElement.style.visibility = 'hidden';
+
     document.addEventListener('DOMContentLoaded', function() {
 
         const isEInkDevice = localStorage.getItem('isEInkDevice');
@@ -547,6 +551,8 @@
 
             loadingOverlayDom.style.background = '#FFFFFF';
         }
+
+        document.documentElement.style.visibility = 'visible';
 
         const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
         document.fonts.add(font);
