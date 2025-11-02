@@ -16,13 +16,13 @@
     <link rel="icon" href="https://www.myouone.xyz/image/blog.png">
 
     <style>
-        @font-face {
-            font-family: 'SourceSerif4Regular'; /* 自定义字体名称，后续用它指定字体 */
-            src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); /* 字体文件路径，/ 开头表示从静态资源根路径找 */
-            font-weight: 400; /* 对应常规字重，按需调整 */
-            font-style: normal; /* 常规样式，按需调整 */
-            font-display: swap; /* 关键属性 */
-        }
+        /*@font-face {*/
+        /*    font-family: 'SourceSerif4Regular'; !* 自定义字体名称，后续用它指定字体 *!*/
+        /*    src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); !* 字体文件路径，/ 开头表示从静态资源根路径找 *!*/
+        /*    font-weight: 400; !* 对应常规字重，按需调整 *!*/
+        /*    font-style: normal; !* 常规样式，按需调整 *!*/
+        /*    font-display: swap; !* 关键属性 *!*/
+        /*}*/
 
         html {
             overflow-y: scroll;
@@ -381,10 +381,10 @@
 </head>
 <body>
 
-<!--&lt;!&ndash; 加载层 &ndash;&gt;-->
-<!--<div id="loading_overlay">-->
-<!--&lt;!&ndash;    <div id="loader" class="loader" style="display: none;"></div>&ndash;&gt;-->
-<!--</div>-->
+<!-- 加载层 -->
+<div id="loading_overlay">
+<!--    <div id="loader" class="loader" style="display: none;"></div>-->
+</div>
 
 <div id="top_bar" class="top-bar">
 <!--    <p class="top-bar-p">@卖油老翁</p>-->
@@ -519,84 +519,83 @@
 <div id="return_top" class="return-top"></div>
 
 <script>
+    // 在解析 HTML 前立即执行
+    document.documentElement.style.visibility = 'hidden';
 
-    // // 在解析 HTML 前立即执行
-    // document.documentElement.style.visibility = 'hidden';
-    //
-    // document.addEventListener('DOMContentLoaded', function() {
-    //
-    //     const isEInkDevice = localStorage.getItem('isEInkDevice');
-    //
-    //     const loadingOverlayDom = document.getElementById('loading_overlay');
-    //
-    //     if (isEInkDevice === 'false') {
-    //
-    //         // document.querySelector('#loader').style.display = '';
-    //     } else if (isEInkDevice === 'true') {
-    //
-    //         const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
-    //         titleDivFatherDomAll.forEach(item => {
-    //
-    //             item.style.background = '#FFFFFF';
-    //         });
-    //
-    //         const returnTopDom = document.querySelector('#return_top');
-    //         returnTopDom.style.border = '2px solid #f0f0f0';
-    //         returnTopDom.style.boxShadow = 'none';
-    //
-    //         loadingOverlayDom.style.background = '#FFFFFF';
-    //     }
-    //
-    //     document.documentElement.style.visibility = 'visible';
-    //
-    //     const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
-    //     document.fonts.add(font);
-    //
-    //     font.load().then(() => {
-    //
-    //         // 使用requestAnimationFrame确保平滑过渡
-    //         requestAnimationFrame(() => {
-    //
-    //             setTimeout(() => {
-    //
-    //                 // 隐藏加载层
-    //                 loadingOverlayDom.style.opacity = '0';
-    //                 setTimeout(() => {
-    //                     loadingOverlayDom.style.display = 'none';
-    //                     document.body.style.opacity = '1';
-    //                 }, 500);
-    //             }, 500);
-    //         });
-    //     }).catch((error) => {
-    //
-    //         // 使用requestAnimationFrame确保平滑过渡
-    //         requestAnimationFrame(() => {
-    //             // 仍然隐藏加载层
-    //             setTimeout(() => {
-    //                 loadingOverlayDom.style.opacity = '0';
-    //                 setTimeout(() => {
-    //                     loadingOverlayDom.style.display = 'none';
-    //                     document.body.style.opacity = '1';
-    //                 }, 500);
-    //             }, 1000);
-    //         });
-    //     });
-    //
-    //     // 使用requestAnimationFrame确保平滑过渡
-    //     requestAnimationFrame(() => {
-    //         // 设置超时机制（5秒后无论如何都显示页面）
-    //         setTimeout(() => {
-    //             if (loadingOverlayDom.style.display !== 'none') {
-    //
-    //                 loadingOverlayDom.style.opacity = '0';
-    //                 setTimeout(() => {
-    //                     loadingOverlayDom.style.display = 'none';
-    //                     document.body.style.opacity = '1';
-    //                 }, 500);
-    //             }
-    //         }, 5000);
-    //     });
-    // });
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const isEInkDevice = localStorage.getItem('isEInkDevice');
+
+        const loadingOverlayDom = document.getElementById('loading_overlay');
+
+        if (isEInkDevice === 'false') {
+
+            // document.querySelector('#loader').style.display = '';
+        } else if (isEInkDevice === 'true') {
+
+            const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
+            titleDivFatherDomAll.forEach(item => {
+
+                item.style.background = '#FFFFFF';
+            });
+
+            const returnTopDom = document.querySelector('#return_top');
+            returnTopDom.style.border = '2px solid #f0f0f0';
+            returnTopDom.style.boxShadow = 'none';
+
+            loadingOverlayDom.style.background = '#FFFFFF';
+        }
+
+        document.documentElement.style.visibility = 'visible';
+
+        // const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
+        // document.fonts.add(font);
+        //
+        // font.load().then(() => {
+        //
+        //     // 使用requestAnimationFrame确保平滑过渡
+        //     requestAnimationFrame(() => {
+        //
+        //         setTimeout(() => {
+        //
+        //             // 隐藏加载层
+        //             loadingOverlayDom.style.opacity = '0';
+        //             setTimeout(() => {
+        //                 loadingOverlayDom.style.display = 'none';
+        //                 document.body.style.opacity = '1';
+        //             }, 500);
+        //         }, 500);
+        //     });
+        // }).catch((error) => {
+        //
+        //     // 使用requestAnimationFrame确保平滑过渡
+        //     requestAnimationFrame(() => {
+        //         // 仍然隐藏加载层
+        //         setTimeout(() => {
+        //             loadingOverlayDom.style.opacity = '0';
+        //             setTimeout(() => {
+        //                 loadingOverlayDom.style.display = 'none';
+        //                 document.body.style.opacity = '1';
+        //             }, 500);
+        //         }, 1000);
+        //     });
+        // });
+        //
+        // // 使用requestAnimationFrame确保平滑过渡
+        // requestAnimationFrame(() => {
+        //     // 设置超时机制（5秒后无论如何都显示页面）
+        //     setTimeout(() => {
+        //         if (loadingOverlayDom.style.display !== 'none') {
+        //
+        //             loadingOverlayDom.style.opacity = '0';
+        //             setTimeout(() => {
+        //                 loadingOverlayDom.style.display = 'none';
+        //                 document.body.style.opacity = '1';
+        //             }, 500);
+        //         }
+        //     }, 5000);
+        // });
+    });
 
     function classifySearchClick(classify) {
 
@@ -842,7 +841,22 @@
             if (cachedData) {
                 this.createFontFromCache(cachedData);
             } else {
-                await this.downloadAndCacheFont();
+
+                // 使用requestAnimationFrame确保平滑过渡
+                requestAnimationFrame(() => {
+
+                    await this.downloadAndCacheFont();
+
+                    setTimeout(() => {
+
+                        // 隐藏加载层
+                        loadingOverlayDom.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingOverlayDom.style.display = 'none';
+                            document.body.style.opacity = '1';
+                        }, 500);
+                    }, 500);
+                });
             }
         }
 
