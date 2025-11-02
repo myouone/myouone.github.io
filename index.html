@@ -361,17 +361,17 @@
             perspective: 1000; /* 提升3D渲染性能 */
         }
 
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 8px solid #6b7280;
-            border-top: 8px solid #FFFFFF;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            animation: spin 1.2s linear infinite; /* 调整动画速度 */
-            transform: translateZ(0); /* 开启GPU加速 */
-            will-change: transform; /* 提示浏览器优化动画 */
-        }
+        /*.loader {*/
+        /*    width: 60px;*/
+        /*    height: 60px;*/
+        /*    border: 8px solid #6b7280;*/
+        /*    border-top: 8px solid #FFFFFF;*/
+        /*    border-radius: 50%;*/
+        /*    margin-bottom: 20px;*/
+        /*    animation: spin 1.2s linear infinite; !* 调整动画速度 *!*/
+        /*    transform: translateZ(0); !* 开启GPU加速 *!*/
+        /*    will-change: transform; !* 提示浏览器优化动画 *!*/
+        /*}*/
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -381,10 +381,10 @@
 </head>
 <body>
 
-<!-- 加载层 -->
-<div id="loading_overlay">
-<!--    <div id="loader" class="loader" style="display: none;"></div>-->
-</div>
+<!--&lt;!&ndash; 加载层 &ndash;&gt;-->
+<!--<div id="loading_overlay">-->
+<!--&lt;!&ndash;    <div id="loader" class="loader" style="display: none;"></div>&ndash;&gt;-->
+<!--</div>-->
 
 <div id="top_bar" class="top-bar">
 <!--    <p class="top-bar-p">@卖油老翁</p>-->
@@ -520,83 +520,83 @@
 
 <script>
 
-    // 在解析 HTML 前立即执行
-    document.documentElement.style.visibility = 'hidden';
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const isEInkDevice = localStorage.getItem('isEInkDevice');
-
-        const loadingOverlayDom = document.getElementById('loading_overlay');
-
-        if (isEInkDevice === 'false') {
-
-            // document.querySelector('#loader').style.display = '';
-        } else if (isEInkDevice === 'true') {
-
-            const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
-            titleDivFatherDomAll.forEach(item => {
-
-                item.style.background = '#FFFFFF';
-            });
-
-            const returnTopDom = document.querySelector('#return_top');
-            returnTopDom.style.border = '2px solid #f0f0f0';
-            returnTopDom.style.boxShadow = 'none';
-
-            loadingOverlayDom.style.background = '#FFFFFF';
-        }
-
-        document.documentElement.style.visibility = 'visible';
-
-        const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
-        document.fonts.add(font);
-
-        font.load().then(() => {
-
-            // 使用requestAnimationFrame确保平滑过渡
-            requestAnimationFrame(() => {
-
-                setTimeout(() => {
-
-                    // 隐藏加载层
-                    loadingOverlayDom.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlayDom.style.display = 'none';
-                        document.body.style.opacity = '1';
-                    }, 500);
-                }, 500);
-            });
-        }).catch((error) => {
-
-            // 使用requestAnimationFrame确保平滑过渡
-            requestAnimationFrame(() => {
-                // 仍然隐藏加载层
-                setTimeout(() => {
-                    loadingOverlayDom.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlayDom.style.display = 'none';
-                        document.body.style.opacity = '1';
-                    }, 500);
-                }, 1000);
-            });
-        });
-
-        // 使用requestAnimationFrame确保平滑过渡
-        requestAnimationFrame(() => {
-            // 设置超时机制（5秒后无论如何都显示页面）
-            setTimeout(() => {
-                if (loadingOverlayDom.style.display !== 'none') {
-
-                    loadingOverlayDom.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlayDom.style.display = 'none';
-                        document.body.style.opacity = '1';
-                    }, 500);
-                }
-            }, 5000);
-        });
-    });
+    // // 在解析 HTML 前立即执行
+    // document.documentElement.style.visibility = 'hidden';
+    //
+    // document.addEventListener('DOMContentLoaded', function() {
+    //
+    //     const isEInkDevice = localStorage.getItem('isEInkDevice');
+    //
+    //     const loadingOverlayDom = document.getElementById('loading_overlay');
+    //
+    //     if (isEInkDevice === 'false') {
+    //
+    //         // document.querySelector('#loader').style.display = '';
+    //     } else if (isEInkDevice === 'true') {
+    //
+    //         const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
+    //         titleDivFatherDomAll.forEach(item => {
+    //
+    //             item.style.background = '#FFFFFF';
+    //         });
+    //
+    //         const returnTopDom = document.querySelector('#return_top');
+    //         returnTopDom.style.border = '2px solid #f0f0f0';
+    //         returnTopDom.style.boxShadow = 'none';
+    //
+    //         loadingOverlayDom.style.background = '#FFFFFF';
+    //     }
+    //
+    //     document.documentElement.style.visibility = 'visible';
+    //
+    //     const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
+    //     document.fonts.add(font);
+    //
+    //     font.load().then(() => {
+    //
+    //         // 使用requestAnimationFrame确保平滑过渡
+    //         requestAnimationFrame(() => {
+    //
+    //             setTimeout(() => {
+    //
+    //                 // 隐藏加载层
+    //                 loadingOverlayDom.style.opacity = '0';
+    //                 setTimeout(() => {
+    //                     loadingOverlayDom.style.display = 'none';
+    //                     document.body.style.opacity = '1';
+    //                 }, 500);
+    //             }, 500);
+    //         });
+    //     }).catch((error) => {
+    //
+    //         // 使用requestAnimationFrame确保平滑过渡
+    //         requestAnimationFrame(() => {
+    //             // 仍然隐藏加载层
+    //             setTimeout(() => {
+    //                 loadingOverlayDom.style.opacity = '0';
+    //                 setTimeout(() => {
+    //                     loadingOverlayDom.style.display = 'none';
+    //                     document.body.style.opacity = '1';
+    //                 }, 500);
+    //             }, 1000);
+    //         });
+    //     });
+    //
+    //     // 使用requestAnimationFrame确保平滑过渡
+    //     requestAnimationFrame(() => {
+    //         // 设置超时机制（5秒后无论如何都显示页面）
+    //         setTimeout(() => {
+    //             if (loadingOverlayDom.style.display !== 'none') {
+    //
+    //                 loadingOverlayDom.style.opacity = '0';
+    //                 setTimeout(() => {
+    //                     loadingOverlayDom.style.display = 'none';
+    //                     document.body.style.opacity = '1';
+    //                 }, 500);
+    //             }
+    //         }, 5000);
+    //     });
+    // });
 
     function classifySearchClick(classify) {
 
@@ -826,6 +826,109 @@
             localStorage.setItem('isEInkDevice', false);
         }
     })();
+
+    class FontManager {
+
+        constructor() {
+            this.fontKey = 'cached-font-data';
+            this.fontUrl = '/SourceSerif4-Regular.otf.woff2';
+            this.fontFamily = 'SourceSerif4Regular';
+        }
+
+        async init() {
+
+            const cachedData = localStorage.getItem(this.fontKey);
+
+            if (cachedData) {
+                this.createFontFromCache(cachedData);
+            } else {
+                await this.downloadAndCacheFont();
+            }
+        }
+
+        async downloadAndCacheFont() {
+
+            try {
+                const response = await fetch(this.fontUrl);
+                const arrayBuffer = await response.arrayBuffer();
+
+                // 存储 ArrayBuffer
+                this.cacheFontData(arrayBuffer);
+
+                // 创建字体
+                this.createFontFromArrayBuffer(arrayBuffer);
+
+            } catch (error) {
+                console.error('字体加载失败:', error);
+                this.fallbackToSystemFont();
+            }
+        }
+
+        cacheFontData(arrayBuffer) {
+
+            // 将 ArrayBuffer 转换为 Base64 存储
+            const base64 = btoa(
+
+                new Uint8Array(arrayBuffer).reduce(
+                    (data, byte) => data + String.fromCharCode(byte), ''
+                )
+            );
+
+            localStorage.setItem(this.fontKey, base64);
+        }
+
+        createFontFromCache(base64Data) {
+
+            // 将 Base64 转换回 ArrayBuffer
+            const binaryString = atob(base64Data);
+            const bytes = new Uint8Array(binaryString.length);
+
+            for (let i = 0; i < binaryString.length; i++) {
+
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            this.createFontFromArrayBuffer(bytes.buffer);
+        }
+
+        createFontFromArrayBuffer(arrayBuffer) {
+            const blob = new Blob([arrayBuffer], { type: 'font/woff2' });
+            const fontUrl = URL.createObjectURL(blob);
+
+            this.injectFontStyle(fontUrl);
+        }
+
+        injectFontStyle(fontUrl) {
+            const existingStyle = document.getElementById(this.fontKey);
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+
+            const style = document.createElement('style');
+            style.id = this.fontKey;
+            style.textContent = `@font-face {
+                                     font-family: '${this.fontFamily}';
+                                     src: url(${fontUrl}) format('woff2');
+                                     font-display: swap;
+                                     font-weight: normal;
+                                     font-style: normal;
+                                  }`;
+
+            document.head.appendChild(style);
+        }
+
+        // 检查存储空间
+        checkStorageSpace() {
+
+            const data = localStorage.getItem(this.fontKey);
+            if (data) {
+                console.log(`字体缓存大小: ${(data.length * 2) / 1024} KB`);
+            }
+        }
+    }
+
+    // 使用
+    const fontManager = new FontManager();
+    fontManager.init();
 </script>
 </body>
 </html>
