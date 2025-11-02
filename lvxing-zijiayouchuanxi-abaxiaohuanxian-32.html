@@ -274,6 +274,7 @@
 
             // 等待字体加载完成
             await this.waitForFontLoad();
+
             this.showContent();
             this.hideLoadingMask();
         }
@@ -352,19 +353,23 @@
         waitForFontLoad() {
 
             return new Promise((resolve) => {
+
                 // 如果字体已经加载，立即解析
                 if (this.isFontLoaded) {
+
                     resolve();
                     return;
                 }
 
                 // 使用 Font Loading API 检测字体加载
                 if (document.fonts && document.fonts.ready) {
+
                     document.fonts.ready.then(() => {
                         this.isFontLoaded = true;
                         resolve();
                     });
                 } else {
+
                     // 降级方案：等待一小段时间
                     setTimeout(() => {
                         this.isFontLoaded = true;
@@ -374,6 +379,7 @@
 
                 // 额外检查：如果特定字体已加载
                 if (document.fonts) {
+
                     document.fonts.load(`1em ${this.fontFamily}`).then(() => {
                         this.isFontLoaded = true;
                         resolve();
@@ -389,6 +395,7 @@
 
         // 显示页面内容
         showContent() {
+
             document.documentElement.classList.remove('font-loading');
             this.isFontLoaded = true;
         }
@@ -416,27 +423,8 @@
                   font-family: system-ui, -apple-system, sans-serif;
                   color: #333;
                   font-size: 18px;
-                ">
-                  <div style="text-align: center;">
-                    <div style="
-                      width: 40px;
-                      height: 40px;
-                      border: 4px solid #FFFFFF;
-                      border-top: 4px solid #6b7280;
-                      border-radius: 50%;
-                      animation: spin 1s linear infinite;
-                      margin: 0 auto 15px;
-                    "></div>
-                    <div>正在加载字体，请稍候...</div>
-                  </div>
-                </div>
-                <style>
-                  @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                  }
-                </style>
-            `;
+                "></div>
+                `;
 
             document.body.appendChild(this.loadingMask);
         }
