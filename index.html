@@ -16,14 +16,6 @@
     <link rel="icon" href="https://www.myouone.xyz/image/blog.png">
 
     <style>
-        /*@font-face {*/
-        /*    font-family: 'SourceSerif4Regular'; !* 自定义字体名称，后续用它指定字体 *!*/
-        /*    src: url('/SourceSerif4-Regular.otf.woff2') format('woff2'); !* 字体文件路径，/ 开头表示从静态资源根路径找 *!*/
-        /*    font-weight: 400; !* 对应常规字重，按需调整 *!*/
-        /*    font-style: normal; !* 常规样式，按需调整 *!*/
-        /*    font-display: swap; !* 关键属性 *!*/
-        /*}*/
-
         html {
             overflow-y: scroll;
             height: 100%;
@@ -41,26 +33,6 @@
             background-color: #FFFFFF;
         }
 
-        /*.top-bar-p {*/
-        /*    display: none;*/
-        /*    line-height: 38px;*/
-        /*    font-size: 24px;*/
-        /*    color: #1E293B;*/
-        /*    transform: rotate(-20deg);*/
-        /*    position: absolute;*/
-        /*    top: 25px;*/
-        /*    left: 5%;*/
-        /*    font-weight: bold;*/
-        /*    margin-block-start: 0;*/
-        /*    margin-block-end: 0;*/
-        /*    !* 禁用圈选 *!*/
-        /*    user-select: none; !* 标准语法 *!*/
-        /*    -webkit-user-select: none; !* Safari 浏览器 *!*/
-        /*    -moz-user-select: none; !* Firefox 浏览器 *!*/
-        /*    -ms-user-select: none; !* IE/Edge 浏览器 *!*/
-        /*    -webkit-tap-highlight-color: transparent; !* 移除点击高亮 *!*/
-        /*}*/
-
         .button-group {
             width: 68%;
             display: flex;
@@ -68,8 +40,6 @@
             align-items: center;
             gap: 10px; /* 按钮间间距（可选，也可用 margin ） */
             margin: 0 auto; /* 居中（可选） */
-            /*padding-top: 0 !important;*/
-            /*padding-bottom: 0 !important;*/
         }
 
         .classify-search {
@@ -302,7 +272,6 @@
         }
 
         @media screen and (max-width: 1157px) {
-
             .top-bar {
                 display: none;
             }
@@ -341,54 +310,11 @@
                 padding-bottom: 50px;
             }
         }
-
-        /* 加载层样式 */
-        #loading_overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-            background: #FFFFFF; /* 改为纯色减少渲染负担 */
-            transform: translateZ(0); /* 开启GPU加速 */
-            backface-visibility: hidden; /* 提升3D渲染性能 */
-            perspective: 1000; /* 提升3D渲染性能 */
-        }
-
-        /*.loader {*/
-        /*    width: 60px;*/
-        /*    height: 60px;*/
-        /*    border: 8px solid #6b7280;*/
-        /*    border-top: 8px solid #FFFFFF;*/
-        /*    border-radius: 50%;*/
-        /*    margin-bottom: 20px;*/
-        /*    animation: spin 1.2s linear infinite; !* 调整动画速度 *!*/
-        /*    transform: translateZ(0); !* 开启GPU加速 *!*/
-        /*    will-change: transform; !* 提示浏览器优化动画 *!*/
-        /*}*/
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
 
-<!--&lt;!&ndash; 加载层 &ndash;&gt;-->
-<!--<div id="loading_overlay">-->
-<!--&lt;!&ndash;    <div id="loader" class="loader" style="display: none;"></div>&ndash;&gt;-->
-<!--</div>-->
-
 <div id="top_bar" class="top-bar">
-<!--    <p class="top-bar-p">@卖油老翁</p>-->
-
     <div class="button-group">
         <div id="classify_search_all" class="classify-search classify-search1" onclick="classifySearchClick('')">
             <p>全部</p>
@@ -519,19 +445,13 @@
 <div id="return_top" class="return-top"></div>
 
 <script>
-    // 在解析 HTML 前立即执行
-    document.documentElement.style.visibility = 'hidden';
-
     document.addEventListener('DOMContentLoaded', function() {
 
         const isEInkDevice = localStorage.getItem('isEInkDevice');
 
         const loadingOverlayDom = document.getElementById('loading_overlay');
 
-        if (isEInkDevice === 'false') {
-
-            // document.querySelector('#loader').style.display = '';
-        } else if (isEInkDevice === 'true') {
+        if (isEInkDevice === 'true') {
 
             const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
             titleDivFatherDomAll.forEach(item => {
@@ -545,56 +465,6 @@
 
             loadingOverlayDom.style.background = '#FFFFFF';
         }
-
-        document.documentElement.style.visibility = 'visible';
-
-        // const font = new FontFace('CustomFont', 'url(/SourceSerif4-Regular.otf.woff2)');
-        // document.fonts.add(font);
-        //
-        // font.load().then(() => {
-        //
-        //     // 使用requestAnimationFrame确保平滑过渡
-        //     requestAnimationFrame(() => {
-        //
-        //         setTimeout(() => {
-        //
-        //             // 隐藏加载层
-        //             loadingOverlayDom.style.opacity = '0';
-        //             setTimeout(() => {
-        //                 loadingOverlayDom.style.display = 'none';
-        //                 document.body.style.opacity = '1';
-        //             }, 500);
-        //         }, 500);
-        //     });
-        // }).catch((error) => {
-        //
-        //     // 使用requestAnimationFrame确保平滑过渡
-        //     requestAnimationFrame(() => {
-        //         // 仍然隐藏加载层
-        //         setTimeout(() => {
-        //             loadingOverlayDom.style.opacity = '0';
-        //             setTimeout(() => {
-        //                 loadingOverlayDom.style.display = 'none';
-        //                 document.body.style.opacity = '1';
-        //             }, 500);
-        //         }, 1000);
-        //     });
-        // });
-        //
-        // // 使用requestAnimationFrame确保平滑过渡
-        // requestAnimationFrame(() => {
-        //     // 设置超时机制（5秒后无论如何都显示页面）
-        //     setTimeout(() => {
-        //         if (loadingOverlayDom.style.display !== 'none') {
-        //
-        //             loadingOverlayDom.style.opacity = '0';
-        //             setTimeout(() => {
-        //                 loadingOverlayDom.style.display = 'none';
-        //                 document.body.style.opacity = '1';
-        //             }, 500);
-        //         }
-        //     }, 5000);
-        // });
     });
 
     function classifySearchClick(classify) {
@@ -826,22 +696,18 @@
         }
     })();
 
-
-
-
     class FontManager {
+
         constructor() {
-            // === 需要修改的配置 ===
             this.fontUrl = '/SourceSerif4-Regular.otf.woff2';
             this.fontFamily = 'SourceSerif4Regular';
-            // ====================
-
             this.fontKey = 'cached-font-data';
             this.loadingMask = null;
             this.isFontLoaded = false;
         }
 
         async init() {
+
             const cachedData = localStorage.getItem(this.fontKey);
 
             // 先隐藏页面内容，防止抖动
@@ -863,7 +729,9 @@
         }
 
         async downloadAndCacheFont() {
+
             try {
+
                 const response = await fetch(this.fontUrl);
                 if (!response.ok) throw new Error('下载失败');
 
@@ -889,6 +757,7 @@
         }
 
         createFontFromCache(base64Data) {
+
             const binaryString = atob(base64Data);
             const bytes = new Uint8Array(binaryString.length);
             for (let i = 0; i < binaryString.length; i++) {
@@ -898,12 +767,14 @@
         }
 
         createFontFromArrayBuffer(arrayBuffer) {
+
             const blob = new Blob([arrayBuffer], { type: 'font/woff2' });
             const fontUrl = URL.createObjectURL(blob);
             this.injectFontStyle(fontUrl);
         }
 
         injectFontStyle(fontUrl) {
+
             // 移除已存在的样式
             const existingStyle = document.getElementById(this.fontKey);
             if (existingStyle) existingStyle.remove();
@@ -912,24 +783,25 @@
             const style = document.createElement('style');
             style.id = this.fontKey;
             style.textContent = `
-      @font-face {
-        font-family: '${this.fontFamily}';
-        src: url(${fontUrl}) format('woff2');
-        font-display: block; /* 修改为 block，防止文本闪烁 */
-        font-weight: normal;
-        font-style: normal;
-      }
+                @font-face {
+                  font-family: '${this.fontFamily}';
+                  src: url(${fontUrl}) format('woff2');
+                  font-display: block; /* 修改为 block，防止文本闪烁 */
+                  font-weight: normal;
+                  font-style: normal;
+                }
 
-      /* 临时隐藏使用该字体的元素 */
-      .font-loading * {
-        visibility: hidden !important;
-      }
-    `;
+                /* 临时隐藏使用该字体的元素 */
+                .font-loading * {
+                  visibility: hidden !important;
+                }
+            `;
             document.head.appendChild(style);
         }
 
         // 等待字体加载完成
         waitForFontLoad() {
+
             return new Promise((resolve) => {
                 // 如果字体已经加载，立即解析
                 if (this.isFontLoaded) {
@@ -981,47 +853,48 @@
             this.loadingMask = document.createElement('div');
             this.loadingMask.id = 'font-loading-mask';
             this.loadingMask.innerHTML = `
-      <div style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        font-family: system-ui, -apple-system, sans-serif;
-        color: #333;
-        font-size: 16px;
-      ">
-        <div style="text-align: center;">
-          <div style="
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-          "></div>
-          <div>正在加载字体，请稍候...</div>
-        </div>
-      </div>
-      <style>
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      </style>
-    `;
+                <div style="
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(255, 255, 255, 0.95);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  z-index: 9999;
+                  font-family: system-ui, -apple-system, sans-serif;
+                  color: #333;
+                  font-size: 16px;
+                ">
+                  <div style="text-align: center;">
+                    <div style="
+                      width: 40px;
+                      height: 40px;
+                      border: 4px solid #f3f3f3;
+                      border-top: 4px solid #3498db;
+                      border-radius: 50%;
+                      animation: spin 1s linear infinite;
+                      margin: 0 auto 15px;
+                    "></div>
+                    <div>正在加载字体，请稍候...</div>
+                  </div>
+                </div>
+                <style>
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                </style>
+            `;
 
             document.body.appendChild(this.loadingMask);
         }
 
         // 隐藏加载遮罩
         hideLoadingMask() {
+
             const mask = document.getElementById('font-loading-mask');
             if (mask) {
                 mask.remove();
@@ -1031,6 +904,7 @@
 
         // 可选：清除缓存（调试用）
         clearCache() {
+
             localStorage.removeItem(this.fontKey);
             const style = document.getElementById(this.fontKey);
             if (style) style.remove();
@@ -1041,6 +915,7 @@
 
     // 页面加载时自动初始化
     document.addEventListener('DOMContentLoaded', function() {
+
         const fontManager = new FontManager();
         fontManager.init();
     });
