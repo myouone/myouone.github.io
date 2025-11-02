@@ -334,11 +334,6 @@
                 width: 90%;
                 margin-left: 5%;
             }
-
-            .loader {
-                width: 60px !important;
-                height: 60px !important;
-            }
         }
 
         @media screen and (max-width: 450px) {
@@ -360,17 +355,17 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 0.5s ease;
-            background: #F8F8F8; /* 改为纯色减少渲染负担 */
+            background: #FFFFFF; /* 改为纯色减少渲染负担 */
             transform: translateZ(0); /* 开启GPU加速 */
             backface-visibility: hidden; /* 提升3D渲染性能 */
             perspective: 1000; /* 提升3D渲染性能 */
         }
 
         .loader {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border: 8px solid #6b7280;
-            border-top: 8px solid #F8F8F8;
+            border-top: 8px solid #FFFFFF;
             border-radius: 50%;
             margin-bottom: 20px;
             animation: spin 1.2s linear infinite; /* 调整动画速度 */
