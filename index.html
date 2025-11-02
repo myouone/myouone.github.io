@@ -9,7 +9,7 @@
     <meta name="keywords" content="老翁卖油,卖油的老翁,卖油老翁,卖油翁,户外探索,公考应试,旅行笔记,IT开发,成长" />
     <meta name="msvalidate.01" content="0370BF431D2268DDBD063B6344B5F2D2" />
     <meta name="baidu-site-verification" content="codeva-1DV0mPSHZI" />
-    
+
     <link rel="icon" href="https://www.myouone.xyz/image/blog.png">
 
     <style>
@@ -711,10 +711,8 @@
             this.hideContent();
 
             if (cachedData) {
-                console.log('从缓存加载字体');
                 this.createFontFromCache(cachedData);
             } else {
-                console.log('下载并缓存字体');
                 this.showLoadingMask();
                 await this.downloadAndCacheFont();
             }
@@ -743,7 +741,6 @@
                 localStorage.setItem(this.fontKey, base64);
 
                 this.createFontFromArrayBuffer(arrayBuffer);
-                console.log('字体缓存成功');
 
             } catch (error) {
                 console.error('字体加载失败:', error);
@@ -856,7 +853,7 @@
                   left: 0;
                   width: 100%;
                   height: 100%;
-                  background: rgba(255, 255, 255, 0.95);
+                  background: #FFFFFF;
                   display: flex;
                   justify-content: center;
                   align-items: center;
@@ -869,8 +866,8 @@
                     <div style="
                       width: 40px;
                       height: 40px;
-                      border: 4px solid #f3f3f3;
-                      border-top: 4px solid #3498db;
+                      border: 4px solid #FFFFFF;
+                      border-top: 4px solid #6b7280;
                       border-radius: 50%;
                       animation: spin 1s linear infinite;
                       margin: 0 auto 15px;
