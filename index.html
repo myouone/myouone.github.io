@@ -381,10 +381,10 @@
 </head>
 <body>
 
-<!-- 加载层 -->
-<div id="loading_overlay">
-<!--    <div id="loader" class="loader" style="display: none;"></div>-->
-</div>
+<!--&lt;!&ndash; 加载层 &ndash;&gt;-->
+<!--<div id="loading_overlay">-->
+<!--&lt;!&ndash;    <div id="loader" class="loader" style="display: none;"></div>&ndash;&gt;-->
+<!--</div>-->
 
 <div id="top_bar" class="top-bar">
 <!--    <p class="top-bar-p">@卖油老翁</p>-->
@@ -826,12 +826,16 @@
         }
     })();
 
+
+
+
     class FontManager {
 
         constructor() {
-            this.fontKey = 'cached-font-data';
             this.fontUrl = '/SourceSerif4-Regular.otf.woff2';
             this.fontFamily = 'SourceSerif4Regular';
+            this.fontKey = 'cached-font-data';
+            this.loadingMask = null;
         }
 
         async init() {
@@ -839,84 +843,68 @@
             const cachedData = localStorage.getItem(this.fontKey);
 
             if (cachedData) {
+
+                // 有缓存，直接加载不显示遮罩
                 this.createFontFromCache(cachedData);
             } else {
 
-                // 使用requestAnimationFrame确保平滑过渡
-                requestAnimationFrame(() => {
-
-                    await this.downloadAndCacheFont();
-
-                    setTimeout(() => {
-
-                        // 隐藏加载层
-                        loadingOverlayDom.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingOverlayDom.style.display = 'none';
-                            document.body.style.opacity = '1';
-                        }, 500);
-                    }, 500);
-                });
+                // 没有缓存，显示遮罩并下载
+                this.showLoadingMask();
+                await this.downloadAndCacheFont();
+                this.hideLoadingMask();
             }
         }
 
         async downloadAndCacheFont() {
 
             try {
+
                 const response = await fetch(this.fontUrl);
+                if (!response.ok) throw new Error('下载失败');
+
                 const arrayBuffer = await response.arrayBuffer();
 
-                // 存储 ArrayBuffer
-                this.cacheFontData(arrayBuffer);
+                // 存储 ArrayBuffer 为 Base64
+                const base64 = btoa(
+                    new Uint8Array(arrayBuffer).reduce(
+                        (data, byte) => data + String.fromCharCode(byte), ''
+                    )
+                );
+                localStorage.setItem(this.fontKey, base64);
 
-                // 创建字体
                 this.createFontFromArrayBuffer(arrayBuffer);
+                console.log('字体缓存成功');
 
             } catch (error) {
                 console.error('字体加载失败:', error);
-                this.fallbackToSystemFont();
+                this.hideLoadingMask();
             }
-        }
-
-        cacheFontData(arrayBuffer) {
-
-            // 将 ArrayBuffer 转换为 Base64 存储
-            const base64 = btoa(
-
-                new Uint8Array(arrayBuffer).reduce(
-                    (data, byte) => data + String.fromCharCode(byte), ''
-                )
-            );
-
-            localStorage.setItem(this.fontKey, base64);
         }
 
         createFontFromCache(base64Data) {
 
-            // 将 Base64 转换回 ArrayBuffer
             const binaryString = atob(base64Data);
             const bytes = new Uint8Array(binaryString.length);
-
             for (let i = 0; i < binaryString.length; i++) {
-
                 bytes[i] = binaryString.charCodeAt(i);
             }
             this.createFontFromArrayBuffer(bytes.buffer);
         }
 
         createFontFromArrayBuffer(arrayBuffer) {
+
             const blob = new Blob([arrayBuffer], { type: 'font/woff2' });
             const fontUrl = URL.createObjectURL(blob);
-
             this.injectFontStyle(fontUrl);
         }
 
         injectFontStyle(fontUrl) {
-            const existingStyle = document.getElementById(this.fontKey);
-            if (existingStyle) {
-                existingStyle.remove();
-            }
 
+            // 移除已存在的样式
+            const existingStyle = document.getElementById(this.fontKey);
+            if (existingStyle) existingStyle.remove();
+
+            // 创建新样式
             const style = document.createElement('style');
             style.id = this.fontKey;
             style.textContent = `@font-face {
@@ -925,24 +913,82 @@
                                      font-display: swap;
                                      font-weight: normal;
                                      font-style: normal;
-                                  }`;
-
+                                 }`;
             document.head.appendChild(style);
         }
 
-        // 检查存储空间
-        checkStorageSpace() {
-
-            const data = localStorage.getItem(this.fontKey);
-            if (data) {
-                console.log(`字体缓存大小: ${(data.length * 2) / 1024} KB`);
+        // 显示加载遮罩
+        showLoadingMask() {
+            // 如果已经存在遮罩，先移除
+            if (this.loadingMask) {
+                this.loadingMask.remove();
             }
+
+            // 创建遮罩元素
+            this.loadingMask = document.createElement('div');
+            this.loadingMask.innerHTML = `
+                <div style="
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(255, 255, 255, 0.9);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  z-index: 9999;
+                  font-family: Arial, sans-serif;
+                  color: #333;
+                ">
+                  <div style="text-align: center;">
+                    <div style="
+                      width: 40px;
+                      height: 40px;
+                      border: 4px solid #f3f3f3;
+                      border-top: 4px solid #3498db;
+                      border-radius: 50%;
+                      animation: spin 1s linear infinite;
+                      margin: 0 auto 15px;
+                    "></div>
+                    <div>正在加载字体，请稍候...</div>
+                  </div>
+                </div>
+                <style>
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                </style>`;
+
+            document.body.appendChild(this.loadingMask);
+        }
+
+        // 隐藏加载遮罩
+        hideLoadingMask() {
+            if (this.loadingMask) {
+                this.loadingMask.remove();
+                this.loadingMask = null;
+            }
+        }
+
+        // 可选：清除缓存（调试用）
+        clearCache() {
+            localStorage.removeItem(this.fontKey);
+            const style = document.getElementById(this.fontKey);
+            if (style) style.remove();
+            console.log('字体缓存已清除');
         }
     }
 
-    // 使用
-    const fontManager = new FontManager();
-    fontManager.init();
+    // 页面加载时自动初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        const fontManager = new FontManager();
+        fontManager.init();
+
+        // 如果需要手动清除缓存，可以取消注释下面这行
+        // fontManager.clearCache();
+    });
 </script>
 </body>
 </html>
