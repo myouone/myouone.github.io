@@ -119,8 +119,21 @@
             box-shadow: 0 0 4px #D0D0D0;
         }
 
-        a {
+        a,
+        a:link,
+        a:visited,
+        a:hover,
+        a:active,
+        a:focus {
             word-wrap: break-word;
+            color: #333333; /* 深灰色文字 */
+            text-decoration: underline;
+            text-decoration-color: #333333; /* 中等灰色下划线 */
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            background-color: transparent; /* 确保无背景色变化 */
+            outline: none; /* 移除焦点轮廓 */
+            cursor: pointer; /* 保持指针样式表明可点击 */
         }
 
         td {
