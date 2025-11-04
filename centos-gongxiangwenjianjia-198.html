@@ -496,19 +496,17 @@ sudo systemctl status smb nmb  # 查询启动状态</pre>
                 const targetY = target.getBoundingClientRect().top + window.pageYOffset;
                 const distance = Math.abs(targetY - window.pageYOffset);
 
-                console.log('距离:', distance); // 添加这行查看实际距离
+                // console.log('距离:', distance); // 添加这行查看实际距离
 
                 // 简单规则：近距离直接跳转，远距离平滑滚动
-                if (distance < 1000) {
+                if (distance < 2000) {
 
-                    console.log('使用直接跳转');
                     window.scrollTo({
                         top: targetY,
                         behavior: 'instant' // 或 'auto'
                     });
                 } else {
 
-                    console.log('使用平滑滚动');
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
