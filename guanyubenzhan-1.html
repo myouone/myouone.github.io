@@ -513,11 +513,11 @@
                 const distance = Math.abs(targetY - window.pageYOffset);
 
                 // 简单判断：近距离直接跳转，远距离平滑滚动
-                if (distance < 300) {
+                if (distance < 1000) {
 
                     window.scrollTo(0, targetY);
                 } else {
-                    
+
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             }
