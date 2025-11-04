@@ -548,12 +548,16 @@ Get-NetFirewallRule -DisplayName "GitLab_18080" | Select-Object Name, DisplayNam
                 const targetY = target.getBoundingClientRect().top + window.pageYOffset;
                 const distance = Math.abs(targetY - window.pageYOffset);
 
+                console.log('距离:', distance); // 添加这行查看实际距离
+
                 // 简单规则：近距离直接跳转，远距离平滑滚动
                 if (distance < 1000) {
 
+                    console.log('使用直接跳转');
                     window.scrollTo(0, targetY);
                 } else {
-                    
+
+                    console.log('使用平滑滚动');
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
