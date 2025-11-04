@@ -459,7 +459,10 @@
                 if (distance < 1000) {
 
                     console.log('使用直接跳转');
-                    window.scrollTo(0, targetY);
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: 'instant' // 或 'auto'
+                    });
                 } else {
 
                     console.log('使用平滑滚动');
