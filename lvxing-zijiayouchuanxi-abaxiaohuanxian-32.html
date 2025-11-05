@@ -474,10 +474,10 @@
     // 针对你的锚点链接的代码
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-        anchor.addEventListener('click', scrollBehavior(e));
+        anchor.addEventListener('click', scrollBehavior);
     });
 
-    document.querySelector('#return_top').addEventListener('click', scrollBehavior(e));
+    document.querySelector('#return_top').addEventListener('click', scrollBehavior);
 
     function scrollBehavior(e) {
 
