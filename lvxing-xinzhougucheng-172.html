@@ -337,15 +337,12 @@
             if (cachedData) {
                 this.createFontFromCache(cachedData);
             } else {
-                this.showLoadingMask();
                 await this.downloadAndCacheFont();
             }
 
             // 等待字体加载完成
             await this.waitForFontLoad();
-
             this.showContent();
-            this.hideLoadingMask();
         }
 
         async downloadAndCacheFont() {
@@ -476,7 +473,7 @@
             }
 
             this.loadingMask = document.createElement('div');
-            this.loadingMask.id = 'font-loading-mask';
+            this.loadingMask.id = 'font_loading_mask';
             this.loadingMask.innerHTML = `
                 <div style="
                   position: fixed;
@@ -501,11 +498,24 @@
         // 隐藏加载遮罩
         hideLoadingMask() {
 
-            const mask = document.getElementById('font-loading-mask');
+            const mask = document.querySelector('#font_loading_mask');
+
             if (mask) {
-                mask.remove();
+
+                // 添加淡出效果
+                mask.style.transition = 'opacity 0.3s ease';
+                mask.style.opacity = '0';
+
+                // 等待过渡完成后移除元素
+                setTimeout(() => {
+
+                    if (mask && mask.parentNode) {
+
+                        mask.remove();
+                    }
+                    this.loadingMask = null;
+                }, 300);
             }
-            this.loadingMask = null;
         }
 
         // 可选：清除缓存（调试用）
@@ -522,8 +532,13 @@
     // 页面加载时自动初始化
     document.addEventListener('DOMContentLoaded', function() {
 
-        const fontManager = new FontManager();
-        fontManager.init();
+        (async () => {
+            const fontManager = new FontManager();
+            fontManager.showLoadingMask();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            fontManager.init();
+            fontManager.hideLoadingMask();
+        })();
     });
 </script>
 </body>
