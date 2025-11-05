@@ -134,6 +134,13 @@
             background-color: transparent; /* 确保无背景色变化 */
             outline: none; /* 移除焦点轮廓 */
             cursor: pointer; /* 保持指针样式表明可点击 */
+            -webkit-tap-highlight-color: transparent;  /* 移除Webkit浏览器的高亮颜色 */
+            -webkit-touch-callout: none;               /* 禁用长按菜单 */
+            -webkit-user-select: none;                 /* 禁用文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            outline: none;                            /* 移除焦点轮廓 */
         }
 
         td {
