@@ -208,30 +208,64 @@
 <script>
     function scrollBehavior(e) {
 
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        // 阻止a标签的默认行为
+        if (e.currentTarget.tagName === 'A') {
 
-        if (target) {
+            e.preventDefault();
+        }
 
-            const targetY = target.getBoundingClientRect().top + window.pageYOffset;
-            const distance = Math.abs(targetY - window.pageYOffset);
+        // 确定目标位置
+        let targetY;
 
-            // console.log('距离:', distance); // 添加这行查看实际距离
+        if (e.currentTarget.id === 'return_top') {
 
-            // 简单规则：近距离直接跳转，远距离平滑滚动
-            if (distance < 2000) {
+            // 回到顶部按钮 - 滚动到页面顶部
+            targetY = 0;
+        } else {
 
-                window.scrollTo({
-                    top: targetY,
-                    behavior: 'instant' // 或 'auto'
-                });
-            } else {
+            // 锚点链接 - 获取href指向的元素位置
+            const href = e.currentTarget.getAttribute('href');
+            const targetElement = document.querySelector(href);
 
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            if (!targetElement) {
+
+                console.warn('未找到目标元素:', href);
+                return;
             }
+
+            // 计算目标元素的垂直位置
+            const targetRect = targetElement.getBoundingClientRect();
+            targetY = targetRect.top + window.pageYOffset;
+        }
+
+        // 计算当前位置到目标位置的距离
+        const currentY = window.pageYOffset;
+        const distance = Math.abs(targetY - currentY);
+
+        // console.log('当前位置:', currentY, '目标位置:', targetY, '距离:', distance);
+
+        // 滚动逻辑 - 根据距离选择滚动方式
+        if (distance < 2000) {
+
+            // 近距离使用直接跳转
+            window.scrollTo({
+                top: targetY,
+                behavior: 'instant' // 或者直接使用 window.scrollTo(0, targetY)
+            });
+        } else if (distance < 10000) {
+
+            // 近距离使用平滑滚动
+            window.scrollTo({
+                top: targetY,
+                behavior: 'smooth'
+            });
+        } else {
+
+            // 远距离使用直接跳转（性能更好）
+            window.scrollTo({
+                top: targetY,
+                behavior: 'instant' // 或者直接使用 window.scrollTo(0, targetY)
+            });
         }
     }
 
