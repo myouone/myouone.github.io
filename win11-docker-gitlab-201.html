@@ -616,7 +616,7 @@ Get-NetFirewallRule -DisplayName "GitLab_18080" | Select-Object Name, DisplayNam
         (async () => {
             const fontManager = new FontManager();
             fontManager.showLoadingMask();
-            await new Promise(resolve => setTimeout(resolve, 400));
+            await new Promise(resolve => setTimeout(resolve, 4000));
             fontManager.init();
             fontManager.hideLoadingMask();
         })();

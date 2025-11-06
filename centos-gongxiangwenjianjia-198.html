@@ -564,7 +564,7 @@ sudo systemctl status smb nmb  # 查询启动状态</pre>
         (async () => {
             const fontManager = new FontManager();
             fontManager.showLoadingMask();
-            await new Promise(resolve => setTimeout(resolve, 400));
+            await new Promise(resolve => setTimeout(resolve, 4000));
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
