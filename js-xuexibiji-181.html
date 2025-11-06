@@ -33,6 +33,12 @@
             visibility: hidden;
         }
 
+        .body-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: opacity 0.05s ease, visibility 0.05s ease !important;
+        }
+
         h1 {
             line-height: 1.5;
             font-size: 2rem;
@@ -532,6 +538,19 @@ reg<span class="token punctuation">.</span><span class="token function">exec</sp
 <div id="return_top" class="return-top"></div>
 
 <script>
+    // 页面加载逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // 移除隐藏类（如果存在）
+        document.body.classList.remove('body-hidden');
+    });
+
+    // 刷新时立即添加隐藏类
+    window.addEventListener('beforeunload', function() {
+
+        document.body.classList.add('body-hidden');
+    });
+
     function scrollBehavior(e) {
 
         // 阻止a标签的默认行为
@@ -853,7 +872,7 @@ reg<span class="token punctuation">.</span><span class="token function">exec</sp
         (async () => {
             const fontManager = new FontManager();
             fontManager.showLoadingMask();
-            await new Promise(resolve => setTimeout(resolve, 4000));
+            await new Promise(resolve => setTimeout(resolve, 400));
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
