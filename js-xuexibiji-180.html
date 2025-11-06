@@ -616,7 +616,7 @@ arr<span class="token punctuation">.</span><span class="token function">splice</
         (async () => {
             const fontManager = new FontManager();
             fontManager.showLoadingMask();
-            await new Promise(resolve => setTimeout(resolve, 200));
+            await new Promise(resolve => setTimeout(resolve, 400));
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
