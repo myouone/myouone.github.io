@@ -30,6 +30,7 @@
             padding: 0;
             font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
             color: #333333;
+            visibility: hidden;
         }
 
         h1 {
@@ -483,6 +484,9 @@
 
         // 隐藏加载遮罩
         hideLoadingMask() {
+
+            // 显示页面内容
+            document.body.style.visibility = 'visible';
 
             const mask = document.querySelector('#font_loading_mask');
 
