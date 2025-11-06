@@ -741,7 +741,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
         (async () => {
             const fontManager = new FontManager();
             fontManager.showLoadingMask();
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 200));
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
