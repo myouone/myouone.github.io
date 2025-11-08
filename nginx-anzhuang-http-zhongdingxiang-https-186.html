@@ -368,20 +368,27 @@ cd /usr/local/nginx/sbin
 
     document.addEventListener('DOMContentLoaded', function() {
 
-        // 针对你的锚点链接的代码
+        const returnTopDom = document.querySelector('#return_top');
+        returnTopDom.addEventListener('click', scrollBehavior);
+
+        // 锚点链接跳转
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             anchor.addEventListener('click', scrollBehavior);
         });
 
-        document.querySelector('#return_top').addEventListener('click', scrollBehavior);
-
         const isEInkDevice = localStorage.getItem('isEInkDevice');
         if (isEInkDevice === 'true') {
 
             // 移除默认事件
-            document.querySelector('#return_top').removeEventListener('click', scrollBehavior);
-            document.querySelector('#return_top').addEventListener('click', scrollTop);
+            returnTopDom.removeEventListener('click', scrollBehavior);
+            returnTopDom.addEventListener('click', scrollTop);
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+                anchor.removeEventListener('click', scrollBehavior);
+                anchor.addEventListener('click', scrollTop);
+            });
 
             document.querySelectorAll('img').forEach(img => {
 

@@ -466,28 +466,6 @@
         document.body.classList.add('body-hidden');
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const isEInkDevice = localStorage.getItem('isEInkDevice');
-
-        const loadingOverlayDom = document.getElementById('loading_overlay');
-
-        if (isEInkDevice === 'true') {
-
-            const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
-            titleDivFatherDomAll.forEach(item => {
-
-                item.style.background = '#FFFFFF';
-            });
-
-            const returnTopDom = document.querySelector('#return_top');
-            returnTopDom.style.border = '2px solid #f0f0f0';
-            returnTopDom.style.boxShadow = 'none';
-
-            loadingOverlayDom.style.background = '#FFFFFF';
-        }
-    });
-
     function classifySearchClick(classify) {
 
         const searchDivDom = document.querySelector('#search_div');
@@ -729,27 +707,6 @@
         });
     }
 
-    // 保存滚动位置到本地存储
-    function saveScrollPosition() {
-
-        localStorage.setItem('scrollPosition', window.pageYOffset);
-    }
-
-    // 从本地存储恢复滚动位置
-    function restoreScrollPosition() {
-
-        const scrollPosition = localStorage.getItem('scrollPosition');
-        if (scrollPosition) {
-            window.scrollTo(0, parseInt(scrollPosition));
-        }
-    }
-
-    // 页面即将卸载时保存滚动位置
-    window.addEventListener('beforeunload', saveScrollPosition);
-
-    // 页面加载完成后恢复滚动位置
-    window.addEventListener('DOMContentLoaded', restoreScrollPosition);
-
     // 标记为 async 函数，支持 await
     async function isEInkDevice() {
 
@@ -761,9 +718,18 @@
 
         if (await isEInkDevice() && navigator.platform.indexOf('Win') === -1) {
 
+            const returnTopDom = document.querySelector('#return_top');
+            returnTopDom.style.border = '2px solid #f0f0f0';
+            returnTopDom.style.boxShadow = 'none';
             // 移除默认事件
-            document.querySelector('#return_top').removeEventListener('click', scrollBehavior);
-            document.querySelector('#return_top').addEventListener('click', scrollTop);
+            returnTopDom.removeEventListener('click', scrollBehavior);
+            returnTopDom.addEventListener('click', scrollTop);
+
+            const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
+            titleDivFatherDomAll.forEach(item => {item.style.background = '#FFFFFF';});
+
+            const bottomBarDom = document.querySelector('.bottom-bar');
+            bottomBarDom.style.paddingBottom = '50px';
 
             localStorage.setItem('isEInkDevice', true);
         } else {
