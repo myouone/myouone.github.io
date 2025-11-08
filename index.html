@@ -466,6 +466,27 @@
         document.body.classList.add('body-hidden');
     });
 
+    // 保存滚动位置到本地存储
+    function saveScrollPosition() {
+
+        localStorage.setItem('scrollPosition', window.pageYOffset);
+    }
+
+    // 从本地存储恢复滚动位置
+    function restoreScrollPosition() {
+
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+        }
+    }
+
+    // 页面即将卸载时保存滚动位置
+    window.addEventListener('beforeunload', saveScrollPosition);
+
+    // 页面加载完成后恢复滚动位置
+    window.addEventListener('DOMContentLoaded', restoreScrollPosition);
+
     function classifySearchClick(classify) {
 
         const searchDivDom = document.querySelector('#search_div');
