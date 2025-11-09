@@ -390,10 +390,12 @@ Get-NetFirewallRule -DisplayName "GitLab_18080" | Select-Object Name, DisplayNam
         const isEInkDevice = localStorage.getItem('isEInkDevice');
         if (isEInkDevice === 'true') {
 
+            returnTopDom.removeEventListener('click', scrollBehavior);
             returnTopDom.addEventListener('click', scrollTop);
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
+                anchor.removeEventListener('click', scrollBehavior)
                 anchor.addEventListener('click', scrollTop);
             });
 

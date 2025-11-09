@@ -338,10 +338,12 @@ sudo systemctl status smb nmb  # 查询启动状态</pre>
         const isEInkDevice = localStorage.getItem('isEInkDevice');
         if (isEInkDevice === 'true') {
 
+            returnTopDom.removeEventListener('click', scrollBehavior);
             returnTopDom.addEventListener('click', scrollTop);
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
+                anchor.removeEventListener('click', scrollBehavior)
                 anchor.addEventListener('click', scrollTop);
             });
 
