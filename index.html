@@ -469,7 +469,8 @@
     // 保存滚动位置到本地存储
     function saveScrollPosition() {
 
-        localStorage.setItem('scrollPosition', window.pageYOffset);
+        const scrollPosition = window.visualViewport?.pageTop ?? window.pageYOffset;
+        localStorage.setItem('scrollPosition', scrollPosition);
     }
 
     // 从本地存储恢复滚动位置
