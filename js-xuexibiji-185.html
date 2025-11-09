@@ -515,24 +515,14 @@ Object<span class="token punctuation">.</span><span class="token function">assig
     document.addEventListener('DOMContentLoaded', function() {
 
         const returnTopDom = document.querySelector('#return_top');
-        returnTopDom.addEventListener('click', scrollBehavior);
-
-        // 锚点链接跳转
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-            anchor.addEventListener('click', scrollBehavior);
-        });
 
         const isEInkDevice = localStorage.getItem('isEInkDevice');
         if (isEInkDevice === 'true') {
 
-            // 移除默认事件
-            returnTopDom.removeEventListener('click', scrollBehavior);
             returnTopDom.addEventListener('click', scrollTop);
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-                anchor.removeEventListener('click', scrollBehavior);
                 anchor.addEventListener('click', scrollTop);
             });
 
@@ -546,6 +536,15 @@ Object<span class="token punctuation">.</span><span class="token function">assig
             const returnTopDom = document.querySelector('#return_top');
             returnTopDom.style.border = '2px solid #f0f0f0';
             returnTopDom.style.boxShadow = 'none';
+        } else {
+
+            returnTopDom.addEventListener('click', scrollBehavior);
+
+            // 锚点链接跳转
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+                anchor.addEventListener('click', scrollBehavior);
+            });
         }
     });
 
