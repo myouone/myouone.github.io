@@ -698,13 +698,6 @@
         }
     }
 
-    // function scrollTop() {
-    //
-    //     window.scrollTo({
-    //         top: 0
-    //     });
-    // }
-
     // 确保 detectRefreshRate 返回 Promise
     function detectRefreshRate() {
 
@@ -746,9 +739,6 @@
             const returnTopDom = document.querySelector('#return_top');
             returnTopDom.style.border = '2px solid #f0f0f0';
             returnTopDom.style.boxShadow = 'none';
-            // // 移除默认事件
-            // returnTopDom.removeEventListener('click', scrollBehavior);
-            // returnTopDom.addEventListener('click', scrollTop);
 
             const titleDivFatherDomAll = document.querySelectorAll('.title-div-father');
             titleDivFatherDomAll.forEach(item => {item.style.background = '#FFFFFF';});
