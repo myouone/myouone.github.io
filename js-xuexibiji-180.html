@@ -359,14 +359,16 @@ arr<span class="token punctuation">.</span><span class="token function">splice</
                 top: targetY,
                 behavior: 'instant' // 或者直接使用 window.scrollTo(0, targetY)
             });
-        } else if (distance < 10000) {
-
-            // 近距离使用平滑滚动
-            window.scrollTo({
-                top: targetY,
-                behavior: 'smooth'
-            });
-        } else {
+        }
+        // else if (distance < 10000) {
+        //
+        //     // 近距离使用平滑滚动
+        //     window.scrollTo({
+        //         top: targetY,
+        //         behavior: 'smooth'
+        //     });
+        // }
+        else {
 
             // 远距离使用直接跳转（性能更好）
             window.scrollTo({
@@ -376,28 +378,26 @@ arr<span class="token punctuation">.</span><span class="token function">splice</
         }
     }
 
-    function scrollTop() {
-
-        window.scrollTo({
-            top: 0
-        });
-    }
+    // function scrollTop() {
+    //
+    //     window.scrollTo({
+    //         top: 0
+    //     });
+    // }
 
     document.addEventListener('DOMContentLoaded', function() {
 
         const returnTopDom = document.querySelector('#return_top');
+        returnTopDom.addEventListener('click', scrollBehavior);
+
+        // 锚点链接跳转
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', scrollBehavior);
+        });
 
         const isEInkDevice = localStorage.getItem('isEInkDevice');
         if (isEInkDevice === 'true') {
-
-            returnTopDom.removeEventListener('click', scrollBehavior);
-            returnTopDom.addEventListener('click', scrollTop);
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-                anchor.removeEventListener('click', scrollBehavior)
-                anchor.addEventListener('click', scrollTop);
-            });
 
             document.querySelectorAll('img').forEach(img => {
 
@@ -406,18 +406,8 @@ arr<span class="token punctuation">.</span><span class="token function">splice</
                 img.style.objectFit = 'cover';
             });
 
-            const returnTopDom = document.querySelector('#return_top');
             returnTopDom.style.border = '2px solid #f0f0f0';
             returnTopDom.style.boxShadow = 'none';
-        } else {
-
-            returnTopDom.addEventListener('click', scrollBehavior);
-
-            // 锚点链接跳转
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-                anchor.addEventListener('click', scrollBehavior);
-            });
         }
     });
 
