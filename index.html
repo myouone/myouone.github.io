@@ -466,30 +466,48 @@
         document.body.classList.add('body-hidden');
     });
 
-    // 保存滚动位置到本地存储
-    function saveScrollPosition() {
+    // // 保存滚动位置到本地存储
+    // function saveScrollPosition() {
+    //
+    //     localStorage.setItem('scrollPosition', Math.max(
+    //         window.pageYOffset,
+    //         document.documentElement.scrollTop,
+    //         document.body.scrollTop
+    //     ));
+    // }
+    //
+    // // 从本地存储恢复滚动位置
+    // function restoreScrollPosition() {
+    //
+    //     const scrollPosition = localStorage.getItem('scrollPosition');
+    //     if (scrollPosition) {
+    //         window.scrollTo(0, parseInt(scrollPosition));
+    //     }
+    // }
+    //
+    // // 页面即将卸载时保存滚动位置
+    // window.addEventListener('beforeunload', saveScrollPosition);
+    //
+    // // 页面加载完成后恢复滚动位置
+    // window.addEventListener('DOMContentLoaded', restoreScrollPosition);
 
-        localStorage.setItem('scrollPosition', Math.max(
-            window.pageYOffset,
-            document.documentElement.scrollTop,
-            document.body.scrollTop
-        ));
-    }
+    document.addEventListener('click', function(e) {
 
-    // 从本地存储恢复滚动位置
-    function restoreScrollPosition() {
+        if (e.target.tagName === 'A') {
 
-        const scrollPosition = localStorage.getItem('scrollPosition');
-        if (scrollPosition) {
-            window.scrollTo(0, parseInt(scrollPosition));
+            const clickY = e.clientY + window.pageYOffset;
+            localStorage.setItem('scrollPosition', clickY.toString());
         }
-    }
+    });
 
-    // 页面即将卸载时保存滚动位置
-    window.addEventListener('beforeunload', saveScrollPosition);
+    window.addEventListener('DOMContentLoaded', function() {
 
-    // 页面加载完成后恢复滚动位置
-    window.addEventListener('DOMContentLoaded', restoreScrollPosition);
+        const savedPos = localStorage.getItem('scrollPosition');
+        if (savedPos) {
+
+            window.scrollTo(0, parseFloat(savedPos));
+        }
+    });
 
     function classifySearchClick(classify) {
 
