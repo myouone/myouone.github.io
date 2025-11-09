@@ -493,10 +493,14 @@
 
     document.addEventListener('click', function(e) {
 
-        if (e.target.tagName === 'A') {
+        const target = e.target.closest('a, h1');
+        if (target) {
 
-            const clickY = e.clientY + window.pageYOffset;
-            localStorage.setItem('scrollPosition', clickY.toString());
+            const rect = target.getBoundingClientRect();
+            const elementCenter = rect.top + window.pageYOffset + (rect.height / 2);
+            const targetScroll = elementCenter - (window.innerHeight / 2);
+
+            localStorage.setItem('scrollPosition', Math.max(0, targetScroll).toString());
         }
     });
 
@@ -506,6 +510,7 @@
         if (savedPos) {
 
             window.scrollTo(0, parseFloat(savedPos));
+            localStorage.removeItem('scrollPosition');
         }
     });
 
