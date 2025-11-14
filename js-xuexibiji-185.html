@@ -74,6 +74,21 @@
             display: none;
         }
 
+        .separator-item {
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .separator-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1.2em;
+            border-right: 2px solid #cedbe0;
+        }
+
         pre[class*="language-"] {
             padding: 10px 20px;
             border-radius: 2px;
