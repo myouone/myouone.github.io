@@ -594,9 +594,7 @@
             const elementCenter = rect.top + window.pageYOffset + (rect.height / 5);
             let targetScroll = elementCenter - (window.innerHeight / 5);
 
-            console.log(targetScroll);
-
-            if (targetScroll < 110)
+            if (targetScroll <= 110)
                 targetScroll = 0;
 
             localStorage.setItem('scrollPosition', Math.max(0, targetScroll).toString());
