@@ -16,6 +16,7 @@
         html {
             overflow-y: scroll;
             height: 100%;
+            font-size: 16px;
         }
 
         body {
@@ -139,7 +140,7 @@
             vertical-align: middle;
             white-space: nowrap;
             text-align: center;
-            font-size: 16px;
+            font-size: 1rem;
             border-radius: 10px;
             cursor: pointer;
             -moz-user-select: none;
@@ -165,7 +166,7 @@
             flex-direction: column;
             background: #F8F8F8;
             border-radius: 10px;
-            padding: 30px 15px;
+            padding: 30px 15px 15px;
             transition: transform 0.3s ease;
         }
 
@@ -173,17 +174,13 @@
             display: flex;
             align-items: center;
             /*justify-content: space-between;*/ /* 这个设置是让子元素分别左右对其，中间隔开的效果 */
-            padding: 15px 10px 30px 10px;
+            padding: 0 0 15px;
             border-bottom: 2px solid #f0f0f0;
-        }
-
-        :root {
-            --title-a-font-size: 20px;
         }
 
         [class='title-a'] {
             color: #1E293B;
-            font-size: var(--title-a-font-size);
+            font-size: 1.25rem;
             line-height: 1.76;
             white-space: normal;
             text-decoration-skip-ink: auto;
@@ -201,7 +198,7 @@
         #about_h1 {
             all: unset;
             color: #1E293B;
-            font-size: var(--title-a-font-size);
+            font-size: 1.25rem;
             line-height: 1.76;
             white-space: normal;
             cursor: pointer;
@@ -223,16 +220,16 @@
         }
 
         .title-p1 {
-            margin: 30px 10px 30px 10px;
+            margin: 15px 0 15px;
             color: #64748B;
-            font-size: 18px;
+            font-size: 1rem;
             line-height: 1.76;
         }
 
         .title-p2 {
-            margin: auto 10px 0 10px; /* auto属性会把它推到底部 */
+            margin: auto 0; /* auto属性会把它推到底部 */
             color: #64748B;
-            font-size: 18px;
+            font-size: 1rem;
             line-height: 1.76;
         }
 
@@ -264,7 +261,7 @@
         .webinfo {
             overflow: hidden;
             text-overflow: ellipsis;
-            font-size: 18px;
+            font-size: 1rem;
             line-height: 1.76;
             color: #64748B;
             margin: 0;
