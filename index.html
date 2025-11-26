@@ -33,7 +33,7 @@
 
         .top-bar {
             width: 100%;
-            height: 110px;
+            height: calc(2.8125rem + 1.25rem * 2);
             background-color: #FFFFFF;
         }
 
@@ -47,15 +47,14 @@
         }
 
         .classify-search {
-            height: 50px;
+            height: 2.8125rem;
             border-radius: 10px;
             background-color: #F8F8F8;
             border: 1px solid #EFEFEF;
-            margin-top: 30px;
+            margin-top: 1.25rem;
             color: #64748B;
             cursor: pointer;
             flex: 1;
-            line-height: 50px;
             text-align: center;
             user-select: none;
         }
@@ -66,7 +65,7 @@
         }
 
         .classify-search > p {
-            line-height: 50px;
+            line-height: 2.8125rem;
             text-align: center;
             margin-block-start: 0;
             margin-block-end: 0;
@@ -79,11 +78,11 @@
 
         .content-page {
             width: 90%;
-            min-height: calc(100vh - 250px);
+            min-height: calc(100vh - (2.8125rem + 1.25rem * 2) - 110px);
             position: relative;
             background-size: 100% 100%;
             background-color: #FFFFFF;
-            padding-bottom: 30px;
+            padding-bottom: 1.25rem;
             margin: auto;
         }
 
@@ -95,7 +94,7 @@
         /* 重置默认样式 */
         input, button {
             box-sizing: border-box;        /* 统一盒模型 */
-            height: 50px;                 /* 设置相同高度 */
+            height: 2.8125rem;                 /* 设置相同高度 */
             padding: 0;                   /* 清除内边距 */
             border: 1px solid #ccc;       /* 统一边框 */
             margin: 0;                    /* 清除外边距 */
@@ -106,13 +105,13 @@
         }
 
         .search-div-input {
-            line-height: 50px;
-            height: 50px;
+            line-height: 2.8125rem;
+            height: 2.8125rem;
             color: #1E293B;
             border-radius: 10px;
-            padding-left: 15px;
+            padding-left: 1rem;
             width: calc(100% - 180px);
-            margin-bottom: 30px;
+            margin-bottom: 1.25rem;
             background-color: #F8F8F8;
             border: 1px solid #EFEFEF;
         }
@@ -132,7 +131,7 @@
             justify-content: center;
             margin-left: 10px;
             width: 80px !important;
-            height: 50px;
+            height: 2.8125rem;
             background-color: #F8F8F8;
             border: 1px solid #EFEFEF;
             color: #64748B;
@@ -146,7 +145,7 @@
             -moz-user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
-            margin-bottom: 30px;
+            margin-bottom: 1.25rem;
         }
 
         .search-div-button:hover {
@@ -158,7 +157,7 @@
         .content-page-blog-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-            gap: 30px;
+            gap: 1.25rem;
         }
 
         .title-div-father {
@@ -166,7 +165,7 @@
             flex-direction: column;
             background: #F8F8F8;
             border-radius: 10px;
-            padding: 30px 15px 15px;
+            padding: 1.875rem 1.25rem 1rem;
             transition: transform 0.3s ease;
         }
 
@@ -174,7 +173,7 @@
             display: flex;
             align-items: center;
             /*justify-content: space-between;*/ /* 这个设置是让子元素分别左右对其，中间隔开的效果 */
-            padding: 0 0 15px;
+            padding: 0 0 1rem;
             border-bottom: 2px solid #f0f0f0;
         }
 
@@ -220,7 +219,7 @@
         }
 
         .title-p1 {
-            margin: 15px 0 15px;
+            margin: 1rem 0 1rem;
             color: #64748B;
             font-size: 1rem;
             line-height: 1.76;
@@ -234,7 +233,7 @@
         }
 
         .separator-item {
-            padding-right: 20px;
+            padding-right: 1.25rem;
             position: relative;
         }
 
@@ -254,8 +253,8 @@
             text-align: left;
             margin: auto;
             border-top: 2px solid #f0f0f0;
-            padding-top: 30px;
-            padding-bottom: 30px;
+            padding-top: 1.875rem;
+            padding-bottom: 1.875rem;
         }
 
         .webinfo {
@@ -277,7 +276,7 @@
             box-shadow: 0 0 2px #D0D0D0;
             border-radius: 2px;
             background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
-            background-size: 15px 15px;
+            background-size: 1rem 1rem;
             background-position: center;
             background-repeat: no-repeat;
             z-index: 1000;
@@ -314,7 +313,7 @@
             .content-page {
                 width: 90%;
                 margin-left: 5%;
-                margin-top: 20px;
+                margin-top: 1.25rem;
             }
 
             .return-top {
@@ -362,7 +361,7 @@
     <div id="content_page_blog_list" class="content-page-blog-list">
         <div class="title-div-father" data-classify="开发" data-title="Win11使用Docker安装Gitlab"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/win11-docker-gitlab-201.html">Vol.10 · 2025  Win11使用Docker安装Gitlab</a>
                 
             </div>
@@ -375,7 +374,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="centos共享文件夹配置方法"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/centos-gongxiangwenjianjia-198.html">Vol.9 · 2025  centos共享文件夹配置方法</a>
                 
             </div>
@@ -388,7 +387,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="Jenkins + Gitlab配置Springboot多模块项目自动化编译部署"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/jenkins-gitlab-zidonghuabushu-192.html">Vol.8 · 2025  Jenkins + Gitlab配置Springboot多模块项目自动化编译部署</a>
                 
             </div>
@@ -401,7 +400,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="HTML5学习笔记 | HTML5 + CSS3学习"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/html-xuexibiji-189.html">Vol.7 · 2025  HTML5学习笔记 | HTML5 + CSS3学习</a>
                 
             </div>
@@ -414,7 +413,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="电脑edge调试手机edge网页的方法"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/tiaoshi-shouji-edge-188.html">Vol.6 · 2025  电脑edge调试手机edge网页的方法</a>
                 
             </div>
@@ -427,7 +426,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="centos安装nginx，配置将http重定向到https及相关其他配置"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/nginx-anzhuang-http-chongdingxiang-https-186.html">Vol.5 · 2025  centos安装nginx，配置将http重定向到https及相关其他配置</a>
                 
             </div>
@@ -440,7 +439,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="JS进阶学习 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/js-xuexibiji-185.html">Vol.4 · 2025  JS进阶学习 | 原生JS基础到进阶</a>
                 
             </div>
@@ -453,7 +452,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="web APIs学习 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/js-xuexibiji-181.html">Vol.3 · 2025  web APIs学习 | 原生JS基础到进阶</a>
                 
             </div>
@@ -466,7 +465,7 @@
         </div>
         <div class="title-div-father" data-classify="开发" data-title="基础语法扫盲 | 原生JS基础到进阶"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/js-xuexibiji-180.html">Vol.2 · 2025  基础语法扫盲 | 原生JS基础到进阶</a>
                 
             </div>
@@ -479,7 +478,7 @@
         </div>
         <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮重生的文明切片"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/lvxing-xinzhougucheng-172.html">Vol.1 · 2025  寻迹中国 第2期 | 文化寻踪·忻州古城：坍圮重生的文明切片</a>
                 
             </div>
@@ -492,7 +491,7 @@
         </div>
         <div class="title-div-father" data-classify="户外" data-title="厦门环东烂漫骑行记"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/shamenhuandonglanmanxian-qixing-71.html">Vol.3 · 2024  厦门环东烂漫骑行记</a>
                 
             </div>
@@ -505,7 +504,7 @@
         </div>
         <div class="title-div-father" data-classify="户外" data-title="成都天府绿道骑行记"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/chengdoutianfulvdao-qixing-42.html">Vol.2 · 2024  成都天府绿道骑行记</a>
                 
             </div>
@@ -518,7 +517,7 @@
         </div>
         <div class="title-div-father" data-classify="户外" data-title="寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 <a class="title-a" lang="en" href="/lvxing-zijiayouchuanxi-abaxiaohuanxian-32.html">Vol.1 · 2024  寻迹中国 第1期 | 川西自驾·阿坝环线：穿越群山脊背的自由之路</a>
                 
             </div>
@@ -531,7 +530,7 @@
         </div>
         <div class="title-div-father" data-classify="杂谈" data-title="关于本站 - 户外探索见闻 | 公考应试经验 | 多元成长笔记 | IT开发实录"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
-<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 20px;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
+<!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 1.25rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 
                 <h1 id="about_h1" onclick="aboutTitleClick()">Vol.1 · 2023  关于本站 - 户外探索见闻 | 公考应试经验 | 多元成长笔记 | IT开发实录</h1>
             </div>
