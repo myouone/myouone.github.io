@@ -21,14 +21,14 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px;
+            font-size: 62.5%;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
-            font-size: 1rem;
+            font-size: 1.6rem;
             line-height: 2;
             color: #333333;
             visibility: hidden;
@@ -49,16 +49,16 @@
         }
 
         h1, h2, h3, h4 {
-            margin-block-start: 20px;
+            margin-block-start: 2rem;
         }
 
         hr {
             margin-block-start: 0;
-            margin-block-end: 20px;
+            margin-block-end: 2rem;
         }
 
         p {
-            margin: 15px 0;
+            margin: 1.5rem 0;
         }
 
         li {
@@ -79,7 +79,7 @@
         }
 
         .content-page > * {
-            border-radius: 5px;
+            border-radius: 3px;
             border: 0;
             background-color: #FFFFFF;
         }
@@ -89,43 +89,43 @@
         }
 
         .separator-item {
-            padding-right: 20px;
+            padding-right: 2rem;
             position: relative;
         }
 
         .separator-item:not(:last-child)::after {
             content: "";
             position: absolute;
-            right: 9px;
+            right: calc((2rem - 2px) / 2);
             top: 50%;
             transform: translateY(-50%);
-            height: 1.2em;
+            height: 1.8rem;
             border-right: 2px solid #cedbe0;
         }
 
         pre[class*="language-"] {
-            padding: 10px 20px;
-            border-radius: 2px;
-            /*border: 1px solid #D0D0D0;*/
+            padding: 1rem 2rem;
+            border-radius: 3px;
             box-shadow: 0 0 2px #D0D0D0;
             background-color: #FFFFFF; /* #F8F8F8 */
             white-space: pre-wrap;
             color: #333333;
             font-family: 'SourceSerif4Regular', "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
             word-wrap: break-word;
-            font-size: 1rem;
+            font-size: 1.6rem;
             line-height: 2;
         }
 
         code {
             background-color: #F3EFE6;
-            border-radius: 1px;
+            border-radius: 3px;
         }
 
         img {
             background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzI3MDY2Mzk1MzQ4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NjUiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTczLjQ0NzY4IDk1OC4xMTI1MjZTMjg2LjU3NTg4MSA1Ny4zODA2NyA5MTcuMjgxMDU3IDIuNDEwOTUzYzAgMC0yMC43MzQxOTIgMzQxLjM5MDg3NS0yMDIuMDM3ODIgNDc5LjI5NzM1OCAwIDAtMzMuNzUzMzM1IDQ1LjgwODA5OCA3My4yOTI5NTYgMzEuODI0NTczIDAgMC0xMi41MzY5NTMgMTUzLjMzNjU3OS0yMDEuNTU1NjI5IDE5Mi44NzYyIDAgMC0yOC45MzE0MyAyOC45MzE0MyA1NC45Njk3MTcgMzEuODI0NTczIDAgMC04OC43MjMwNTIgMTM3LjQyNDI5My0zMTEuOTc3MjU0IDYzLjY0OTE0NiAwIDAgODkuNjg3NDMzLTIxNi45ODU3MjUgMTY1LjM5MTM0MS0yODkuMzE0M2EyMjA5LjM5Njg3NiAyMjA5LjM5Njg3NiAwIDAgMC0zODUuNzUyNCA0MzEuMDc4MzA4cy0xNS40MzAwOTYgMzUuMTk5OTA3LTM2LjE2NDI4OCAxNC40NjU3MTV6IiBmaWxsPSIjMDEzMjRCIiBwLWlkPSIxNTY2Ij48L3BhdGg+PC9zdmc+) no-repeat center center;
             border: 8px solid #FFFFFF;
             box-shadow: 0 0 2px #D0D0D0;
+            border-radius: 3px;
         }
 
         .return-top {
@@ -135,7 +135,7 @@
             width: 35px;
             height: 35px;
             box-shadow: 0 0 2px #D0D0D0;
-            border-radius: 2px;
+            border-radius: 3px;
             background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzQ5MDA4MTgxODQ1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDE4MzAgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjYzMzMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzU3LjQyMTg3NSIgaGVpZ2h0PSIyMDAiPjxwYXRoIGQ9Ik0xNzkyLjk5NDQ0MSA4MzcuMzY0MDM4TDk5MC43MzcyOCAzNS4xMDY4NzdBMTAxLjQxOTg2OCAxMDEuNDE5ODY4IDAgMCAwIDkyMy4xMjQwMzUgMGgtMjAuODA0MDc2YTEwMS40MTk4NjggMTAxLjQxOTg2OCAwIDAgMC02Mi40MTIyMjYgMjcuMzA1MzQ5TDMxLjE0OTI5OCA4MzcuMzY0MDM4YTEwNS4zMjA2MzIgMTA1LjMyMDYzMiAwIDAgMCAwIDE0OS41MjkyOTMgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDE0OS41MjkyOTMgMEw5MTIuNzIxOTk3IDI2Ni41NTIyMTdsNzI1LjU0MjEzMiA3MjYuODQyMzg3YTEwNi42MjA4ODcgMTA2LjYyMDg4NyAwIDAgMCAxNDkuNTI5MjkzIDAgMTA1LjMyMDYzMiAxMDUuMzIwNjMyIDAgMCAwIDUuMjAxMDE5LTE1Ni4wMzA1NjZ6IiBwLWlkPSI2MzM0Ij48L3BhdGg+PC9zdmc+);
             background-size: 15px 15px;
             background-position: center;
@@ -190,12 +190,12 @@
 
         /* 设置前边小黑点的样式 */
         ul li::marker {
-            font-size: 1rem;
+            font-size: 1.4rem;
             vertical-align: middle;
         }
 
         ul {
-            padding-left: 16px;
+            padding-left: calc(1.4rem + 1px);
         }
 
         @media screen and (max-width: 1157px) {
