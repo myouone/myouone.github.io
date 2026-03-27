@@ -323,19 +323,19 @@
 
 <div id="top_bar" class="top-bar">
     <div class="button-group">
-        <div id="classify_search_outdoor" class="classify-search" onclick="classifySearchClick('行走')">
+        <div id="classify_search_journey" class="classify-search" onclick="classifySearchClick('行走')">
             <p>行走</p>
         </div>
-        <div id="classify_search_civil_service_exam" class="classify-search" onclick="classifySearchClick('思辨')">
+        <div id="classify_search_contemplation" class="classify-search" onclick="classifySearchClick('思辨')">
             <p>思辨</p>
         </div>
-        <div id="classify_search_grow_up" class="classify-search" onclick="classifySearchClick('评论')">
+        <div id="classify_search_critique" class="classify-search" onclick="classifySearchClick('评论')">
             <p>评论</p>
         </div>
         <div id="classify_search_all" class="classify-search classify-search1" onclick="classifySearchClick('')">
             <p>全部</p>
         </div>
-        <div id="classify_search_it_development" class="classify-search" onclick="classifySearchClick('杂谈')">
+        <div id="classify_search_miscellany" class="classify-search" onclick="classifySearchClick('杂谈')">
             <p>杂谈</p>
         </div>
         <div id="classify_search_about" class="classify-search" onclick="aboutTitleClick()">
@@ -489,47 +489,47 @@
         if (classify === '') {
 
             document.querySelector('#classify_search_all').classList.add('classify-search1');
-            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
-            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
-            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
+            document.querySelector('#classify_search_journey').classList.remove('classify-search1');
+            document.querySelector('#classify_search_contemplation').classList.remove('classify-search1');
+            document.querySelector('#classify_search_miscellany').classList.remove('classify-search1');
+            document.querySelector('#classify_search_critique').classList.remove('classify-search1');
         } else if (classify === '行走') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
-            document.querySelector('#classify_search_outdoor').classList.add('classify-search1');
-            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_journey').classList.add('classify-search1');
+            document.querySelector('#classify_search_contemplation').classList.remove('classify-search1');
+            document.querySelector('#classify_search_critique').classList.remove('classify-search1');
+            document.querySelector('#classify_search_miscellany').classList.remove('classify-search1');
         }
         else if (classify === '思辨') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
-            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
-            document.querySelector('#classify_search_civil_service_exam').classList.add('classify-search1');
-            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_journey').classList.remove('classify-search1');
+            document.querySelector('#classify_search_contemplation').classList.add('classify-search1');
+            document.querySelector('#classify_search_critique').classList.remove('classify-search1');
+            document.querySelector('#classify_search_miscellany').classList.remove('classify-search1');
         } else if (classify === '评论') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
-            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
-            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_grow_up').classList.add('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.remove('classify-search1');
+            document.querySelector('#classify_search_journey').classList.remove('classify-search1');
+            document.querySelector('#classify_search_contemplation').classList.remove('classify-search1');
+            document.querySelector('#classify_search_critique').classList.add('classify-search1');
+            document.querySelector('#classify_search_miscellany').classList.remove('classify-search1');
         } else if (classify === '杂谈') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
             document.querySelector('#classify_search_all').classList.remove('classify-search1');
-            document.querySelector('#classify_search_outdoor').classList.remove('classify-search1');
-            document.querySelector('#classify_search_civil_service_exam').classList.remove('classify-search1');
-            document.querySelector('#classify_search_grow_up').classList.remove('classify-search1');
-            document.querySelector('#classify_search_it_development').classList.add('classify-search1');
+            document.querySelector('#classify_search_journey').classList.remove('classify-search1');
+            document.querySelector('#classify_search_contemplation').classList.remove('classify-search1');
+            document.querySelector('#classify_search_critique').classList.remove('classify-search1');
+            document.querySelector('#classify_search_miscellany').classList.add('classify-search1');
         }
 
         const titleDivFather = document.querySelectorAll('.title-div-father');
