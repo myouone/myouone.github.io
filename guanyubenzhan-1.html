@@ -226,24 +226,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            /*gap: 0.8rem;*/
             margin: 5rem 0 5rem;
         }
         .end-sign .line {
             flex: 1;
             height: 1px;
+            transform: scaleY(0.6);
+            transform-origin: center;
             background: linear-gradient(90deg, transparent, #c0bcb2, #b3aa99, #c0bcb2, transparent);
         }
         .end-sign .dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: #bcab8c;
             border-radius: 50%;
             transition: transform 0.2s ease, background 0.2s;
-        }
-        .end-sign:hover .dot {
-            transform: scale(1.4);
-            background: #9b8462;
         }
         /* 文章结束标记样式 */
 
