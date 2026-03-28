@@ -221,6 +221,30 @@
             outline: none;
         }
 
+        /* 文章结束标记样式 */
+        .end-sign {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*gap: 0.8rem;*/
+            margin: 5rem 0 5rem;
+        }
+        .end-sign .line {
+            flex: 1;
+            height: 1px;
+            transform: scaleY(0.6);
+            transform-origin: center;
+            background: linear-gradient(90deg, transparent, #c0bcb2, #b3aa99, #c0bcb2, transparent);
+        }
+        .end-sign .dot {
+            width: 6px;
+            height: 6px;
+            background: #bcab8c;
+            border-radius: 50%;
+            transition: transform 0.2s ease, background 0.2s;
+        }
+        /* 文章结束标记样式 */
+
         @media screen and (max-width: 1157px) {
             img {
                 width: calc(100% - 16px) !important;
@@ -247,8 +271,7 @@
  <head></head>
  <body>
   <h1 style="text-align: left;" data-mce-style="text-align: left;">成都天府绿道骑行记</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #333333;"><span class="separator-item">原创</span><span class="separator-item">2024年10月5日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a></p>
-  
+  <p style="text-align: left; margin-bottom: 50px; color: #bcab8c;"><span class="separator-item">原创</span><span class="separator-item">2024年10月5日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #bcab8c; text-decoration-color: #bcab8c;" href="https://www.myouone.xyz">辰乙</a></p>
   <p>快乐充实的一个下午。</p>
   <p><img src="1/42/8c6200aa-639a-4110-a1de-4009e0a6fae3.jpg" alt="图片" width="281" height="500" data-mce-src="1/42/8c6200aa-639a-4110-a1de-4009e0a6fae3.jpg"> &nbsp;<img src="1/42/20036767-13df-4cda-8d69-fa1f35c6fda5.jpg" alt="图片" width="375" height="500" data-mce-src="1/42/20036767-13df-4cda-8d69-fa1f35c6fda5.jpg">&nbsp;&nbsp;<img src="1/42/b47402fd-c029-4255-aa90-8032d0dd29a7.jpg" alt="图片" width="353" height="500" data-mce-src="1/42/b47402fd-c029-4255-aa90-8032d0dd29a7.jpg"></p>
   <p>哈哈，实际骑行了31.72公里，因为在返程时才想起来记录一下。</p>
@@ -256,7 +279,12 @@
   <p>绿道骑行还是挺舒服的。</p>
   <p><img style="font-size: 1.125rem;" src="1/42/b8c84a5d-c555-4ae0-a815-32cd62cf82a1.jpg" alt="图片" width="281" height="500" data-mce-style="font-size: 1.125rem;" data-mce-src="1/42/b8c84a5d-c555-4ae0-a815-32cd62cf82a1.jpg"> &nbsp;<img src="1/42/b5d935b9-26d4-44ba-bc80-baa845cd01f3.jpg" alt="图片" width="375" height="500" data-mce-src="1/42/b5d935b9-26d4-44ba-bc80-baa845cd01f3.jpg"> &nbsp;<img src="1/42/3177ba85-1512-4821-b73a-639bc7d584f4.jpg" alt="图片" width="375" height="500" data-mce-src="1/42/3177ba85-1512-4821-b73a-639bc7d584f4.jpg"></p>
   <p>运动的同时也停下脚步看看沿途的绿色。</p>
- </body>
+   <div class="end-sign">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="line"></div>
+  </div>
+  </body>
 </html></div>
 </div>
 

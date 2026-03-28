@@ -221,6 +221,30 @@
             outline: none;
         }
 
+        /* 文章结束标记样式 */
+        .end-sign {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*gap: 0.8rem;*/
+            margin: 5rem 0 5rem;
+        }
+        .end-sign .line {
+            flex: 1;
+            height: 1px;
+            transform: scaleY(0.6);
+            transform-origin: center;
+            background: linear-gradient(90deg, transparent, #c0bcb2, #b3aa99, #c0bcb2, transparent);
+        }
+        .end-sign .dot {
+            width: 6px;
+            height: 6px;
+            background: #bcab8c;
+            border-radius: 50%;
+            transition: transform 0.2s ease, background 0.2s;
+        }
+        /* 文章结束标记样式 */
+
         @media screen and (max-width: 1157px) {
             img {
                 width: calc(100% - 16px) !important;
@@ -247,12 +271,16 @@
  <head></head>
  <body>
   <h1 style="text-align: left;" data-mce-style="text-align: left;">厦门环东烂漫骑行记</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #333333;"><span class="separator-item">原创</span><span class="separator-item">2024年11月24日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a></p>
-  
+  <p style="text-align: left; margin-bottom: 50px; color: #bcab8c;"><span class="separator-item">原创</span><span class="separator-item">2024年11月24日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #bcab8c; text-decoration-color: #bcab8c;" href="https://www.myouone.xyz">辰乙</a></p>
   <p><img src="1/71/be556639-a571-4adf-9ae4-b8169614cc65.jpg" alt="图片" width="169" height="300" data-mce-src="1/71/be556639-a571-4adf-9ae4-b8169614cc65.jpg"> &nbsp;<img src="1/71/d649737c-2a8b-4f20-b5fe-590c9e5649de.jpg" alt="图片" width="556" height="300" data-mce-src="1/71/d649737c-2a8b-4f20-b5fe-590c9e5649de.jpg"> &nbsp;<img style="max-width: 950px; width: auto; height: 300px;" src="1/71/c8b135bf-4cbe-4444-b2a2-e71ba2fa6822.jpg" alt="图片" data-mce-style="max-width: 950px; width: auto; height: 300px;" data-mce-src="1/71/c8b135bf-4cbe-4444-b2a2-e71ba2fa6822.jpg"></p>
   <p><img src="1/71/0c412e6e-7f4e-4219-8cc2-28dcc4557c76.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/0c412e6e-7f4e-4219-8cc2-28dcc4557c76.jpg"> &nbsp;<img src="1/71/518df228-9ff9-411b-b097-efcfe1fdf919.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/518df228-9ff9-411b-b097-efcfe1fdf919.jpg"> &nbsp;<img src="1/71/83b76b57-5b18-4a3a-a943-87ce7ec567d5.jpg" alt="图片" width="281" height="500" data-mce-src="1/71/83b76b57-5b18-4a3a-a943-87ce7ec567d5.jpg"></p>
   <p><img src="1/71/9fbc893b-e9d0-43a2-a125-5623877cd71d.jpg" alt="图片" width="889" height="500" data-mce-src="1/71/9fbc893b-e9d0-43a2-a125-5623877cd71d.jpg"></p>
- </body>
+   <div class="end-sign">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="line"></div>
+  </div>
+  </body>
 </html></div>
 </div>
 

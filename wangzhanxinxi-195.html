@@ -221,6 +221,30 @@
             outline: none;
         }
 
+        /* 文章结束标记样式 */
+        .end-sign {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*gap: 0.8rem;*/
+            margin: 5rem 0 5rem;
+        }
+        .end-sign .line {
+            flex: 1;
+            height: 1px;
+            transform: scaleY(0.6);
+            transform-origin: center;
+            background: linear-gradient(90deg, transparent, #c0bcb2, #b3aa99, #c0bcb2, transparent);
+        }
+        .end-sign .dot {
+            width: 6px;
+            height: 6px;
+            background: #bcab8c;
+            border-radius: 50%;
+            transition: transform 0.2s ease, background 0.2s;
+        }
+        /* 文章结束标记样式 */
+
         @media screen and (max-width: 1157px) {
             img {
                 width: calc(100% - 16px) !important;
@@ -247,7 +271,7 @@
  <head></head>
  <body>
   <h1>网站信息</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #333333;"><span class="separator-item">原创</span><span class="separator-item">2025年7月2日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
+  <p style="text-align: left; margin-bottom: 50px; color: #bcab8c;"><span class="separator-item">原创</span><span class="separator-item">2025年7月2日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #bcab8c; text-decoration-color: #bcab8c;" href="https://www.myouone.xyz">辰乙</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
 <hr><p><a class="catalog-a" href='#heading_1'>1.<span class="catalog-span">&nbsp;</span>产品规划与网站更新记录</a></p><p><a class="catalog-a" href='#heading_2'>2.<span class="catalog-span">&nbsp;</span>个人作品集</a></p><p><a class="catalog-a" href='#heading_3'><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span>2.1<span class="catalog-span">&nbsp;</span>【chrome浏览器插件】Website<span class="catalog-span">&nbsp;</span>Access<span class="catalog-span">&nbsp;</span>Control<span class="catalog-span">&nbsp;</span>网站访问控制</a></p></div>
   <h3 id="heading_1" style="text-align: right;" data-mce-style="text-align: right;">产品规划与网站更新记录</h3>
   <hr>
@@ -281,7 +305,12 @@
   <p><strong>功能简介</strong>：支持在插件中添加网站域名或完整url，及其可访问tab数。在访问相关网站时，会按照插件配置做访问控制。</p>
   <p><strong>应用场景</strong>：该插件可应用在第三方跳转场景中，避免同一浏览器同时打开多个同域网页，便于管理。也可用于自律，阻止预设域名下的所有网页的访问。</p>
   <p><strong>下载安装</strong>：暂不支持。</p>
- </body>
+   <div class="end-sign">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="line"></div>
+  </div>
+  </body>
 </html></div>
 </div>
 
