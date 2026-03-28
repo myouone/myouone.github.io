@@ -221,6 +221,32 @@
             outline: none;
         }
 
+        /* 文章结束标记样式 */
+        .end-sign {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 5rem 0 5rem;
+        }
+        .end-sign .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c0bcb2, #b3aa99, #c0bcb2, transparent);
+        }
+        .end-sign .dot {
+            width: 8px;
+            height: 8px;
+            background: #bcab8c;
+            border-radius: 50%;
+            transition: transform 0.2s ease, background 0.2s;
+        }
+        .end-sign:hover .dot {
+            transform: scale(1.4);
+            background: #9b8462;
+        }
+        /* 文章结束标记样式 */
+
         @media screen and (max-width: 1157px) {
             img {
                 width: calc(100% - 16px) !important;
@@ -247,7 +273,7 @@
  <head></head>
  <body>
   <h1 style="text-align: left;" data-mce-style="text-align: left;">关于本站 - 行走 · 思辨 · 评论</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #333333;"><span class="separator-item">原创</span><span class="separator-item">2023年12月3日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
+  <p style="text-align: left; margin-bottom: 50px; color: #bcab8c;"><span class="separator-item">原创</span><span class="separator-item">2023年12月3日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #bcab8c; text-decoration-color: #bcab8c;" href="https://www.myouone.xyz">辰乙</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
 <hr><p><a class="catalog-a" href='#heading_1'>1.<span class="catalog-span">&nbsp;</span>基本信息</a></p><p><a class="catalog-a" href='#heading_2'>2.<span class="catalog-span">&nbsp;</span>关于写作</a></p></div>
   <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_1"><strong>基本信息</strong></h3>
   <hr>
@@ -260,7 +286,12 @@
   <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_2"><strong>关于写作</strong></h3>
   <hr>
   <p class="auto-hide-last-sibling-br paragraph-qzbcQC paragraph-element br-paragraph-space">我相信，好的内容源于对事物本质的深刻洞察，因此，为求一个“真”字，我要悉心体察，如实记录，审慎思考。</p>
- </body>
+   <div class="end-sign">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="line"></div>
+  </div>
+  </body>
 </html></div>
 </div>
 
