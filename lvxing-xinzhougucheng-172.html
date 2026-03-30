@@ -642,13 +642,16 @@
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
-    });
 
-    document.querySelectorAll('p, div').forEach(el => {
+        if (window.matchMedia('(max-width: 1157px)').matches) {
 
-        if (el.innerText.trim() === '') {
-            
-            el.classList.add('empty');
+            document.querySelectorAll('p').forEach(el => {
+
+                if (el.childNodes.length === 1 && el.childNodes[0].nodeName === 'BR') {
+
+                    el.classList.add('empty');
+                }
+            });
         }
     });
 </script>
