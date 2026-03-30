@@ -256,6 +256,10 @@
             margin: 0 0 0 20px;
         }
 
+        .empty {
+            display: none;
+        }
+
         @media screen and (max-width: 1157px) {
             img {
                 width: calc(100% - 16px) !important;
@@ -657,6 +661,14 @@
             fontManager.init();
             fontManager.hideLoadingMask();
         })();
+    });
+
+    document.querySelectorAll('p, div').forEach(el => {
+
+        if (el.innerText.trim() === '') {
+            
+            el.classList.add('empty');
+        }
     });
 </script>
 </body>
