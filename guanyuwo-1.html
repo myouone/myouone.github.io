@@ -89,20 +89,20 @@
             display: none;
         }
 
-        .separator-item {
-            padding-right: 2rem;
-            position: relative;
-        }
+        /*.separator-item {*/
+        /*    padding-right: 2rem;*/
+        /*    position: relative;*/
+        /*}*/
 
-        .separator-item:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            right: calc((2rem - 2px) / 2);
-            top: 50%;
-            transform: translateY(-50%);
-            height: 1.8rem;
-            border-right: 2px solid #cedbe0;
-        }
+        /*.separator-item:not(:last-child)::after {*/
+        /*    content: "";*/
+        /*    position: absolute;*/
+        /*    right: calc((2rem - 2px) / 2);*/
+        /*    top: 50%;*/
+        /*    transform: translateY(-50%);*/
+        /*    height: 1.8rem;*/
+        /*    border-right: 2px solid #cedbe0;*/
+        /*}*/
 
         pre[class*="language-"] {
             padding: 1rem 2rem;
@@ -260,6 +260,19 @@
             display: none;
         }
 
+        /* 注释标记（上标数字） */
+        .note-ref {
+            display: inline-block;
+            font-size: 1.3rem;
+            line-height: 1;
+            vertical-align: super;
+            margin-left: 1rem;
+            cursor: pointer;
+            color: #333333;
+            text-decoration: none !important;
+        }
+        /* 注释标记（上标数字） */
+
         @media screen and (max-width: 1157px) {
             img {
                 display: block;
@@ -302,8 +315,7 @@
     <div><html>
  <head></head>
  <body>
-  <h1 style="text-align: left;" data-mce-style="text-align: left;">关于我 - 行走 · 思辨 · 评论</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #abb8c3;"><span class="separator-item">原创</span><span class="separator-item">2023年12月3日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #abb8c3; text-decoration-color: #abb8c3;" href="https://www.myouone.xyz">辰乙</a></p>
+  <h1 style="text-align: left;" data-mce-style="text-align: left;">关于我 - 行走 · 思辨 · 评论<a class="note-ref" href="#note_1">[1]</a></h1>
   <p>我叫辰乙。我在这里写作。</p>
   <p>我写行走：自然与人文的故事；<br>
    我写思辨：文学与哲学的追问；<br>
@@ -311,7 +323,9 @@
   <p>我认为，好的内容源于对事物本质的深刻洞察，因此，为求一个“真”字，我悉心体察，如实记录，审慎思考。</p>
   <p>深度长文在此首发，愿与知音相遇。</p>
   <p class="ds-markdown-paragraph">往来可洽：<a href="mailto:myouone@outlook.com" target="_blank" rel="noopener" data-mce-href="mailto:myouone@outlook.com">myouone@outlook.com</a>。若有所感，愿闻其详。</p>
-   <div class="end-sign">
+   <div id="note_1">
+      [1] 本文首发于2023年12月3日。来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a> 原创。
+  </div>  <div class="end-sign">
     <div class="line"></div>
     <div class="dot"></div>
     <div class="line"></div>

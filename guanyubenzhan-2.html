@@ -89,20 +89,20 @@
             display: none;
         }
 
-        .separator-item {
-            padding-right: 2rem;
-            position: relative;
-        }
+        /*.separator-item {*/
+        /*    padding-right: 2rem;*/
+        /*    position: relative;*/
+        /*}*/
 
-        .separator-item:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            right: calc((2rem - 2px) / 2);
-            top: 50%;
-            transform: translateY(-50%);
-            height: 1.8rem;
-            border-right: 2px solid #cedbe0;
-        }
+        /*.separator-item:not(:last-child)::after {*/
+        /*    content: "";*/
+        /*    position: absolute;*/
+        /*    right: calc((2rem - 2px) / 2);*/
+        /*    top: 50%;*/
+        /*    transform: translateY(-50%);*/
+        /*    height: 1.8rem;*/
+        /*    border-right: 2px solid #cedbe0;*/
+        /*}*/
 
         pre[class*="language-"] {
             padding: 1rem 2rem;
@@ -260,6 +260,19 @@
             display: none;
         }
 
+        /* 注释标记（上标数字） */
+        .note-ref {
+            display: inline-block;
+            font-size: 1.3rem;
+            line-height: 1;
+            vertical-align: super;
+            margin-left: 1rem;
+            cursor: pointer;
+            color: #333333;
+            text-decoration: none !important;
+        }
+        /* 注释标记（上标数字） */
+
         @media screen and (max-width: 1157px) {
             img {
                 display: block;
@@ -302,8 +315,11 @@
     <div><html>
  <head></head>
  <body>
-  <h1>关于本站</h1>
-  <p style="text-align: left; margin-bottom: 50px; color: #abb8c3;"><span class="separator-item">原创</span><span class="separator-item">2023年12月4日</span>来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent; color: #abb8c3; text-decoration-color: #abb8c3;" href="https://www.myouone.xyz">辰乙</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
+  <h1>关于本站<a class="note-ref" href="#note_1">[1]</a></h1>
+  <div id="catalog_div">
+   <h3 style="text-align: right;" data-mce-style="text-align: right;" id="heading_0"><strong>目录</strong></h3>
+   <hr>
+   <p><a class="catalog-a" href="#heading_1" data-mce-href="#heading_1">1.<span class="catalog-span">&nbsp;</span>产品规划与网站更新记录</a></p><div id="catalog_div"><h3 style="text-align: right;"><strong>目录</strong></h3>
 <hr><p><a class="catalog-a" href='#heading_1'>1.<span class="catalog-span">&nbsp;</span>产品规划与网站更新记录</a></p><p><a class="catalog-a" href='#heading_2'>2.<span class="catalog-span">&nbsp;</span>个人作品集</a></p><p><a class="catalog-a" href='#heading_3'><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span><span class="catalog-span">&nbsp;</span>2.1<span class="catalog-span">&nbsp;</span>【chrome浏览器插件】Website<span class="catalog-span">&nbsp;</span>Access<span class="catalog-span">&nbsp;</span>Control<span class="catalog-span">&nbsp;</span>网站访问控制</a></p></div>
   <h3 id="heading_1" style="text-align: right;" data-mce-style="text-align: right;">产品规划与网站更新记录</h3>
   <hr>
@@ -337,7 +353,9 @@
   <p><strong>功能简介</strong>：支持在插件中添加网站域名或完整url，及其可访问tab数。在访问相关网站时，会按照插件配置做访问控制。</p>
   <p><strong>应用场景</strong>：该插件可应用在第三方跳转场景中，避免同一浏览器同时打开多个同域网页，便于管理。也可用于自律，阻止预设域名下的所有网页的访问。</p>
   <p><strong>下载安装</strong>：暂不支持。</p>
-   <div class="end-sign">
+   <div id="note_1">
+      [1] 本文首发于2023年12月4日。来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a> 原创。
+  </div>  <div class="end-sign">
     <div class="line"></div>
     <div class="dot"></div>
     <div class="line"></div>
