@@ -61,6 +61,7 @@
         .content-page {
             width: 90%;
             max-width: 72rem;
+            min-height: calc(100vh - 146px);
             position: relative;
             top: 0;
             left: 0;
@@ -70,6 +71,23 @@
             z-index: 998;
             margin: auto;
             padding: 1px;
+        }
+
+        .bottom-bar {
+            background-color: #FFFFFF;
+            text-align: left;
+            margin-top: 5rem;
+            border-top: 2px solid #f0f0f0;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .webinfo {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #64748B;
+            margin: auto;
+            text-align: center;
         }
 
         .content-page > * {
@@ -200,30 +218,6 @@
             outline: none;
         }
 
-        /* 文章结束标记样式 */
-        .end-sign {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /*gap: 0.8rem;*/
-            margin: 5rem 0 5rem;
-        }
-        .end-sign .line {
-            flex: 1;
-            height: 1px;
-            transform: scaleY(0.6);
-            transform-origin: center;
-            background: linear-gradient(90deg, transparent, #abb8c3, transparent);
-        }
-        .end-sign .dot {
-            width: 6px;
-            height: 6px;
-            background: #abb8c3;
-            border-radius: 50%;
-            transition: transform 0.2s ease, background 0.2s;
-        }
-        /* 文章结束标记样式 */
-
         .fixed-height-left {
             float: left;
             margin: 0 20px 10px 0;
@@ -331,13 +325,12 @@
   <p>绿道骑行还是挺舒适的。不过，在挥汗的同时也不妨停下脚步看看沿途的绿色。</p>
    <div id="note_1">
       ① 本文首发于2024年10月5日。来源：<a style="text-underline-offset: 4px; cursor: pointer; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: transparent;" href="https://www.myouone.xyz">辰乙</a>。
-  </div>  <div class="end-sign">
-    <div class="line"></div>
-    <div class="dot"></div>
-    <div class="line"></div>
-  </div>
-  </body>
+  </div>  </body>
 </html></div>
+</div>
+
+<div class="bottom-bar">
+    <p class="webinfo">Copyright © 2023 - 2026 辰乙. All Rights Reserved.</p>
 </div>
 
 <div id="return_top" class="return-top"></div>
