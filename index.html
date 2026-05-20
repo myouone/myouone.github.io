@@ -161,8 +161,10 @@
 
         .content-page-blog-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+            /*grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));*/
+            grid-template-columns: repeat(3, 1fr); /* 例如三列 */
             gap: 2rem;
+            align-items: stretch; /* 默认，让每个单元格高度由内容撑开且同行等高 */
         }
 
         .title-div-father {
@@ -227,7 +229,7 @@
         }
 
         .title-p2 {
-            margin: auto 0; /* auto属性会把它推到底部 */
+            margin-top: auto; /* auto属性会把它推到底部 */
             color: #64748B;
         }
 
