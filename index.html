@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>辰乙</title>
     <meta http-equiv="Content-Language" content="zh-CN">
-    <meta name="description" content="这里是辰乙的个人网站！我在这里写行走、思辨、评论。">
-    <meta name="keywords" content="辰乙,行走,思辨,评论" />
+    <meta name="description" content="这里是辰乙的个人网站！我在这里写纪事、思辨、评论。">
+    <meta name="keywords" content="辰乙,纪事,思辨,评论" />
     <meta name="msvalidate.01" content="0370BF431D2268DDBD063B6344B5F2D2" />
     <meta name="baidu-site-verification" content="codeva-1DV0mPSHZI" />
 
@@ -327,8 +327,8 @@
 
 <div id="top_bar" class="top-bar">
     <div class="button-group">
-        <div id="classify_search_journey" class="classify-search" onclick="classifySearchClick('行走')">
-            <p>行走</p>
+        <div id="classify_search_journey" class="classify-search" onclick="classifySearchClick('纪事')">
+            <p>纪事</p>
         </div>
         <div id="classify_search_contemplation" class="classify-search" onclick="classifySearchClick('思辨')">
             <p>思辨</p>
@@ -424,11 +424,11 @@
                 <span class="separator-item">杂谈</span><span class="separator-item">编写于2023年12月04日 修订于2026年04月01日</span>
             </p>
         </div>
-        <div class="title-div-father" data-classify="杂谈" data-title="关于我 - 行走 · 思辨 · 评论"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
+        <div class="title-div-father" data-classify="杂谈" data-title="关于我 - 纪事 · 思辨 · 评论"> <!-- th:style="${iterStat.index == 0} ? 'box-shadow: none; margin-top: 0;' : ''"-->
             <div class="title-div">
 <!--                <p style="font-size: var(&#45;&#45;title-a-font-size); margin-right: 2rem;" th:utext="'Vol.' + ${item.seq} + ' ' "></p>-->
                 
-                <h1 id="about_h1" onclick="aboutTitleClick()">Vol.1 · 2023  关于我 - 行走 · 思辨 · 评论</h1>
+                <h1 id="about_h1" onclick="aboutTitleClick()">Vol.1 · 2023  关于我 - 纪事 · 思辨 · 评论</h1>
             </div>
             <p class="title-p1">
                 <span>导读：这里记录了本站内容定位的相关信息。如有需要可以通过邮箱与我联系。</span>
@@ -497,7 +497,7 @@
             document.querySelector('#classify_search_contemplation').classList.remove('classify-search1');
             document.querySelector('#classify_search_miscellany').classList.remove('classify-search1');
             document.querySelector('#classify_search_critique').classList.remove('classify-search1');
-        } else if (classify === '行走') {
+        } else if (classify === '纪事') {
 
             searchDivDom.style.display = 'none';
             document.querySelector('#classify_search_search').classList.remove('classify-search1');
